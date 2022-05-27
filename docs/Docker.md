@@ -12,8 +12,9 @@ Lista de herramientas necesarias:
 ## Inicio
 
 ```bash
-$ docker/up.sh   # En Linux/Mac
-$ docker\up.cmd  # En Windows
+$ docker/up.sh        # En Linux/Mac
+$ sudo docker/up.sh   # Si la de arriba da problemas
+$ docker\up.cmd       # En Windows
 ```
 
 Una vez dentro del contenedor, podemos ejecutar los siguientes comandos (es un contenedor Linux):

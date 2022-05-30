@@ -1,3 +1,31 @@
+Skip to content
+Search or jump to…
+Pull requests
+Issues
+Marketplace
+Explore
+ 
+@bonshot 
+ElianaHarriet
+/
+tp2_gps
+Public
+Code
+Issues
+Pull requests
+Actions
+Projects
+Wiki
+Security
+Insights
+tp2_gps/.github/workflows/codeql-analysis.yml
+@seblaz
+seblaz Docker support (#6)
+Latest commit 38542bc on 28 May 2021
+ History
+ 1 contributor
+69 lines (59 sloc)  2.3 KB
+   
 # For most projects, this workflow file will not need changing; you simply need
 # to commit it to your repository.
 #
@@ -14,11 +42,11 @@ name: "CodeQL"
 on:
   push:
     branches:
-     - "*"
+     - "[ master ]"
   pull_request:
     # The branches below must be a subset of the branches above
     branches:
-     - "*"
+     - "[ master ]"
   schedule:
     - cron: '33 7 * * 3'
 
@@ -67,3 +95,16 @@ jobs:
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v1
+© 2022 GitHub, Inc.
+Terms
+Privacy
+Security
+Status
+Docs
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About
+Loading complete

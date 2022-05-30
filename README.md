@@ -6,7 +6,6 @@ Trabajo Práctico número 2 de la materia Algoritmos y Programación III de FIUB
 
 ## Grupo {N}
 
-
 * **Joaquin Rivero (106032)** - [Rivejjj](https://github.com/Rivejjj)
 * **Valentin Schneider (107964)** - [Valen1611](https://github.com/Valen1611)
 * **Joaquin Pandolfi (108215)** - [PandolfiJoaquin](https://github.com/PandolfiJoaquin)

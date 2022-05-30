@@ -9,7 +9,7 @@ Trabajo Práctico número 2 de la materia Algoritmos y Programación III de FIUB
 
 * **Joaquin Rivero (106032)** - [Rivejjj](https://github.com/ElianaHarriet/tp2_gps)
 * **Valentin Schneider (107964)** - [Valen1611](https://github.com/Valen1611)
-* **Integrante 3** - [gituser3](https://github.com/integrante3)
+* **Joaquin Pandolfi (108215)** - [PandolfiJoaquin](https://github.com/PandolfiJoaquin)
 * **Integrante 4** - [gituser3](https://github.com/integrante3)
 * **Harriet Eliana (107205)** - [ElianaHarriet](https://github.com/ElianaHarriet)
 

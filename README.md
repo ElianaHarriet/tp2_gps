@@ -7,13 +7,13 @@ Trabajo Práctico número 2 de la materia Algoritmos y Programación III de FIUB
 ## Grupo {N}
 
 
-* **Joaquin Rivero (106032)** - [Rivejjj](https://github.com/ElianaHarriet/tp2_gps)
+* **Joaquin Rivero (106032)** - [Rivejjj](https://github.com/Rivejjj)
 * **Valentin Schneider (107964)** - [Valen1611](https://github.com/Valen1611)
 * **Joaquin Pandolfi (108215)** - [PandolfiJoaquin](https://github.com/PandolfiJoaquin)
-* **Integrante 4** - [gituser3](https://github.com/integrante3)
+* **Facundo Aguirre Argerich (107539)** - [bonshot](https://github.com/bonshot)
 * **Harriet Eliana (107205)** - [ElianaHarriet](https://github.com/ElianaHarriet)
 
-Corrector: **{Corrector}**
+  Corrector: **{Corrector}**
 
 ## Aplicación
 

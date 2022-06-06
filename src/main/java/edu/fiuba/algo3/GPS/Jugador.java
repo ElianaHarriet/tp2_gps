@@ -3,8 +3,8 @@ package edu.fiuba.algo3.GPS;
 public class Jugador {
     int movimientos;
     String nick;
-    Esquina posicion;
-    Vehiculo vehiculo;
+    Esquina esquina;
+    IVehiculo vehiculo;
 
     public Jugador() {
         this.movimientos = 0;
@@ -32,8 +32,8 @@ public class Jugador {
 
     }
 
-    public actualizarEstado(Esquina siguienteEsquina,Sorpresa sorpresa, Obstaculo obstaculo){
-        this.vehiculo.atravesarObstaculo(obstaculo);
+    public void actualizarEstado(Esquina siguienteEsquina, ISorpresa sorpresa, IObstaculo obstaculo){
+        this.vehiculo.atravesarPozo(this.movimientos); //provisorio
     }
 
 }

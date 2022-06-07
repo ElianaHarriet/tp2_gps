@@ -6,34 +6,30 @@ public class Jugador {
     Esquina esquina;
     IVehiculo vehiculo;
 
-    public Jugador() {
+    public Jugador(Esquina esqInicial, String nick) {
         this.movimientos = 0;
-        this.posicion = new Esquina();
+        this.esquina = esqInicial;
+        this.nick = nick;
     }
 
-    public void setVehiculo(Vehiculo vehiculo){
+    public void setVehiculo(IVehiculo vehiculo){
         this.vehiculo = vehiculo;
     }
 
 
-    public Jugador crearJugadorConNombre(String unNombre){
-        Jugador jugador = new Jugador();
-
-        jugador.nick = unNombre;
-        return jugador;
-    }
 
     public int cantMovimientos(){
         return this.movimientos;
     }
 
     public boolean estaEnDestino(){
-        return this.posicion.esDestino();
+        return this.esquina.esDestino();
 
     }
 
     public void actualizarEstado(Esquina siguienteEsquina, ISorpresa sorpresa, IObstaculo obstaculo){
-        this.vehiculo.atravesarPozo(this.movimientos); //provisorio
+        //this.vehiculo.atravesarPozo(this.movimientos); //provisorio
+        this.movimientos += this.vehiculo.atravesarObstaculo(obstaculo);
     }
 
 }

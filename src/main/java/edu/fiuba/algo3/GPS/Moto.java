@@ -8,8 +8,8 @@ public class Moto implements IVehiculo{
     * la probabilidad es de 0,8 para las motos
     * */
 
-    public void atravesarObstaculo(Esquina esquina, int movimientos, IObstaculo obstaculo){
-        movimientos = obstaculo.aplicar(this, movimientos);
+    public int atravesarObstaculo(/*Esquina esquina, int movimientos, */IObstaculo obstaculo){
+        //movimientos = obstaculo.aplicar(this, movimientos);
 
         /*if (obstaculo == pozo) {
             movimientos += 3;
@@ -20,10 +20,7 @@ public class Moto implements IVehiculo{
         if (obstaculo == poli) {
             movimientos += 3;  * probabilidad_xd
         }*/
+        return obstaculo.penalizar(this);
     }
 
-    public void atravesarPozo(int movimientos ){
-        movimientos = movimientos +3;
-    }
-    
 }

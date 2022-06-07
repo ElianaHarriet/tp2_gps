@@ -3,14 +3,15 @@ package edu.fiuba.algo3.GPS;
 public class Partida {
     Jugador jugador;
 
-    public Partida crearPartida(int m, int n){
-        this.jugador = new Jugador();
+    public Partida (int m, int n) {
+        this.jugador = new Jugador(new Esquina(false), null);
     }
 
     public int cantMovimientos(){
         return this.jugador.cantMovimientos();
     }
-    public boolean terminada(){
+    public boolean terminada() {
 
         return jugador.estaEnDestino();
+    }
 }

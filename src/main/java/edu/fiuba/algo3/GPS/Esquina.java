@@ -3,7 +3,7 @@ package edu.fiuba.algo3.GPS;
 
 public class Esquina {
 
-    private boolean esDestino;
+    private final boolean esDestino;
     /*
     Calle adyacenteN;
     Calle adyacenteS;
@@ -11,8 +11,8 @@ public class Esquina {
     Calle adyacenteE;
     */
 
-    public Esquina(){
-
+    public Esquina(boolean esDestino){
+        this.esDestino = esDestino;
     }
 
     public boolean esDestino(){

@@ -1,5 +1,5 @@
 package edu.fiuba.algo3.GPS;
 
 public interface IObstaculo {
-    int aplicar(Vehiculo vehiculo,int movimientos);
+    int penalizar(IVehiculo vehiculo/*,int movimientos*/);
 }

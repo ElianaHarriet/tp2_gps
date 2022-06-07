@@ -10,7 +10,7 @@ public class PruebasJugador {
     public void prueba00ElJugadorSeCreaSinMovimientos() {
         Esquina esqInicial = new Esquina(false);
         Jugador jugador = new Jugador(esqInicial, "Alister");
-        assertEquals(jugador.getMovimientos(), 0);
+        assertEquals(jugador.cantMovimientos(), 0);
     }
 
     /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -33,9 +33,9 @@ public class PruebasJugador {
         Pozo pozo = new Pozo();
 
         jugador.actualizarEstado(null, null, pozo);
-        assertEquals(jugador.getMovimientos(), movimientosEsperados);
+        assertEquals(movimientosEsperados, jugador.cantMovimientos());
     }
-/*
+
     @Test
     public void prueba02UnAutoSeEncuentraConUnPozoYEsPenalizadoTresMovimientos() {
         int movimientosEsperados = 3;
@@ -46,7 +46,7 @@ public class PruebasJugador {
         Pozo pozo = new Pozo();
 
         jugador.actualizarEstado(null, null, pozo);
-        assertEquals(jugador.getMovimientos(), movimientosEsperados);
+        assertEquals(movimientosEsperados, jugador.cantMovimientos());
     }
 
     @Test
@@ -59,9 +59,10 @@ public class PruebasJugador {
         Pozo pozo = new Pozo();
 
         jugador.actualizarEstado(null, null, pozo);
-        assertEquals(jugador.getMovimientos(), movimientosEsperados);
+        assertEquals(movimientosEsperados, jugador.cantMovimientos());
     }
 
+    /*
     @Test
     public void prueba04UnaCamionetaPasaPorTresPozosYEsPenalizadaDosMovimientos() {
         int movimientosEsperados = 2;

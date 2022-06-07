@@ -11,11 +11,11 @@ public class Esquina {
     Calle adyacenteE;
     */
 
-    public Esquina(boolean esDestino){
+    public Esquina(boolean esDestino) {
         this.esDestino = esDestino;
     }
 
-    public boolean esDestino(){
+    public boolean esDestino() {
         return this.esDestino;
     }
 }

@@ -1,10 +1,7 @@
 package edu.fiuba.algo3.GPS;
 
-public class Auto implements IVehiculo{
-    @Override
-    public int atravesarObstaculo(/*Esquina esquina, int movimientos, */IObstaculo obstaculo){
+public class Auto extends Vehiculo{
 
-        return obstaculo.penalizar(this);
-    }
+
 
 }

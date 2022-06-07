@@ -19,6 +19,7 @@ public class PruebasPartida {
         Partida partida = new Partida(10, 10);
         //assertEquals(partida.posicionActual().columna, 'A');
         //assertTrue(0 <= partida.posicionActual().fila <= 9);
+        assertEquals(3, 8); // -> Usado solo para que no de OK (marca que falta hacer cosas)
     }
 
     @Test
@@ -26,6 +27,7 @@ public class PruebasPartida {
         Partida partida = new Partida(10, 10);
         //assertEquals(partida.destino().columna, 'J');
         //assertTrue(0 <= partida.destino().fila <= 9);
+        assertEquals(3, 8); // -> Usado solo para que no de OK (marca que falta hacer cosas)
     }
 
 

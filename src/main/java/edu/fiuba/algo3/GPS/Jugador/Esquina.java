@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.GPS;
+package edu.fiuba.algo3.GPS.Jugador;
 
 
 public class Esquina {

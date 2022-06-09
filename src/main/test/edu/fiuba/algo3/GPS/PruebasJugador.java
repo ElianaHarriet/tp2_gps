@@ -1,5 +1,16 @@
 package edu.fiuba.algo3.GPS;
 
+import edu.fiuba.algo3.GPS.Jugador.Esquina;
+import edu.fiuba.algo3.GPS.Jugador.Jugador;
+import edu.fiuba.algo3.GPS.Obstaculos.ControlPolicial;
+import edu.fiuba.algo3.GPS.Obstaculos.Obstaculo;
+import edu.fiuba.algo3.GPS.Obstaculos.Piquete;
+import edu.fiuba.algo3.GPS.Obstaculos.Pozo;
+import edu.fiuba.algo3.GPS.Sorpresas.SorpresaFavorable;
+import edu.fiuba.algo3.GPS.Vehiculos.Auto;
+import edu.fiuba.algo3.GPS.Vehiculos.Camioneta;
+import edu.fiuba.algo3.GPS.Vehiculos.Moto;
+import edu.fiuba.algo3.GPS.Vehiculos.Vehiculo;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -53,7 +64,7 @@ public class PruebasJugador {
     public void prueba03UnaCamionetaSeEncuentraConUnPozoYNoEsPenalizada() {
         int movimientosEsperados = 0;
         Esquina esqInicial = new Esquina(false);
-        Jugador jugador = new Jugador(esqInicial,"s");
+        Jugador jugador = new Jugador(esqInicial, "s");
         Vehiculo camioneta = new Camioneta();
         jugador.setVehiculo(camioneta);
         Pozo pozo = new Pozo();
@@ -66,7 +77,7 @@ public class PruebasJugador {
     public void prueba04UnaCamionetaPasaPorTresPozosYEsPenalizadaDosMovimientos() {
         int movimientosEsperados = 2;
         Esquina esqInicial = new Esquina(false);
-        Jugador jugador = new Jugador(esqInicial,"qwe");
+        Jugador jugador = new Jugador(esqInicial, "qwe");
         Vehiculo camioneta = new Camioneta();
         jugador.setVehiculo(camioneta);
         Pozo pozo = new Pozo();
@@ -246,5 +257,16 @@ public class PruebasJugador {
         assertEquals(movimientosEsperados, jugador.cantMovimientos());
     }
 
-}
+    @Test
+    public void prueba01UnVehiculoAtraviesaLaCiudadYEncuentraUnaSorpresaFavorable() {
+        int movimientosEsperados = 2;
+        Esquina esqInicial = new Esquina(false);
+        Jugador jugador = new Jugador(esqInicial, "Beto");
+        Vehiculo moto = new Moto();
+        jugador.setVehiculo(moto);
+        SorpresaFavorable sorpresa = new SorpresaFavorable();
 
+        jugador.actualizarEstado(null, null, piquete);
+        assertEquals(movimientosEsperados, jugador.cantMovimientos());
+    }
+}

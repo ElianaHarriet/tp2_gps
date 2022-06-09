@@ -1,4 +1,8 @@
-package edu.fiuba.algo3.GPS;
+package edu.fiuba.algo3.GPS.Jugador;
+
+import edu.fiuba.algo3.GPS.Sorpresas.ISorpresa;
+import edu.fiuba.algo3.GPS.Obstaculos.Obstaculo;
+import edu.fiuba.algo3.GPS.Vehiculos.Vehiculo;
 
 public class Jugador {
     int movimientos;

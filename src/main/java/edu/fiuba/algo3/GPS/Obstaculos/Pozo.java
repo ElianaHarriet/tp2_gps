@@ -1,4 +1,8 @@
-package edu.fiuba.algo3.GPS;
+package edu.fiuba.algo3.GPS.Obstaculos;
+
+import edu.fiuba.algo3.GPS.Vehiculos.Auto;
+import edu.fiuba.algo3.GPS.Vehiculos.Moto;
+import edu.fiuba.algo3.GPS.Vehiculos.Vehiculo;
 
 public class Pozo extends Obstaculo {
 

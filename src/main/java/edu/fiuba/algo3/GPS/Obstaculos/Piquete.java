@@ -1,6 +1,7 @@
-package edu.fiuba.algo3.GPS;
+package edu.fiuba.algo3.GPS.Obstaculos;
 
-import java.util.HashMap;
+import edu.fiuba.algo3.GPS.Vehiculos.Moto;
+import edu.fiuba.algo3.GPS.Vehiculos.Vehiculo;
 
 public class Piquete extends Obstaculo {
 

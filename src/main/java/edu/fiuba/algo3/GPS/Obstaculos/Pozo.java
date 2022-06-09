@@ -1,18 +1,20 @@
 package edu.fiuba.algo3.GPS.Obstaculos;
 
-import edu.fiuba.algo3.GPS.Vehiculos.Auto;
-import edu.fiuba.algo3.GPS.Vehiculos.Moto;
-import edu.fiuba.algo3.GPS.Vehiculos.Vehiculo;
+import edu.fiuba.algo3.GPS.Vehiculos.*;
 
-public class Pozo extends Obstaculo {
 
-    public Pozo() {
-        vehiculos.put(Moto.class.toString(), 3);
-        vehiculos.put(Auto.class.toString(), 3);
+public class Pozo implements IObstaculo {
+
+    public int penalizar(Auto auto) {
+        return 3;
     }
 
-    public int penalizar(Vehiculo vehiculo/* int movimientos*/) {
-        return vehiculos.get(vehiculo.getClass().toString());
+    public int penalizar(Moto moto) {
+        return 3;
+    }
+
+    public int penalizar(Camioneta camioneta) {
+        return 0;
     }
 
 }

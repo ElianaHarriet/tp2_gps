@@ -1,7 +1,10 @@
 package edu.fiuba.algo3.GPS.Vehiculos;
 
-public class Auto extends Vehiculo{
+import edu.fiuba.algo3.GPS.Obstaculos.IObstaculo;
 
+public class Auto implements IVehiculo {
 
-
+    public int atravesarObstaculo(/*Esquina esquina, int movimientos, */IObstaculo obstaculo) {
+        return obstaculo.penalizar(this);
+    }
 }

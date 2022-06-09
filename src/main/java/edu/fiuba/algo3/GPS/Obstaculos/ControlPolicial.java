@@ -1,8 +1,9 @@
 package edu.fiuba.algo3.GPS.Obstaculos;
 
-import edu.fiuba.algo3.GPS.Vehiculos.Vehiculo;
+import edu.fiuba.algo3.GPS.Vehiculos.*;
 
-public class ControlPolicial extends Obstaculo {
+
+public class ControlPolicial implements IObstaculo {
 
     private final boolean detenido;
 
@@ -10,8 +11,15 @@ public class ControlPolicial extends Obstaculo {
         this.detenido = detenido;
     }
 
-    @Override
-    public int penalizar(Vehiculo vehiculo/*, int movimientos*/) {
-        return detenido ? 3 : 0; // Operador ternario -> hacer un refactor asi no se usa un if
+    public int penalizar(Auto auto) {
+        return detenido ? 3 : 0; // Refactorizar para no usar un if
+    }
+
+    public int penalizar(Moto moto) {
+        return detenido ? 3 : 0; // Refactorizar para no usar un if
+    }
+
+    public int penalizar(Camioneta camioneta) {
+        return detenido ? 3 : 0; // Refactorizar para no usar un if
     }
 }

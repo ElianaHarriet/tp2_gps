@@ -1,8 +1,8 @@
 package edu.fiuba.algo3.GPS.Sorpresas;
 
-import edu.fiuba.algo3.GPS.Vehiculos.Vehiculo;
+import edu.fiuba.algo3.GPS.Vehiculos.IVehiculo;
 
 public interface ISorpresa {
 
-    public abstract int aplicar(Vehiculo vehiculo, int movimientos);
+    public abstract int aplicar(IVehiculo vehiculo, int movimientos);
 }

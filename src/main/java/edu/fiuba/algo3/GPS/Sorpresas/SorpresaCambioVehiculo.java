@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.GPS.Sorpresas;
 
-import edu.fiuba.algo3.GPS.Vehiculos.Vehiculo;
+import edu.fiuba.algo3.GPS.Vehiculos.IVehiculo;
 
 public class SorpresaCambioVehiculo implements ISorpresa {
     /*
@@ -18,7 +18,7 @@ public class SorpresaCambioVehiculo implements ISorpresa {
         //Bueno no se puede hacer asi, pero capaz hay una forma mas linda con esa idea
     }*/
 
-    public int aplicar(Vehiculo vehiculo, int movimientos) {
+    public int aplicar(IVehiculo vehiculo, int movimientos) {
         return 3;//vehiculos(vehiculo);
         // o jugador.setVehiculo(tukituki) pero no se si deberia tocar eso desde aca
     }

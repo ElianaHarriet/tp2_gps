@@ -11,8 +11,9 @@ public class Camioneta implements IVehiculo {
     }
 
     public int atravesarObstaculo(IObstaculo obstaculo) {
-    
-        return obstaculo.penalizar(this) + (int)Math.floor(pozos / 3);
+        pozos = pozos % 3;
+        pozos += obstaculo.return1SiEsPozo();
+        return obstaculo.penalizar(this) + (int)Math.floor(pozos / 3) * 2;
     }
 
 }

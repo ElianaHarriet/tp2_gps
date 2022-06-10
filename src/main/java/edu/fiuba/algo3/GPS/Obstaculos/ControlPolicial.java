@@ -22,4 +22,8 @@ public class ControlPolicial implements IObstaculo {
     public int penalizar(Camioneta camioneta) {
         return detenido ? 3 : 0; // Refactorizar para no usar un if
     }
+
+    public int return1SiEsPozo() {
+        return 0;
+    }
 }

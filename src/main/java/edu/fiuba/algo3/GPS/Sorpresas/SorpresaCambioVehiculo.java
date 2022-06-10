@@ -1,25 +1,44 @@
 package edu.fiuba.algo3.GPS.Sorpresas;
 
-import edu.fiuba.algo3.GPS.Vehiculos.IVehiculo;
+import edu.fiuba.algo3.GPS.Vehiculos.*;
+
 
 public class SorpresaCambioVehiculo implements ISorpresa {
-    /*
-    *  Si es una moto, la convierte en auto.
-    * Si es un auto lo convierte en 4x4.
-    * Si es una 4x4 la convierte en moto.
-     * */
-    /*final HashMap<Vehiculo, Vehiculo> vehiculos;
+
+     /*
+     moto --> auto.
+     auto --> 4x4.
+     4x4  --> moto.
+     */
+    final HashMap<IVehiculo, IVehiculo> vehiculos;
 
     public SorpresaCambioVehiculo() {
         this.vehiculos = new HashMap<>();
         vehiculos.put(Moto.class, Auto.class);
         vehiculos.put(Auto.class, Camioneta.class);
         vehiculos.put(Camioneta.class, Moto.class);
-        //Bueno no se puede hacer asi, pero capaz hay una forma mas linda con esa idea
-    }*/
-
-    public int aplicar(IVehiculo vehiculo, int movimientos) {
-        return 3;//vehiculos(vehiculo);
-        // o jugador.setVehiculo(tukituki) pero no se si deberia tocar eso desde aca
     }
+
+    @Override
+    public int aplicar(IVehiculo vehiculo, int movimientos) {
+        //no me deja devolver IVehiculo, por eso sigue el int,
+        // asi que el override esta al pedo creo
+            vehiculo = vehiculos(vehiculo); //No se si el vehiculo que recibo funciona como puntero, espero que si
+            return 0;
+        }
+
+        /*
+        Otra opcion es
+        @Override
+        public int aplicar(IVehiculo vehiculo, int movimientos, Jugador jugador) {
+            jugador.setVehiculo(vehiculos(vehiculo))
+        }
+
+        pero creo que rompo pilares con eso
+
+
+        YYy falta agregar lo que se que necesite para poder usar el hashmap
+         */
+
 }
+

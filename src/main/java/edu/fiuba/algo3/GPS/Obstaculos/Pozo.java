@@ -17,4 +17,7 @@ public class Pozo implements IObstaculo {
         return 0;
     }
 
+    public int return1SiEsPozo() {
+        return 1;
+    }
 }

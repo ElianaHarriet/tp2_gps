@@ -2,6 +2,8 @@ package edu.fiuba.algo3.GPS.Sorpresas;
 
 import edu.fiuba.algo3.GPS.Vehiculos.*;
 
+import java.util.HashMap;
+
 
 public class SorpresaCambioVehiculo implements ISorpresa {
 
@@ -13,17 +15,17 @@ public class SorpresaCambioVehiculo implements ISorpresa {
     final HashMap<IVehiculo, IVehiculo> vehiculos;
 
     public SorpresaCambioVehiculo() {
-        this.vehiculos = new HashMap<>();
-        vehiculos.put(Moto.class, Auto.class);
-        vehiculos.put(Auto.class, Camioneta.class);
-        vehiculos.put(Camioneta.class, Moto.class);
+        this.vehiculos = new HashMap<>(); // -> Por que no double dispatch??
+//        vehiculos.put(Moto.class, Auto.class);
+//        vehiculos.put(Auto.class, Camioneta.class);
+//        vehiculos.put(Camioneta.class, Moto.class);
     }
 
     @Override
     public int aplicar(IVehiculo vehiculo, int movimientos) {
         //no me deja devolver IVehiculo, por eso sigue el int,
         // asi que el override esta al pedo creo
-            vehiculo = vehiculos(vehiculo); //No se si el vehiculo que recibo funciona como puntero, espero que si
+//            vehiculo = vehiculos(vehiculo); //No se si el vehiculo que recibo funciona como puntero, espero que si
             return 0;
         }
 

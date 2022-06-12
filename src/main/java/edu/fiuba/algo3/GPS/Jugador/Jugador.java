@@ -38,12 +38,19 @@ public class Jugador {
     }
 
     public void actualizarEstado(Esquina siguienteEsquina, ISorpresa sorpresa, IObstaculo obstaculo) {
-        this.movimientos += this.vehiculo.atravesarObstaculo(obstaculo);
+        if (obstaculo != null) { //usado para empezar las pruebas, luego crear obataculoNulo
+            this.movimientos += this.vehiculo.atravesarObstaculo(obstaculo);
+        }
+        if (sorpresa != null) { //usado para empezar las pruebas, luego crear sorpresaNula
+            this.movimientos = sorpresa.aplicar(this.vehiculo, this.movimientos);
+        }
 
         /* INTERFAZ ATRAVESABLE??? Interfaz tumama*/
     }
 
-
+    public void setMovimientos(int movimientos) {
+        this.movimientos = movimientos;
+    }
 
 
 }

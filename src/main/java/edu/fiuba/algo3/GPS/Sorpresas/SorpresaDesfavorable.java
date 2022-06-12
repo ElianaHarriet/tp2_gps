@@ -1,11 +1,13 @@
 package edu.fiuba.algo3.GPS.Sorpresas;
 
 import edu.fiuba.algo3.GPS.Obstaculos.IAtravesable;
+import edu.fiuba.algo3.GPS.Vehiculos.IVehiculo;
 
 
-public abstract class SorpresaDesfavorable implements IAtravesable {
+public class SorpresaDesfavorable implements ISorpresa {
 
-    public int aplicar(int movimientos){
-        return movimientos - (movimientos * (20/100));
+    @Override
+    public int aplicar(IVehiculo vehiculo, int movimientos) {
+        return (int)(movimientos * 1.25);
     }
 }

@@ -256,13 +256,12 @@ public class PruebasJugador {
      * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
      * Caso de uso 1: Un vehículo atraviesa la ciudad y encuentra una sorpresa favorable.                          *
      * Caso de uso 2: Un vehículo atraviesa la ciudad y encuentra una sorpresa desfavorable.                       *
-     * Caso de uso 3: Un vehículo atraviesa la ciudad y encuentra una sorpresa cambio de vehículo.                 *
-     * EXTRAS                                                                                                      *
-     * Caso de uso 4:                                                                                              *
-     * Caso de uso 5:                                                                                              *
+     * Caso de uso 3: Un vehículo atraviesa la ciudad y encuentra una sorpresa cambio de vehículo (caso Auto).     *
+     * Caso de uso 4: Un vehículo atraviesa la ciudad y encuentra una sorpresa cambio de vehículo (caso Moto).     *
+     * Caso de uso 5: Un vehículo atraviesa la ciudad y encuentra una sorpresa cambio de vehículo (caso Camioneta).*
      * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
-  /*  @Test
+    @Test
     public void prueba01UnVehiculoAtraviesaLaCiudadYEncuentraUnaSorpresaFavorable() {
         Esquina esqInicial = new Esquina(false);
         Jugador jugador = new Jugador(esqInicial, "Beto");
@@ -270,25 +269,29 @@ public class PruebasJugador {
         jugador.setVehiculo(moto);
         ISorpresa sorpresa = new SorpresaFavorable();
 
-        int movimientosEsperados = jugador.cantMovimientos() - (jugador.cantMovimientos()*100/25);
+        int movimientosInicio = 10;
+        int movimientosEsperados = (int)(10 - 10 * 0.2);
+        jugador.setMovimientos(movimientosInicio);
         jugador.actualizarEstado(null, sorpresa, null);
 
         assertEquals(movimientosEsperados, jugador.cantMovimientos());
-    }*/
+    }
 
-//    @Test
-//    public void prueba02UnVehiculoAtraviesaLaCiudadYEncuentraUnaSorpresaDesfavorable() {
-//        Esquina esqInicial = new Esquina(false);
-//        Jugador jugador = new Jugador(esqInicial, "Beto");
-//        IVehiculo moto = new Moto();
-//        jugador.setVehiculo(moto);
-//        ISorpresa sorpresa = new SorpresaDesfavorable();
-//
-//        int movimientosEsperados = jugador.cantMovimientos() + (jugador.cantMovimientos()*100/20);
-//
-//        jugador.actualizarEstado(null, sorpresa, null);
-//        assertEquals(movimientosEsperados, jugador.cantMovimientos());
-//    }
+    @Test
+    public void prueba02UnVehiculoAtraviesaLaCiudadYEncuentraUnaSorpresaDesfavorable() {
+        Esquina esqInicial = new Esquina(false);
+        Jugador jugador = new Jugador(esqInicial, "Beto");
+        IVehiculo moto = new Moto();
+        jugador.setVehiculo(moto);
+        ISorpresa sorpresa = new SorpresaDesfavorable();
+
+        int movimientosInicio = 10;
+        int movimientosEsperados = (int)(10 + 10 * 0.25);
+        jugador.setMovimientos(movimientosInicio);
+        jugador.actualizarEstado(null, sorpresa, null);
+
+        assertEquals(movimientosEsperados, jugador.cantMovimientos());
+    }
 
 
 }

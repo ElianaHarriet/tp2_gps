@@ -12,7 +12,8 @@ public class Pozo implements IObstaculo {
     }
 
     public int penalizar(Camioneta camioneta) {
-        return 0;
+        return camioneta.atravesarObstaculo(this);
+
     }
 
     public int return1SiEsPozo() {

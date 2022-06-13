@@ -41,13 +41,15 @@ public class Jugador {
     public void actualizarEstado(Esquina siguienteEsquina, ISorpresa sorpresa, IObstaculo obstaculo) {
 
         this.movimientos += this.vehiculo.atravesarObstaculo(obstaculo);
-
-
         this.movimientos = sorpresa.actualizarMovimientos(this.movimientos);
         this.vehiculo = this.vehiculo.actualizarVehiculo(sorpresa);
 
-
-        /* INTERFAZ ATRAVESABLE??? Interfaz tumama*/
+        /*
+        * this.movimiento = this.vehiculo.atravezarAtravezable(atravezable1)
+        *  this.movimiento = this.vehiculo.atravezarAtravezable(atravezable2)
+        *
+        *   PONIENDO MOVIMIENTOS EN VEHICULO + CREAR INICIALIZADOR
+        * */
     }
 
     public void setMovimientos(int movimientos) {

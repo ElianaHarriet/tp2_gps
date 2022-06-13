@@ -7,11 +7,33 @@ import java.util.HashMap;
 
 public class SorpresaCambioVehiculo implements ISorpresa {
 
-     /*
+
+
+    @Override
+    public int actualizarMovimientos(int movimientos) {
+        return movimientos;
+    }
+
+    @Override
+    public IVehiculo actualizarVehiculo(Auto auto) {
+        return new Camioneta();
+    }
+
+    @Override
+    public IVehiculo actualizarVehiculo(Moto moto) {
+        return new Auto();
+    }
+
+    @Override
+    public IVehiculo actualizarVehiculo(Camioneta camioneta) {
+        return new Moto();
+    }
+
+         /*
      moto --> auto.
      auto --> 4x4.
      4x4  --> moto.
-     */
+     *//*
     final HashMap<IVehiculo, IVehiculo> vehiculos;
 
     public SorpresaCambioVehiculo() {
@@ -27,8 +49,7 @@ public class SorpresaCambioVehiculo implements ISorpresa {
         // asi que el override esta al pedo creo
 //            vehiculo = vehiculos(vehiculo); //No se si el vehiculo que recibo funciona como puntero, espero que si
             return 0;
-        }
-
+        }*/
         /*
         Otra opcion es
         @Override

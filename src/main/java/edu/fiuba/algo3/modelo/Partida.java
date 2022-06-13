@@ -1,7 +1,6 @@
-package edu.fiuba.algo3.GPS;
+package edu.fiuba.algo3.modelo;
 
-import edu.fiuba.algo3.GPS.Jugador.Esquina;
-import edu.fiuba.algo3.GPS.Jugador.Jugador;
+import edu.fiuba.algo3.modelo.Jugador.Jugador;
 
 public class Partida {
 

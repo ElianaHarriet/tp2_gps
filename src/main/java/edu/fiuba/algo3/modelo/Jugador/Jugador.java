@@ -1,8 +1,9 @@
-package edu.fiuba.algo3.GPS.Jugador;
+package edu.fiuba.algo3.modelo.Jugador;
 
-import edu.fiuba.algo3.GPS.Sorpresas.ISorpresa;
-import edu.fiuba.algo3.GPS.Obstaculos.IObstaculo;
-import edu.fiuba.algo3.GPS.Vehiculos.IVehiculo;
+import edu.fiuba.algo3.modelo.Esquina;
+import edu.fiuba.algo3.modelo.Sorpresas.ISorpresa;
+import edu.fiuba.algo3.modelo.Obstaculos.IObstaculo;
+import edu.fiuba.algo3.modelo.Vehiculos.IVehiculo;
 
 public class Jugador {
     int movimientos;
@@ -38,12 +39,13 @@ public class Jugador {
     }
 
     public void actualizarEstado(Esquina siguienteEsquina, ISorpresa sorpresa, IObstaculo obstaculo) {
-        if (obstaculo != null) { //usado para empezar las pruebas, luego crear obataculoNulo
-            this.movimientos += this.vehiculo.atravesarObstaculo(obstaculo);
-        }
-        if (sorpresa != null) { //usado para empezar las pruebas, luego crear sorpresaNula
-            this.movimientos = sorpresa.aplicar(this.vehiculo, this.movimientos);
-        }
+
+        this.movimientos += this.vehiculo.atravesarObstaculo(obstaculo);
+
+
+        this.movimientos = sorpresa.actualizarMovimientos(this.movimientos);
+        this.vehiculo = this.vehiculo.actualizarVehiculo(sorpresa);
+
 
         /* INTERFAZ ATRAVESABLE??? Interfaz tumama*/
     }
@@ -52,5 +54,7 @@ public class Jugador {
         this.movimientos = movimientos;
     }
 
-
+    public IVehiculo getVehiculo() {
+        return vehiculo;
+    }
 }

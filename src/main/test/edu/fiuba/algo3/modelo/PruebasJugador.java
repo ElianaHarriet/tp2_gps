@@ -1,10 +1,10 @@
-package edu.fiuba.algo3.GPS;
+package edu.fiuba.algo3.modelo;
 
-import edu.fiuba.algo3.GPS.Jugador.Esquina;
-import edu.fiuba.algo3.GPS.Jugador.Jugador;
-import edu.fiuba.algo3.GPS.Obstaculos.*;
-import edu.fiuba.algo3.GPS.Sorpresas.*;;
-import edu.fiuba.algo3.GPS.Vehiculos.*;
+import edu.fiuba.algo3.modelo.Jugador.Jugador;
+
+import edu.fiuba.algo3.modelo.Obstaculos.*;
+import edu.fiuba.algo3.modelo.Sorpresas.*;
+import edu.fiuba.algo3.modelo.Vehiculos.*;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -179,7 +179,7 @@ public class PruebasJugador {
         Jugador jugador = new Jugador(esqInicial, "alister");
         IVehiculo auto = new Auto();
         jugador.setVehiculo(auto);
-        IObstaculo controlPolicial = new ControlPolicial(false);
+        IObstaculo controlPolicial = new ControlPolicial(0);
 
         jugador.actualizarEstado(null, new SorpresaNula(), controlPolicial);
         assertEquals(movimientosEsperados, jugador.cantMovimientos());
@@ -192,7 +192,7 @@ public class PruebasJugador {
         Jugador jugador = new Jugador(esqInicial, "alister");
         IVehiculo auto = new Auto();
         jugador.setVehiculo(auto);
-        IObstaculo controlPolicial = new ControlPolicial(false);
+        IObstaculo controlPolicial = new ControlPolicial(0);
 
         jugador.actualizarEstado(null, new SorpresaNula(), controlPolicial);
         assertEquals(movimientosEsperados, jugador.cantMovimientos());
@@ -205,7 +205,7 @@ public class PruebasJugador {
         Jugador jugador = new Jugador(esqInicial, "alister");
         IVehiculo camioneta = new Camioneta();
         jugador.setVehiculo(camioneta);
-        IObstaculo controlPolicial = new ControlPolicial(false);
+        IObstaculo controlPolicial = new ControlPolicial(0);
 
         jugador.actualizarEstado(null, new SorpresaNula(), controlPolicial);
         assertEquals(movimientosEsperados, jugador.cantMovimientos());
@@ -218,7 +218,7 @@ public class PruebasJugador {
         Jugador jugador = new Jugador(esqInicial, "alister");
         IVehiculo auto = new Auto();
         jugador.setVehiculo(auto);
-        IObstaculo controlPolicial = new ControlPolicial(true);
+        IObstaculo controlPolicial = new ControlPolicial(1);
 
         jugador.actualizarEstado(null, new SorpresaNula(), controlPolicial);
         assertEquals(movimientosEsperados, jugador.cantMovimientos());
@@ -232,7 +232,7 @@ public class PruebasJugador {
         Jugador jugador = new Jugador(esqInicial, "alister");
         IVehiculo moto = new Moto();
         jugador.setVehiculo(moto);
-        IObstaculo controlPolicial = new ControlPolicial(true);
+        IObstaculo controlPolicial = new ControlPolicial(1);
 
         jugador.actualizarEstado(null, new SorpresaNula(), controlPolicial);
         assertEquals(movimientosEsperados, jugador.cantMovimientos());
@@ -245,7 +245,7 @@ public class PruebasJugador {
         Jugador jugador = new Jugador(esqInicial, "alister");
         IVehiculo camioneta = new Camioneta();
         jugador.setVehiculo(camioneta);
-        IObstaculo controlPolicial = new ControlPolicial(true);
+        IObstaculo controlPolicial = new ControlPolicial(1);
 
         jugador.actualizarEstado(null, new SorpresaNula(), controlPolicial);
         assertEquals(movimientosEsperados, jugador.cantMovimientos());
@@ -272,7 +272,7 @@ public class PruebasJugador {
         int movimientosInicio = 10;
         int movimientosEsperados = (int)(10 - 10 * 0.2);
         jugador.setMovimientos(movimientosInicio);
-        jugador.actualizarEstado(null, sorpresa, null);
+        jugador.actualizarEstado(null, sorpresa, new ObstaculoNulo());
 
         assertEquals(movimientosEsperados, jugador.cantMovimientos());
     }
@@ -288,10 +288,48 @@ public class PruebasJugador {
         int movimientosInicio = 10;
         int movimientosEsperados = (int)(10 + 10 * 0.25);
         jugador.setMovimientos(movimientosInicio);
-        jugador.actualizarEstado(null, sorpresa, null);
+        jugador.actualizarEstado(null, sorpresa, new ObstaculoNulo());
 
         assertEquals(movimientosEsperados, jugador.cantMovimientos());
     }
 
+    @Test
+    public void prueba03UnAutoAtraviesaLaCiudadYEncuentraUnaSorpresaCambioDeVehiculo() {
+        Esquina esqInicial = new Esquina(false);
+        Jugador jugador = new Jugador(esqInicial, "Bonshot");
+        IVehiculo auto = new Auto();
+        jugador.setVehiculo(auto);
+        ISorpresa sorpresa = new SorpresaCambioVehiculo();
+        IVehiculo vehiculoEsperado = new Camioneta();
 
+        jugador.actualizarEstado(null, sorpresa, new ObstaculoNulo());
+        assertEquals(vehiculoEsperado, jugador.getVehiculo());
+
+    }
+
+    @Test
+    public void prueba04UnaMotoAtraviesaLaCiudadYEncuentraUnaSorpresaCambioDeVehiculo() {
+        Esquina esqInicial = new Esquina(false);
+        Jugador jugador = new Jugador(esqInicial, "Bonshot");
+        IVehiculo moto = new Moto();
+        jugador.setVehiculo(moto);
+        ISorpresa sorpresa = new SorpresaCambioVehiculo();
+        IVehiculo vehiculoEsperado = new Auto();
+
+        jugador.actualizarEstado(null, sorpresa, new ObstaculoNulo());
+        assertEquals(vehiculoEsperado, jugador.getVehiculo());
+    }
+
+    @Test
+    public void prueba05UnaCamionetaAtraviesaLaCiudadYEncuentraUnaSorpresaCambioDeVehiculo() {
+        Esquina esqInicial = new Esquina(false);
+        Jugador jugador = new Jugador(esqInicial, "Bonshot");
+        IVehiculo camioneta = new Camioneta();
+        jugador.setVehiculo(camioneta);
+        ISorpresa sorpresa = new SorpresaCambioVehiculo();
+        IVehiculo vehiculoEsperado = new Moto();
+
+        jugador.actualizarEstado(null, sorpresa, new ObstaculoNulo());
+        assertEquals(vehiculoEsperado, jugador.getVehiculo());
+    }
 }

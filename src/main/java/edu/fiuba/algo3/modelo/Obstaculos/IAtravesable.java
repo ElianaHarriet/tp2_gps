@@ -1,7 +1,7 @@
-package edu.fiuba.algo3.GPS.Obstaculos;
+package edu.fiuba.algo3.modelo.Obstaculos;
 
 
-import edu.fiuba.algo3.GPS.Vehiculos.IVehiculo;
+import edu.fiuba.algo3.modelo.Vehiculos.IVehiculo;
 
 public interface IAtravesable {
 

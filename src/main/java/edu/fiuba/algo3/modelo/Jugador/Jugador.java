@@ -37,8 +37,8 @@ public class Jugador {
         this.vehiculo = this.vehiculo.actualizarVehiculo(sorpresa);
 
         /*
-        * this.movimiento = this.vehiculo.atravezarAtravezable(atravezable1)
-        *  this.movimiento = this.vehiculo.atravezarAtravezable(atravezable2)
+        * this.movimiento = this.vehiculo.atravezarAtravesable(atravesable1)
+        *  this.movimiento = this.vehiculo.atravezarAtravesable(atravesable2)
         *
         *   PONIENDO MOVIMIENTOS EN VEHICULO + CREAR INICIALIZADOR
         * */

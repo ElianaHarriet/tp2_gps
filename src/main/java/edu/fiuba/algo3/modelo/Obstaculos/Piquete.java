@@ -1,7 +1,5 @@
-package edu.fiuba.algo3.GPS.Obstaculos;
-
-import edu.fiuba.algo3.GPS.Vehiculos.*;
-
+package edu.fiuba.algo3.modelo.Obstaculos;
+import edu.fiuba.algo3.modelo.Vehiculos.*;
 
 public class Piquete implements IObstaculo {
     /*QUEDO ANEMICO*/
@@ -14,10 +12,6 @@ public class Piquete implements IObstaculo {
     }
 
     public int penalizar(Camioneta camioneta) {
-        return 0;
-    }
-
-    public int return1SiEsPozo() {
         return 0;
     }
 }

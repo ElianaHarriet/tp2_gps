@@ -1,7 +1,7 @@
 package edu.fiuba.algo3.modelo.Jugador;
 
 import edu.fiuba.algo3.modelo.Esquina;
-import edu.fiuba.algo3.modelo.Sorpresas.ISorpresa;
+import edu.fiuba.algo3.modelo.Sorpresas.*;
 import edu.fiuba.algo3.modelo.Obstaculos.IObstaculo;
 import edu.fiuba.algo3.modelo.Vehiculos.IVehiculo;
 
@@ -30,7 +30,7 @@ public class Jugador {
 
     }
 
-    public void actualizarEstado(Esquina siguienteEsquina, ISorpresa sorpresa, IObstaculo obstaculo) {
+    public void actualizarEstado(Esquina siguienteEsquina, SorpresaNeutra sorpresa, IObstaculo obstaculo) {
 
         this.movimientos += this.vehiculo.atravesarObstaculo(obstaculo);
         this.movimientos = sorpresa.actualizarMovimientos(this.movimientos);

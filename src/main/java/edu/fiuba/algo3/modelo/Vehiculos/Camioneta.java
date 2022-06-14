@@ -1,7 +1,7 @@
 package edu.fiuba.algo3.modelo.Vehiculos;
 
 import edu.fiuba.algo3.modelo.Obstaculos.*;
-import edu.fiuba.algo3.modelo.Sorpresas.ISorpresa;;
+import edu.fiuba.algo3.modelo.Sorpresas.*;
 
 
 
@@ -23,7 +23,7 @@ public class Camioneta implements IVehiculo {
     }
 
 
-    public IVehiculo actualizarVehiculo(ISorpresa sorpresa) {
+    public IVehiculo actualizarVehiculo(SorpresaNeutra sorpresa) {
         return sorpresa.intercambiarVehiculo(this);
     }
 

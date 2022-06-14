@@ -1,7 +1,7 @@
 package edu.fiuba.algo3.modelo.Vehiculos;
 
 import edu.fiuba.algo3.modelo.Obstaculos.IObstaculo;
-import edu.fiuba.algo3.modelo.Sorpresas.ISorpresa;
+import edu.fiuba.algo3.modelo.Sorpresas.*;
 
 public class Moto implements IVehiculo{
     /*
@@ -15,7 +15,7 @@ public class Moto implements IVehiculo{
         return obstaculo.penalizar(this);
     }
 
-    public IVehiculo actualizarVehiculo(ISorpresa sorpresa) {
+    public IVehiculo actualizarVehiculo(SorpresaNeutra sorpresa) {
         return sorpresa.intercambiarVehiculo(this);
     }
 

@@ -14,8 +14,4 @@ public class Piquete implements IObstaculo {
     public int penalizar(Camioneta camioneta) {
         return 0;
     }
-
-    public int return1SiEsPozo() {
-        return 0;
-    }
 }

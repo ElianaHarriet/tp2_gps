@@ -13,18 +13,13 @@ public class Camioneta implements IVehiculo {
         pozos = 0;
     }
 
-    public int atravesarObstaculo(Pozo obstaculo){
+    public int atravesarObstaculo(Pozo obstaculo) {
         this.pozos++;
-        if (this.pozos % 3 == 0) {return 2;}
-        return 0;
+        return this.pozos % 3 == 0 ? 2 : 0; // Ver si se puede hacer un refactor para no usar if
     }
 
     public int atravesarObstaculo(IObstaculo obstaculo) {
         return obstaculo.penalizar(this);
-
-        //pozos = pozos % 3;
-        //pozos += obstaculo.return1SiEsPozo();
-        //return obstaculo.penalizar(this) + (int)Math.floor(pozos / 3) * 2;
     }
 
 

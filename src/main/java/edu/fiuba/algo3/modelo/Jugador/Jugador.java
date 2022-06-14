@@ -25,14 +25,6 @@ public class Jugador {
         this.esquina = esquina;
     }
 
-    public Esquina getPosicion() {
-        return this.esquina;
-    }
-
-    public int cantMovimientos() {
-        return this.movimientos;
-    }
-
     public boolean estaEnDestino() {
         return this.esquina.esDestino();
 
@@ -56,7 +48,4 @@ public class Jugador {
         this.movimientos = movimientos;
     }
 
-    public IVehiculo getVehiculo() {
-        return vehiculo;
-    }
 }

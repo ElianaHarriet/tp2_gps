@@ -20,8 +20,4 @@ public class ControlPolicial implements IObstaculo {
     public int penalizar(Camioneta camioneta) {
         return 3 * detenido;
     }
-
-    public int return1SiEsPozo() {
-        return 0;
-    }
 }

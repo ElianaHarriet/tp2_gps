@@ -4,6 +4,10 @@ package edu.fiuba.algo3.modelo.Obstaculos;
 import edu.fiuba.algo3.modelo.Vehiculos.IVehiculo;
 
 public interface IAtravesable {
+    /* * * * * * * * * * * * * * * * * * *\
+     *         INTERFAZ SIN USO          *
+     *    (PROVISORIA PARA UN FUTURO)    *
+    \* * * * * * * * * * * * * * * * * * */
 
     int atravesar(IVehiculo vehiculo); //
         //return movimientos * cuentita random

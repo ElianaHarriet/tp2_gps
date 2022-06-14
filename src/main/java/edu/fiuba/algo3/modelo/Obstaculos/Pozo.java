@@ -15,8 +15,4 @@ public class Pozo implements IObstaculo {
         return camioneta.atravesarObstaculo(this);
 
     }
-
-    public int return1SiEsPozo() {
-        return 1;
-    }
 }

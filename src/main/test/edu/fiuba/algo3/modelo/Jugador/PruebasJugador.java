@@ -1,6 +1,6 @@
-package edu.fiuba.algo3.modelo;
+package edu.fiuba.algo3.modelo.Jugador;
 
-import edu.fiuba.algo3.modelo.Jugador.Jugador;
+import edu.fiuba.algo3.modelo.Esquina;
 
 import edu.fiuba.algo3.modelo.Obstaculos.*;
 import edu.fiuba.algo3.modelo.Sorpresas.*;
@@ -15,7 +15,7 @@ public class PruebasJugador {
     public void prueba00ElJugadorSeCreaSinMovimientos() {
         Esquina esqInicial = new Esquina(false);
         Jugador jugador = new Jugador(esqInicial, "Alister");
-        assertEquals(jugador.cantMovimientos(), 0);
+        assertEquals(0, jugador.movimientos);
     }
 
     /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -38,7 +38,7 @@ public class PruebasJugador {
         IObstaculo pozo = new Pozo();
 
         jugador.actualizarEstado(null, new SorpresaNula(), pozo);
-        assertEquals(movimientosEsperados, jugador.cantMovimientos());
+        assertEquals(movimientosEsperados, jugador.movimientos);
     }
 
     @Test
@@ -51,7 +51,7 @@ public class PruebasJugador {
         IObstaculo pozo = new Pozo();
 
         jugador.actualizarEstado(null, new SorpresaNula(), pozo);
-        assertEquals(movimientosEsperados, jugador.cantMovimientos());
+        assertEquals(movimientosEsperados, jugador.movimientos);
     }
 
     @Test
@@ -64,7 +64,7 @@ public class PruebasJugador {
         IObstaculo pozo = new Pozo();
 
         jugador.actualizarEstado(null, new SorpresaNula(), pozo);
-        assertEquals(movimientosEsperados, jugador.cantMovimientos());
+        assertEquals(movimientosEsperados, jugador.movimientos);
     }
 
     @Test
@@ -79,7 +79,7 @@ public class PruebasJugador {
         jugador.actualizarEstado(null, new SorpresaNula(), pozo);
         jugador.actualizarEstado(null, new SorpresaNula(), pozo);
         jugador.actualizarEstado(null, new SorpresaNula(), pozo);
-        assertEquals(movimientosEsperados, jugador.cantMovimientos());
+        assertEquals(movimientosEsperados, jugador.movimientos);
     }
 
     @Test
@@ -92,7 +92,7 @@ public class PruebasJugador {
         IObstaculo piquete = new Piquete();
 
         jugador.actualizarEstado(null, new SorpresaNula(), piquete);
-        assertEquals(movimientosEsperados, jugador.cantMovimientos());
+        assertEquals(movimientosEsperados, jugador.movimientos);
     }
 
     /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -114,7 +114,7 @@ public class PruebasJugador {
         IObstaculo piquete = new Piquete();
 
         jugador.actualizarEstado(null, new SorpresaNula(), piquete);
-        assertEquals(movimientosEsperados, jugador.cantMovimientos());
+        assertEquals(movimientosEsperados, jugador.movimientos);
     }
 
     @Test
@@ -127,7 +127,7 @@ public class PruebasJugador {
         IObstaculo piquete = new Piquete();
 
         jugador.actualizarEstado(null, new SorpresaNula(), piquete);
-        assertEquals(movimientosEsperados, jugador.cantMovimientos());
+        assertEquals(movimientosEsperados, jugador.movimientos);
     }
 
     @Test
@@ -142,7 +142,7 @@ public class PruebasJugador {
         jugador.setPosicion(esquinaInicial);
 
         jugador.actualizarEstado(esquinaSiguiente, new SorpresaNula(), piquete);
-        assertEquals(jugador.getPosicion(), esquinaInicial);
+        assertEquals(esquinaInicial, jugador.esquina);
     }
 
     @Test
@@ -157,8 +157,7 @@ public class PruebasJugador {
         jugador.setPosicion(esquinaInicial);
 
         jugador.actualizarEstado(esquinaSiguiente, new SorpresaNula(), piquete);
-        assertEquals(jugador.getPosicion(), esquinaInicial);
-        //assertEquals(3, 8); // -> Usado solo para que no de OK (marca que falta hacer cosas)
+        assertEquals(esquinaInicial, jugador.esquina);
     }
 
     /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -182,7 +181,7 @@ public class PruebasJugador {
         IObstaculo controlPolicial = new ControlPolicial(0);
 
         jugador.actualizarEstado(null, new SorpresaNula(), controlPolicial);
-        assertEquals(movimientosEsperados, jugador.cantMovimientos());
+        assertEquals(movimientosEsperados, jugador.movimientos);
     }
 
     @Test
@@ -195,7 +194,7 @@ public class PruebasJugador {
         IObstaculo controlPolicial = new ControlPolicial(0);
 
         jugador.actualizarEstado(null, new SorpresaNula(), controlPolicial);
-        assertEquals(movimientosEsperados, jugador.cantMovimientos());
+        assertEquals(movimientosEsperados, jugador.movimientos);
     }
 
     @Test
@@ -208,7 +207,7 @@ public class PruebasJugador {
         IObstaculo controlPolicial = new ControlPolicial(0);
 
         jugador.actualizarEstado(null, new SorpresaNula(), controlPolicial);
-        assertEquals(movimientosEsperados, jugador.cantMovimientos());
+        assertEquals(movimientosEsperados, jugador.movimientos);
     }
 
     @Test
@@ -221,7 +220,7 @@ public class PruebasJugador {
         IObstaculo controlPolicial = new ControlPolicial(1);
 
         jugador.actualizarEstado(null, new SorpresaNula(), controlPolicial);
-        assertEquals(movimientosEsperados, jugador.cantMovimientos());
+        assertEquals(movimientosEsperados, jugador.movimientos);
     }
 
 
@@ -235,7 +234,7 @@ public class PruebasJugador {
         IObstaculo controlPolicial = new ControlPolicial(1);
 
         jugador.actualizarEstado(null, new SorpresaNula(), controlPolicial);
-        assertEquals(movimientosEsperados, jugador.cantMovimientos());
+        assertEquals(movimientosEsperados, jugador.movimientos);
     }
 
     @Test
@@ -248,7 +247,7 @@ public class PruebasJugador {
         IObstaculo controlPolicial = new ControlPolicial(1);
 
         jugador.actualizarEstado(null, new SorpresaNula(), controlPolicial);
-        assertEquals(movimientosEsperados, jugador.cantMovimientos());
+        assertEquals(movimientosEsperados, jugador.movimientos);
     }
 
     /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -274,7 +273,7 @@ public class PruebasJugador {
         jugador.setMovimientos(movimientosInicio);
         jugador.actualizarEstado(null, sorpresa, new ObstaculoNulo());
 
-        assertEquals(movimientosEsperados, jugador.cantMovimientos());
+        assertEquals(movimientosEsperados, jugador.movimientos);
     }
 
     @Test
@@ -290,7 +289,7 @@ public class PruebasJugador {
         jugador.setMovimientos(movimientosInicio);
         jugador.actualizarEstado(null, sorpresa, new ObstaculoNulo());
 
-        assertEquals(movimientosEsperados, jugador.cantMovimientos());
+        assertEquals(movimientosEsperados, jugador.movimientos);
     }
 
     @Test
@@ -303,7 +302,7 @@ public class PruebasJugador {
         IVehiculo vehiculoEsperado = new Camioneta();
 
         jugador.actualizarEstado(null, sorpresa, new ObstaculoNulo());
-        assertEquals(vehiculoEsperado, jugador.getVehiculo());
+        assertEquals(vehiculoEsperado, jugador.vehiculo);
 
     }
 
@@ -317,7 +316,7 @@ public class PruebasJugador {
         IVehiculo vehiculoEsperado = new Auto();
 
         jugador.actualizarEstado(null, sorpresa, new ObstaculoNulo());
-        assertEquals(vehiculoEsperado, jugador.getVehiculo());
+        assertEquals(vehiculoEsperado, jugador.vehiculo);
     }
 
     @Test
@@ -330,6 +329,6 @@ public class PruebasJugador {
         IVehiculo vehiculoEsperado = new Moto();
 
         jugador.actualizarEstado(null, sorpresa, new ObstaculoNulo());
-        assertEquals(vehiculoEsperado, jugador.getVehiculo());
+        assertEquals(vehiculoEsperado, jugador.vehiculo);
     }
 }

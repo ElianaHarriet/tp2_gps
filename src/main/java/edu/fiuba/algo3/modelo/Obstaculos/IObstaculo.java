@@ -12,6 +12,5 @@ public interface IObstaculo {
 
     int penalizar(Moto moto);
 
-    int return1SiEsPozo();
 }
 

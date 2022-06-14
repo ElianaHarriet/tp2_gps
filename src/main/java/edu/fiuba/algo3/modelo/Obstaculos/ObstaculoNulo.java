@@ -15,9 +15,4 @@ public class ObstaculoNulo implements IObstaculo {
     public int penalizar(Moto moto) {
         return 0;
     }
-
-    public int return1SiEsPozo() {
-        return 0;
-    }
-
 }

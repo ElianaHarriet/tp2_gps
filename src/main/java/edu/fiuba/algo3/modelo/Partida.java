@@ -10,10 +10,6 @@ public class Partida {
         this.jugador = new Jugador(new Esquina(false), null);
     }
 
-    public int cantMovimientos() {
-        return this.jugador.cantMovimientos();
-    }
-
     public boolean terminada() {
 
         return jugador.estaEnDestino();

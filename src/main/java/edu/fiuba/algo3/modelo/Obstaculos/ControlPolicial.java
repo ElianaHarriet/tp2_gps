@@ -3,25 +3,21 @@ import edu.fiuba.algo3.modelo.Vehiculos.*;
 
 public class ControlPolicial implements IObstaculo {
 
-    private final int detenido;
+    private final Detencion detencion;
 
-    public ControlPolicial(int detenido) {
-        this.detenido = detenido;
+    public ControlPolicial(Detencion detencion) {
+        this.detencion = detencion;
     }
 
     public int penalizar(Auto auto) {
-        return 3 * detenido;
+        return this.detencion.penalizar(auto);
     }
 
     public int penalizar(Moto moto) {
-        return 3 * detenido;
+        return this.detencion.penalizar(moto); //Ver de eliminar el codigo repetido
     }
 
     public int penalizar(Camioneta camioneta) {
-        return 3 * detenido;
-    }
-
-    public int return1SiEsPozo() {
-        return 0;
+        return this.detencion.penalizar(camioneta); //Ver de eliminar el codigo repetido
     }
 }

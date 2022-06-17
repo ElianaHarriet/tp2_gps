@@ -1,6 +1,6 @@
-package edu.fiuba.algo3.modelo;
+package edu.fiuba.algo3.modelo.Jugador;
 
-import edu.fiuba.algo3.modelo.Jugador.Jugador;
+import edu.fiuba.algo3.modelo.Esquina;
 
 import edu.fiuba.algo3.modelo.Obstaculos.*;
 import edu.fiuba.algo3.modelo.Sorpresas.*;
@@ -15,7 +15,7 @@ public class PruebasJugador {
     public void prueba00ElJugadorSeCreaSinMovimientos() {
         Esquina esqInicial = new Esquina(false);
         Jugador jugador = new Jugador(esqInicial, "Alister");
-        assertEquals(jugador.cantMovimientos(), 0);
+        assertEquals(0, jugador.movimientos);
     }
 
     /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
@@ -37,8 +37,8 @@ public class PruebasJugador {
         jugador.setVehiculo(moto);
         IObstaculo pozo = new Pozo();
 
-        jugador.actualizarEstado(null, new SorpresaNula(), pozo);
-        assertEquals(movimientosEsperados, jugador.cantMovimientos());
+        jugador.actualizarEstado(null, new SorpresaNeutra(), pozo);
+        assertEquals(movimientosEsperados, jugador.movimientos);
     }
 
     @Test
@@ -50,8 +50,8 @@ public class PruebasJugador {
         jugador.setVehiculo(auto);
         IObstaculo pozo = new Pozo();
 
-        jugador.actualizarEstado(null, new SorpresaNula(), pozo);
-        assertEquals(movimientosEsperados, jugador.cantMovimientos());
+        jugador.actualizarEstado(null, new SorpresaNeutra(), pozo);
+        assertEquals(movimientosEsperados, jugador.movimientos);
     }
 
     @Test
@@ -63,8 +63,8 @@ public class PruebasJugador {
         jugador.setVehiculo(camioneta);
         IObstaculo pozo = new Pozo();
 
-        jugador.actualizarEstado(null, new SorpresaNula(), pozo);
-        assertEquals(movimientosEsperados, jugador.cantMovimientos());
+        jugador.actualizarEstado(null, new SorpresaNeutra(), pozo);
+        assertEquals(movimientosEsperados, jugador.movimientos);
     }
 
     @Test
@@ -76,10 +76,10 @@ public class PruebasJugador {
         jugador.setVehiculo(camioneta);
         IObstaculo pozo = new Pozo();
 
-        jugador.actualizarEstado(null, new SorpresaNula(), pozo);
-        jugador.actualizarEstado(null, new SorpresaNula(), pozo);
-        jugador.actualizarEstado(null, new SorpresaNula(), pozo);
-        assertEquals(movimientosEsperados, jugador.cantMovimientos());
+        jugador.actualizarEstado(null, new SorpresaNeutra(), pozo);
+        jugador.actualizarEstado(null, new SorpresaNeutra(), pozo);
+        jugador.actualizarEstado(null, new SorpresaNeutra(), pozo);
+        assertEquals(movimientosEsperados, jugador.movimientos);
     }
 
     @Test
@@ -91,47 +91,19 @@ public class PruebasJugador {
         jugador.setVehiculo(moto);
         IObstaculo piquete = new Piquete();
 
-        jugador.actualizarEstado(null, new SorpresaNula(), piquete);
-        assertEquals(movimientosEsperados, jugador.cantMovimientos());
+        jugador.actualizarEstado(null, new SorpresaNeutra(), piquete);
+        assertEquals(movimientosEsperados, jugador.movimientos);
     }
 
     /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
      *                                              Extras (piquete)                                               *
      * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-     * Caso de uso A1: Un auto quiere pasar por un piquete y no es penalizado porque no puede pasar                *
-     * Caso de uso B1: Una 4x4 quiere pasar por un piquete y no es penalizada porque no puede pasar                *
-     * Caso de uso A2: Un auto quiere pasar por un piquete y vuelve a su lugar porque no puede pasar               *
-     * Caso de uso B2: Una 4x4 quiere pasar por un piquete y vuelve a su lugar porque no puede pasar               *
+     * Caso de uso A: Un auto quiere pasar por un piquete y vuelve a su lugar porque no puede pasar                *
+     * Caso de uso B: Una 4x4 quiere pasar por un piquete y vuelve a su lugar porque no puede pasar                *
      * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
     @Test
-    public void pruebaA1UnAutoQuierePasarPorUnPiqueteYNoEsPenalizado() {
-        int movimientosEsperados = 0;
-        Esquina esqInicial = new Esquina(false);
-        Jugador jugador = new Jugador(esqInicial, "alister");
-        IVehiculo auto = new Auto();
-        jugador.setVehiculo(auto);
-        IObstaculo piquete = new Piquete();
-
-        jugador.actualizarEstado(null, new SorpresaNula(), piquete);
-        assertEquals(movimientosEsperados, jugador.cantMovimientos());
-    }
-
-    @Test
-    public void pruebaB1Una4x4QuierePasarPorUnPiqueteYNoEsPenalizado() {
-        int movimientosEsperados = 0;
-        Esquina esqInicial = new Esquina(false);
-        Jugador jugador = new Jugador(esqInicial, "alister");
-        IVehiculo camioneta = new Camioneta();
-        jugador.setVehiculo(camioneta);
-        IObstaculo piquete = new Piquete();
-
-        jugador.actualizarEstado(null, new SorpresaNula(), piquete);
-        assertEquals(movimientosEsperados, jugador.cantMovimientos());
-    }
-
-    @Test
-    public void pruebaA2UnAutoQuierePasarPorUnPiqueteYVuelveAlLugarInicial() {
+    public void pruebaAUnAutoQuierePasarPorUnPiqueteYVuelveAlLugarInicial() {
         Esquina esqInicial = new Esquina(false);
         Jugador jugador = new Jugador(esqInicial, "alister");
         IVehiculo auto = new Auto();
@@ -141,12 +113,12 @@ public class PruebasJugador {
         Esquina esquinaSiguiente = new Esquina(false);
         jugador.setPosicion(esquinaInicial);
 
-        jugador.actualizarEstado(esquinaSiguiente, new SorpresaNula(), piquete);
-        assertEquals(jugador.getPosicion(), esquinaInicial);
+        jugador.actualizarEstado(esquinaSiguiente, new SorpresaNeutra(), piquete);
+        assertEquals(esquinaInicial, jugador.esquina);
     }
 
     @Test
-    public void pruebaB2Una4x4QuierePasarPorUnPiqueteYVuelveAlLugarInicial() {
+    public void pruebaBUna4x4QuierePasarPorUnPiqueteYVuelveAlLugarInicial() {
         Esquina esqInicial = new Esquina(false);
         Jugador jugador = new Jugador(esqInicial, "Alister");
         IVehiculo camioneta = new Camioneta();
@@ -156,100 +128,10 @@ public class PruebasJugador {
         Esquina esquinaSiguiente = new Esquina(false);
         jugador.setPosicion(esquinaInicial);
 
-        jugador.actualizarEstado(esquinaSiguiente, new SorpresaNula(), piquete);
-        assertEquals(jugador.getPosicion(), esquinaInicial);
-        //assertEquals(3, 8); // -> Usado solo para que no de OK (marca que falta hacer cosas)
+        jugador.actualizarEstado(esquinaSiguiente, new SorpresaNeutra(), piquete);
+        assertEquals(esquinaInicial, jugador.esquina);
     }
 
-    /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-     *                                           Extras (control policial)                                         *
-     * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-     * Caso de uso C1: Un auto pasa con exito un control policial (no es penalizado)                               *
-     * Caso de uso D1: Una moto pasa con exito un control policial (no es penalizada)                              *
-     * Caso de uso E1: Una 4x4 pasa con exito un control policial (no es penalizado)                               *
-     * Caso de uso C2: Un auto no pasa con exito un control policial (es penalizado)                               *
-     * Caso de uso D2: Una moto no pasa con exito un control policial (es penalizada)                              *
-     * Caso de uso E2: Una 4x4 no pasa con exito un control policial (es penalizada)                               *
-     * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-
-    @Test
-    public void pruebaC1UnAutoPasaConExitoUnControlPolicial() {
-        int movimientosEsperados = 0;
-        Esquina esqInicial = new Esquina(false);
-        Jugador jugador = new Jugador(esqInicial, "alister");
-        IVehiculo auto = new Auto();
-        jugador.setVehiculo(auto);
-        IObstaculo controlPolicial = new ControlPolicial(0);
-
-        jugador.actualizarEstado(null, new SorpresaNula(), controlPolicial);
-        assertEquals(movimientosEsperados, jugador.cantMovimientos());
-    }
-
-    @Test
-    public void pruebaD1UnaMotoPasaConExitoUnControlPolicialNoEsPenalizado() {
-        int movimientosEsperados = 0;
-        Esquina esqInicial = new Esquina(false);
-        Jugador jugador = new Jugador(esqInicial, "alister");
-        IVehiculo auto = new Auto();
-        jugador.setVehiculo(auto);
-        IObstaculo controlPolicial = new ControlPolicial(0);
-
-        jugador.actualizarEstado(null, new SorpresaNula(), controlPolicial);
-        assertEquals(movimientosEsperados, jugador.cantMovimientos());
-    }
-
-    @Test
-    public void pruebaE1Una4x4PasaConExitoUnControlPolicial() {
-        int movimientosEsperados = 0;
-        Esquina esqInicial = new Esquina(false);
-        Jugador jugador = new Jugador(esqInicial, "alister");
-        IVehiculo camioneta = new Camioneta();
-        jugador.setVehiculo(camioneta);
-        IObstaculo controlPolicial = new ControlPolicial(0);
-
-        jugador.actualizarEstado(null, new SorpresaNula(), controlPolicial);
-        assertEquals(movimientosEsperados, jugador.cantMovimientos());
-    }
-
-    @Test
-    public void pruebaC2UnAutoNoPasaConExitoUnControlPolicial() {
-        int movimientosEsperados = 3;
-        Esquina esqInicial = new Esquina(false);
-        Jugador jugador = new Jugador(esqInicial, "alister");
-        IVehiculo auto = new Auto();
-        jugador.setVehiculo(auto);
-        IObstaculo controlPolicial = new ControlPolicial(1);
-
-        jugador.actualizarEstado(null, new SorpresaNula(), controlPolicial);
-        assertEquals(movimientosEsperados, jugador.cantMovimientos());
-    }
-
-
-    @Test
-    public void pruebaD2UnaMotoNoPasaConExitoUnControlPolicial() {
-        int movimientosEsperados = 3;
-        Esquina esqInicial = new Esquina(false);
-        Jugador jugador = new Jugador(esqInicial, "alister");
-        IVehiculo moto = new Moto();
-        jugador.setVehiculo(moto);
-        IObstaculo controlPolicial = new ControlPolicial(1);
-
-        jugador.actualizarEstado(null, new SorpresaNula(), controlPolicial);
-        assertEquals(movimientosEsperados, jugador.cantMovimientos());
-    }
-
-    @Test
-    public void pruebaE2Una4x4NoPasaConExitoUnControlPolicial() {
-        int movimientosEsperados = 3;
-        Esquina esqInicial = new Esquina(false);
-        Jugador jugador = new Jugador(esqInicial, "alister");
-        IVehiculo camioneta = new Camioneta();
-        jugador.setVehiculo(camioneta);
-        IObstaculo controlPolicial = new ControlPolicial(1);
-
-        jugador.actualizarEstado(null, new SorpresaNula(), controlPolicial);
-        assertEquals(movimientosEsperados, jugador.cantMovimientos());
-    }
 
     /* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
      *                                                  Entrega 02                                                 *
@@ -267,14 +149,14 @@ public class PruebasJugador {
         Jugador jugador = new Jugador(esqInicial, "Beto");
         IVehiculo moto = new Moto();
         jugador.setVehiculo(moto);
-        ISorpresa sorpresa = new SorpresaFavorable();
+        SorpresaNeutra sorpresa = new SorpresaFavorable();
 
         int movimientosInicio = 10;
         int movimientosEsperados = (int)(10 - 10 * 0.2);
         jugador.setMovimientos(movimientosInicio);
         jugador.actualizarEstado(null, sorpresa, new ObstaculoNulo());
 
-        assertEquals(movimientosEsperados, jugador.cantMovimientos());
+        assertEquals(movimientosEsperados, jugador.movimientos);
     }
 
     @Test
@@ -283,14 +165,14 @@ public class PruebasJugador {
         Jugador jugador = new Jugador(esqInicial, "Beto");
         IVehiculo moto = new Moto();
         jugador.setVehiculo(moto);
-        ISorpresa sorpresa = new SorpresaDesfavorable();
+        SorpresaNeutra sorpresa = new SorpresaDesfavorable();
 
         int movimientosInicio = 10;
         int movimientosEsperados = (int)(10 + 10 * 0.25);
         jugador.setMovimientos(movimientosInicio);
         jugador.actualizarEstado(null, sorpresa, new ObstaculoNulo());
 
-        assertEquals(movimientosEsperados, jugador.cantMovimientos());
+        assertEquals(movimientosEsperados, jugador.movimientos);
     }
 
     @Test
@@ -299,11 +181,11 @@ public class PruebasJugador {
         Jugador jugador = new Jugador(esqInicial, "Bonshot");
         IVehiculo auto = new Auto();
         jugador.setVehiculo(auto);
-        ISorpresa sorpresa = new SorpresaCambioVehiculo();
+        SorpresaNeutra sorpresa = new SorpresaCambioVehiculo();
         IVehiculo vehiculoEsperado = new Camioneta();
 
         jugador.actualizarEstado(null, sorpresa, new ObstaculoNulo());
-        assertEquals(vehiculoEsperado, jugador.getVehiculo());
+        assertEquals(vehiculoEsperado, jugador.vehiculo);
 
     }
 
@@ -313,11 +195,11 @@ public class PruebasJugador {
         Jugador jugador = new Jugador(esqInicial, "Bonshot");
         IVehiculo moto = new Moto();
         jugador.setVehiculo(moto);
-        ISorpresa sorpresa = new SorpresaCambioVehiculo();
+        SorpresaNeutra sorpresa = new SorpresaCambioVehiculo();
         IVehiculo vehiculoEsperado = new Auto();
 
         jugador.actualizarEstado(null, sorpresa, new ObstaculoNulo());
-        assertEquals(vehiculoEsperado, jugador.getVehiculo());
+        assertEquals(vehiculoEsperado, jugador.vehiculo);
     }
 
     @Test
@@ -326,10 +208,10 @@ public class PruebasJugador {
         Jugador jugador = new Jugador(esqInicial, "Bonshot");
         IVehiculo camioneta = new Camioneta();
         jugador.setVehiculo(camioneta);
-        ISorpresa sorpresa = new SorpresaCambioVehiculo();
+        SorpresaNeutra sorpresa = new SorpresaCambioVehiculo();
         IVehiculo vehiculoEsperado = new Moto();
 
         jugador.actualizarEstado(null, sorpresa, new ObstaculoNulo());
-        assertEquals(vehiculoEsperado, jugador.getVehiculo());
+        assertEquals(vehiculoEsperado, jugador.vehiculo);
     }
 }

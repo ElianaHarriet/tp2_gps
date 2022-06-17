@@ -1,7 +1,7 @@
 package edu.fiuba.algo3.modelo.Sorpresas;
 import edu.fiuba.algo3.modelo.Vehiculos.*;
 
-public class SorpresaNeutra {
+public class SorpresaNeutra implements ISorpresa {
 
     public int actualizarMovimientos(int movimientos) {
         return movimientos;

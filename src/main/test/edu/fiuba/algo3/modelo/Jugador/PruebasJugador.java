@@ -1,7 +1,5 @@
 package edu.fiuba.algo3.modelo.Jugador;
 
-import edu.fiuba.algo3.modelo.Esquina;
-
 import edu.fiuba.algo3.modelo.Obstaculos.*;
 import edu.fiuba.algo3.modelo.Sorpresas.*;
 import edu.fiuba.algo3.modelo.Vehiculos.*;
@@ -149,7 +147,7 @@ public class PruebasJugador {
         Jugador jugador = new Jugador(esqInicial, "Beto");
         IVehiculo moto = new Moto();
         jugador.setVehiculo(moto);
-        SorpresaNeutra sorpresa = new SorpresaFavorable();
+        ISorpresa sorpresa = new SorpresaFavorable();
 
         int movimientosInicio = 10;
         int movimientosEsperados = (int)(10 - 10 * 0.2);
@@ -165,7 +163,7 @@ public class PruebasJugador {
         Jugador jugador = new Jugador(esqInicial, "Beto");
         IVehiculo moto = new Moto();
         jugador.setVehiculo(moto);
-        SorpresaNeutra sorpresa = new SorpresaDesfavorable();
+        ISorpresa sorpresa = new SorpresaDesfavorable();
 
         int movimientosInicio = 10;
         int movimientosEsperados = (int)(10 + 10 * 0.25);
@@ -181,7 +179,7 @@ public class PruebasJugador {
         Jugador jugador = new Jugador(esqInicial, "Bonshot");
         IVehiculo auto = new Auto();
         jugador.setVehiculo(auto);
-        SorpresaNeutra sorpresa = new SorpresaCambioVehiculo();
+        ISorpresa sorpresa = new SorpresaCambioVehiculo();
         IVehiculo vehiculoEsperado = new Camioneta();
 
         jugador.actualizarEstado(null, sorpresa, new ObstaculoNulo());
@@ -195,7 +193,7 @@ public class PruebasJugador {
         Jugador jugador = new Jugador(esqInicial, "Bonshot");
         IVehiculo moto = new Moto();
         jugador.setVehiculo(moto);
-        SorpresaNeutra sorpresa = new SorpresaCambioVehiculo();
+        ISorpresa sorpresa = new SorpresaCambioVehiculo();
         IVehiculo vehiculoEsperado = new Auto();
 
         jugador.actualizarEstado(null, sorpresa, new ObstaculoNulo());
@@ -208,7 +206,7 @@ public class PruebasJugador {
         Jugador jugador = new Jugador(esqInicial, "Bonshot");
         IVehiculo camioneta = new Camioneta();
         jugador.setVehiculo(camioneta);
-        SorpresaNeutra sorpresa = new SorpresaCambioVehiculo();
+        ISorpresa sorpresa = new SorpresaCambioVehiculo();
         IVehiculo vehiculoEsperado = new Moto();
 
         jugador.actualizarEstado(null, sorpresa, new ObstaculoNulo());

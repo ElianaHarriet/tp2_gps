@@ -1,7 +1,7 @@
-package edu.fiuba.algo3.modelo.Jugador;
+package edu.fiuba.algo3.modelo;
 
 
-import edu.fiuba.algo3.modelo.Jugador.Calle;
+import edu.fiuba.algo3.modelo.Jugador.Jugador;
 
 public class Esquina {
 

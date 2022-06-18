@@ -1,4 +1,5 @@
 package edu.fiuba.algo3.modelo.Obstaculos;
+import edu.fiuba.algo3.modelo.Esquina;
 import edu.fiuba.algo3.modelo.Vehiculos.*;
 
 public class ControlPolicial implements IObstaculo {
@@ -15,6 +16,21 @@ public class ControlPolicial implements IObstaculo {
 
     public int penalizar(Moto moto) {
         return this.detencion.penalizar(moto); //Ver de eliminar el codigo repetido
+    }
+
+    @Override
+    public Esquina siguienteEsquina(Esquina origen, Esquina destino, Auto auto) {
+        return destino;
+    }
+
+    @Override
+    public Esquina siguienteEsquina(Esquina origen, Esquina destino, Camioneta camioneta) {
+        return destino;
+    }
+
+    @Override
+    public Esquina siguienteEsquina(Esquina origen, Esquina destino, Moto moto) {
+        return destino;
     }
 
     public int penalizar(Camioneta camioneta) {

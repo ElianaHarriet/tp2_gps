@@ -1,5 +1,7 @@
-package edu.fiuba.algo3.modelo.Jugador;
+package edu.fiuba.algo3.modelo;
 
+import edu.fiuba.algo3.modelo.Esquina;
+import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import edu.fiuba.algo3.modelo.Obstaculos.IObstaculo;
 import edu.fiuba.algo3.modelo.Sorpresas.ISorpresa;
 

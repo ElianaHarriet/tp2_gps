@@ -1,6 +1,5 @@
 package edu.fiuba.algo3.modelo;
 
-import edu.fiuba.algo3.modelo.Jugador.Esquina;
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
 
 public class Partida {
@@ -8,7 +7,7 @@ public class Partida {
     Jugador jugador;
 
     public Partida () {
-        this.jugador = new Jugador(new Esquina(false), null);
+        this.jugador = new Jugador(new Esquina(false), null, null);
     }
 
     public boolean terminada() {

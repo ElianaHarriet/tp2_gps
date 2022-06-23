@@ -5,7 +5,7 @@ import edu.fiuba.algo3.TeFaltaCalleError;
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import edu.fiuba.algo3.modelo.Mapa.Calle;
 
-public class Esquina {
+public class Esquina { //dividir esquina normal de esquina destino
 
     private final boolean esDestino;
 

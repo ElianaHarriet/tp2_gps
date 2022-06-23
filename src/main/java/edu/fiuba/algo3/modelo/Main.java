@@ -19,7 +19,7 @@ public class Main {
         //pedir por interfaz el auto
         jugador = new Jugador(mapa.posicionInicio(), nick, /*lo que quiera el jugador*/);
 
-        while (!jugador.estaEnDestino()) {
+        while (!jugador.estaEnDestino()) {  //varios jugadores
             //pedir where se va a mover
             /* moverse */
             /* ver que moverse no explote */
@@ -27,6 +27,6 @@ public class Main {
 
         int movimientos = jugador.getMovimientos();
         puntajes.put(nick, movimientos);
-        /*se guarda en un csv? Para que trascienda de la partida y ejecucion o no*/
+        /*se guarda en un json -> Para que trascienda de la partida*/  // patron facade
     }
 }

@@ -5,7 +5,7 @@ import edu.fiuba.algo3.modelo.Sorpresas.*;
 
 import java.util.Random;
 
-public class Mapa {
+public class Mapa { //patron factory
 
     private final Esquina[][] mapa;
     private final int tam;

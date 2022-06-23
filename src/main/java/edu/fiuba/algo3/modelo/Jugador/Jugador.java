@@ -33,7 +33,7 @@ public class Jugador {
         this.movimientos = movimientos;
     }
 
-    public void moverseArriba() {
+    public void moverseArriba() { // mover unico -> modelar direccion
         this.esquina.moverseArriba(this);
         movimientos++;
     }

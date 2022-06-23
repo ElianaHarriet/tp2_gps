@@ -1,7 +1,8 @@
-package edu.fiuba.algo3.modelo;
+package edu.fiuba.algo3.modelo.Mapa;
 
 
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
+import edu.fiuba.algo3.modelo.Mapa.Calle;
 
 public class Esquina {
 
@@ -20,12 +21,22 @@ public class Esquina {
         this.adyacenteE = null;
     }
 
-    public void setAdyacentes(Calle adyacenteN, Calle adyacenteS, Calle adyacenteW, Calle adyacenteE) {
-        this.adyacenteN = adyacenteN;
-        this.adyacenteS = adyacenteS;
-        this.adyacenteW = adyacenteW;
-        this.adyacenteE = adyacenteE;
+    public void setAdySuperior(Calle adyacente) {
+        this.adyacenteN = adyacente;
     }
+
+    public void setAdyInferior(Calle adyacente) {
+        this.adyacenteS = adyacente;
+    }
+
+    public void setAdyIzquierda(Calle adyacente) {
+        this.adyacenteW = adyacente;
+    }
+
+    public void setAdyDerecha(Calle adyacente) {
+        this.adyacenteE = adyacente;
+    }
+
     public boolean esDestino() {
         return this.esDestino;
     }

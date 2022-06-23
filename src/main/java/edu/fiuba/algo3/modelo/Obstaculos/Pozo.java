@@ -1,5 +1,5 @@
 package edu.fiuba.algo3.modelo.Obstaculos;
-import edu.fiuba.algo3.modelo.Esquina;
+import edu.fiuba.algo3.modelo.Mapa.Esquina;
 import edu.fiuba.algo3.modelo.Vehiculos.*;
 
 public class Pozo implements IObstaculo {

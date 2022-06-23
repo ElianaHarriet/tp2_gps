@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.modelo.Jugador;
 
-import edu.fiuba.algo3.modelo.Esquina;
+import edu.fiuba.algo3.modelo.Mapa.Esquina;
 import edu.fiuba.algo3.modelo.Obstaculos.*;
 import edu.fiuba.algo3.modelo.Sorpresas.*;
 import edu.fiuba.algo3.modelo.Vehiculos.*;

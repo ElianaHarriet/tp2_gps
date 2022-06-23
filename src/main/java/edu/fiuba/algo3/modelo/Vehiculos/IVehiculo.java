@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.modelo.Vehiculos;
 
-import edu.fiuba.algo3.modelo.Esquina;
+import edu.fiuba.algo3.modelo.Mapa.Esquina;
 import edu.fiuba.algo3.modelo.Obstaculos.IObstaculo;
 import edu.fiuba.algo3.modelo.Sorpresas.ISorpresa;
 

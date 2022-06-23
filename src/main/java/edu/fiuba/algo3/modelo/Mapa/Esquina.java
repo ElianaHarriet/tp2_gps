@@ -1,6 +1,7 @@
 package edu.fiuba.algo3.modelo.Mapa;
 
 
+import edu.fiuba.algo3.TeFaltaCalleError;
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import edu.fiuba.algo3.modelo.Mapa.Calle;
 
@@ -42,19 +43,29 @@ public class Esquina {
     }
 
     public void moverseArriba(Jugador jugador) {
+        this.validarMovimiento(this.adyacenteN);
         this.adyacenteN.moverse(this, jugador);
     }
 
     public void moverseAbajo(Jugador jugador) {
+        this.validarMovimiento(this.adyacenteS);
         this.adyacenteS.moverse(this, jugador);
     }
 
     public void moverseIzquierda(Jugador jugador) {
+        this.validarMovimiento(this.adyacenteW);
         this.adyacenteW.moverse(this, jugador);
     }
 
     public void moverseDerecha(Jugador jugador) {
+        this.validarMovimiento(this.adyacenteE);
         this.adyacenteE.moverse(this, jugador);
+    }
+
+    private void validarMovimiento(Calle calle) {
+        if (calle == null) {
+            throw new TeFaltaCalleError();
+        }
     }
 }
 

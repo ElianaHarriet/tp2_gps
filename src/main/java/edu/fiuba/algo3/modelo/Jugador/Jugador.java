@@ -20,21 +20,13 @@ public class Jugador {
 
     public boolean estaEnDestino() {
         return this.esquina.esDestino();
-
     }
 
     public void actualizarEstado(Esquina siguienteEsquina, ISorpresa sorpresa, IObstaculo obstaculo) {
-
         this.movimientos += this.vehiculo.atravesarObstaculo(obstaculo);
         this.movimientos = sorpresa.actualizarMovimientos(this.movimientos);
         this.vehiculo = this.vehiculo.actualizarVehiculo(sorpresa);
         this.esquina = this.vehiculo.siguienteEsquina(this.esquina, siguienteEsquina, obstaculo);
-        /*
-        * this.movimiento = this.vehiculo.atravezarAtravesable(atravesable1)
-        *  this.movimiento = this.vehiculo.atravezarAtravesable(atravesable2)
-        *
-        *   PONIENDO MOVIMIENTOS EN VEHICULO + CREAR INICIALIZADOR
-        * */
     }
 
     public void setMovimientos(int movimientos) {
@@ -59,5 +51,9 @@ public class Jugador {
     public void moverseDerecha() {
         this.esquina.moverseDerecha(this);
         movimientos++;
+    }
+
+    public int getMovimientos() {
+        return movimientos;
     }
 }

@@ -2,6 +2,7 @@ package edu.fiuba.algo3.modelo;
 
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import edu.fiuba.algo3.modelo.Mapa.Mapa;
+import edu.fiuba.algo3.modelo.Vehiculos.Auto;
 
 import java.util.HashMap;
 
@@ -17,7 +18,7 @@ public class Main {
         //pedir por interfaz el nick
         String nick = "manolo";
         //pedir por interfaz el auto
-        jugador = new Jugador(mapa.posicionInicio(), nick, /*lo que quiera el jugador*/);
+        jugador = new Jugador(mapa.posicionInicio(), nick, new Auto());
 
         while (!jugador.estaEnDestino()) {  //varios jugadores
             //pedir where se va a mover

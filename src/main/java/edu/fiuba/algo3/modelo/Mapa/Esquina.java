@@ -42,6 +42,7 @@ public class Esquina { //dividir esquina normal de esquina destino
         return this.esDestino;
     }
 
+
     public void moverseArriba(Jugador jugador) {
         this.validarMovimiento(this.adyacenteN);
         this.adyacenteN.moverse(this, jugador);
@@ -61,6 +62,7 @@ public class Esquina { //dividir esquina normal de esquina destino
         this.validarMovimiento(this.adyacenteE);
         this.adyacenteE.moverse(this, jugador);
     }
+
 
     private void validarMovimiento(Calle calle) {
         if (calle == null) {

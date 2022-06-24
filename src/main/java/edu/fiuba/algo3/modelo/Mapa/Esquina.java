@@ -5,7 +5,7 @@ import edu.fiuba.algo3.TeFaltaCalleError;
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import edu.fiuba.algo3.modelo.Mapa.Calle;
 
-public class Esquina { //dividir esquina normal de esquina destino
+public abstract class Esquina { //dividir esquina normal de esquina destino
 
     private final boolean esDestino;
 
@@ -38,30 +38,36 @@ public class Esquina { //dividir esquina normal de esquina destino
         this.adyacenteE = adyacente;
     }
 
-    public boolean esDestino() {
-        return this.esDestino;
+    public abstract boolean esDestino();
+
+
+    public void mover(Jugador jugador, Arriba arriba){
+
     }
 
 
-    public void moverseArriba(Jugador jugador) {
+    public void moverseHacia(Jugador jugador, Arriba direccion) {
         this.validarMovimiento(this.adyacenteN);
         this.adyacenteN.moverse(this, jugador);
     }
 
-    public void moverseAbajo(Jugador jugador) {
+    public void moverseHacia(Jugador jugador, Abajo direccion) {
         this.validarMovimiento(this.adyacenteS);
         this.adyacenteS.moverse(this, jugador);
     }
 
-    public void moverseIzquierda(Jugador jugador) {
+    public void moverseHacia(Jugador jugador, Izquierda direccion) {
         this.validarMovimiento(this.adyacenteW);
         this.adyacenteW.moverse(this, jugador);
     }
 
-    public void moverseDerecha(Jugador jugador) {
+    public void moverseHacia(Jugador jugador, Derecha direccion) {
         this.validarMovimiento(this.adyacenteE);
         this.adyacenteE.moverse(this, jugador);
     }
+
+
+    public abstract void moverse();
 
 
     private void validarMovimiento(Calle calle) {

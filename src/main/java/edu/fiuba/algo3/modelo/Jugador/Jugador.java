@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.modelo.Jugador;
 
-import edu.fiuba.algo3.modelo.Mapa.Esquina;
+import edu.fiuba.algo3.modelo.Mapa.*;
 import edu.fiuba.algo3.modelo.Sorpresas.*;
 import edu.fiuba.algo3.modelo.Obstaculos.IObstaculo;
 import edu.fiuba.algo3.modelo.Vehiculos.IVehiculo;
@@ -33,25 +33,32 @@ public class Jugador {
         this.movimientos = movimientos;
     }
 
-    public void moverseArriba() { // mover unico -> modelar direccion
-        this.esquina.moverseArriba(this);
-        movimientos++;
-    }
 
-    public void moverseAbajo() {
-        this.esquina.moverseAbajo(this);
-        movimientos++;
-    }
 
-    public void moverseIzquierda() {
-        this.esquina.moverseIzquierda(this);
+    public void moverseHacia(IDireccion direccion) {
+        direccion.moverseHacia(this, this.esquina);
+        //this.moverseHacia(this, direccion);
         movimientos++;
     }
-
-    public void moverseDerecha() {
-        this.esquina.moverseDerecha(this);
-        movimientos++;
-    }
+    //public void moverseArriba() { // mover unico -> modelar direccion
+    //    this.esquina.moverseArriba(this);
+    //    movimientos++;
+    //}
+//
+    //public void moverseAbajo() {
+    //    this.esquina.moverseAbajo(this);
+    //    movimientos++;
+    //}
+//
+    //public void moverseIzquierda() {
+    //    this.esquina.moverseIzquierda(this);
+    //    movimientos++;
+    //}
+//
+    //public void moverseDerecha() {
+    //    this.esquina.moverseDerecha(this);
+    //    movimientos++;
+    //}
 
     public int getMovimientos() {
         return movimientos;

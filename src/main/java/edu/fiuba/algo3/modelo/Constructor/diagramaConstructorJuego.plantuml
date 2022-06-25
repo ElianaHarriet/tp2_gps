@@ -1,4 +1,3 @@
-"poner lo de abajo en https://www.plantuml.com/plantuml/uml/SyfFKj2rKt3CoKnELR1Io4ZDoSa70000 para visualizar"
 @startuml
 Class ConstructorJuego{
 -constructorJugador

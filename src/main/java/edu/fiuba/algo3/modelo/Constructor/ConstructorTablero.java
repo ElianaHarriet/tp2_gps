@@ -4,7 +4,7 @@ import edu.fiuba.algo3.modelo.Mapa.Esquina;
 import edu.fiuba.algo3.modelo.Vehiculos.IVehiculo;
 
 public class ConstructorTablero implements IConstructor{
-
+    Esquina esquinaInicial;
     public ConstructorTablero() {
 
     }
@@ -13,7 +13,8 @@ public class ConstructorTablero implements IConstructor{
 
     }
 
-    public Object getResultado() {
-
+    @Override
+    public Esquina getResultado() {
+        return this.esquinaInicial;
     }
 }

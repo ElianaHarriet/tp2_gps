@@ -2,6 +2,8 @@ package edu.fiuba.algo3.modelo.Constructor;
 
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import edu.fiuba.algo3.modelo.Vehiculos.IVehiculo;
+import edu.fiuba.algo3.modelo.Vehiculos.Auto;
+
 
 public class ConstructorJuego implements IConstructor{
 	//c = constructor no tenemos ganas de escribir
@@ -24,11 +26,11 @@ public class ConstructorJuego implements IConstructor{
         * saquen cvehiculo.crear... y cambien c.vehiculo.get por vehiculo
         * */
         this.cTablero.crearConTamanio(m,n);
-        this.cJugador.crearConNick(nick, cTablero.getResultado(),cVehiculo.getResultado());
+        this.cJugador.crearConNick(nick, cTablero.getResultado(), new Auto());//cVehiculo.getResultado());
         this.cVehiculo.crearVehiculo(vehiculo);
     }
     public Jugador getResultado(){
-        this.cJugador.getResultado();
+        return this.cJugador.getResultado();
     }
 
 }

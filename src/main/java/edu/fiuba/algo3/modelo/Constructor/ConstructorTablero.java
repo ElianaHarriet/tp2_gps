@@ -7,7 +7,7 @@ import edu.fiuba.algo3.modelo.Vehiculos.IVehiculo;
 
 import java.util.Random;
 
-public class ConstructorTablero implements IConstructor{
+public class ConstructorTablero implements IConstructor {
 
     private Esquina[][] mapa;
     private int n;
@@ -23,8 +23,8 @@ public class ConstructorTablero implements IConstructor{
         this.mapa = new Esquina[n][n];
         this.random = new Random(System.currentTimeMillis());
         this.iniciarTablero();
-
     }
+
     private void iniciarTablero(){
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {

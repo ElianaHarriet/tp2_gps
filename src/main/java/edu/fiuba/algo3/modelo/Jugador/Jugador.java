@@ -63,4 +63,8 @@ public class Jugador {
     public int getMovimientos() {
         return movimientos;
     }
+
+    public String getNick() {
+        return this.nick;
+    }
 }

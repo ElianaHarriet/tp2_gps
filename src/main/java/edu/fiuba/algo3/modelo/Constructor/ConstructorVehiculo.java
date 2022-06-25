@@ -4,10 +4,10 @@ import edu.fiuba.algo3.modelo.Mapa.Esquina;
 import edu.fiuba.algo3.modelo.Vehiculos.*;
 
 
-public class ConstructorVehiculo implements IConstructor{
+public class ConstructorVehiculo implements IConstructor {
+
     private IVehiculo vehiculo;
     public ConstructorVehiculo() {
-
     }
 
     public void crearVehiculo(String vehiculo) {

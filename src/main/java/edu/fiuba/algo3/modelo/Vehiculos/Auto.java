@@ -23,4 +23,5 @@ public class Auto implements IVehiculo {
     public boolean equals(Object obj) {
         return obj instanceof Auto;
     }
+
 }

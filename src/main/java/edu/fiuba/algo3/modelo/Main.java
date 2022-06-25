@@ -3,22 +3,26 @@ package edu.fiuba.algo3.modelo;
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import edu.fiuba.algo3.modelo.Mapa.Mapa;
 import edu.fiuba.algo3.modelo.Vehiculos.Auto;
+import edu.fiuba.algo3.modelo.Constructor.*;
 
 import java.util.HashMap;
 
 public class Main {
-    private Mapa mapa;
+
     private Jugador jugador;
+
     private final int tamMapa = 15;
 
     private HashMap<String, Integer> puntajes;
 
     public Main() {
-        mapa = new Mapa(tamMapa);
+        ConstructorJuego constructor = new ConstructorJuego();
         //pedir por interfaz el nick
         String nick = "manolo";
         //pedir por interfaz el auto
-        jugador = new Jugador(mapa.posicionInicio(), nick, new Auto());
+        String vehiculo = "fitito";
+        constructor.crearJuego(tamMapa, nick, vehiculo);
+        jugador = constructor.getResultado();
 
         while (!jugador.estaEnDestino()) {  //varios jugadores
             //pedir where se va a mover

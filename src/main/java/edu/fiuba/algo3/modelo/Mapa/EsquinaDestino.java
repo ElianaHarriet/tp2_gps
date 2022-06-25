@@ -1,10 +1,11 @@
 package edu.fiuba.algo3.modelo.Mapa;
 
-public class EsquinaNormie extends Esquina {
+public class EsquinaDestino extends Esquina {
 
     public boolean esDestino() {
-        return false;
+        return true;
     }
+
     public void moverse() {
 
     }

@@ -1,7 +1,6 @@
 package edu.fiuba.algo3.modelo.Constructor;
 
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
-import edu.fiuba.algo3.modelo.Vehiculos.IVehiculo;
 import edu.fiuba.algo3.modelo.Vehiculos.Auto;
 
 
@@ -20,17 +19,16 @@ public class ConstructorJuego implements IConstructor{
         this.cVehiculo = new ConstructorVehiculo();
     }
 
-    public void crearJuego(int n, String nick, String vehiculo) {
+    public void crearJuego(int tam, String nick, String vehiculo) {
         /*
         * si quieren sacar el switch/hash de crearVehiculo, pasennos directamente el vehiculo
         * saquen cvehiculo.crear... y cambien c.vehiculo.get por vehiculo
         * */
-        this.cTablero.crearConTamanio(n);
+        this.cTablero.crearConTamanio(tam);
         this.cJugador.crearConNick(nick, cTablero.getResultado(), new Auto());//cVehiculo.getResultado());
         this.cVehiculo.crearVehiculo(vehiculo);
     }
     public Jugador getResultado() {
         return this.cJugador.getResultado();
     }
-
 }

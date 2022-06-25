@@ -1,0 +1,27 @@
+"poner lo de abajo en https://www.plantuml.com/plantuml/uml/SyfFKj2rKt3CoKnELR1Io4ZDoSa70000 para visualizar"
+@startuml
+Class ConstructorJuego{
+-constructorJugador
+-constructorTablero
+-construtorVehiculo
++crearJuego(m,n, nick, vehiculo)
+}
+Class ConstructorTablero{
++crearConTamaño(m, n)
+-unirCeldas(Esquinas)
+}
+Class ConstructorJugador{
++crearConNick(unNick)
+}
+Class ConstructorEsquinas{
++crearConTamaño(m,n)
+}
+Class ConstructorVehiculo{
++crearVehiculo(unVehiculo)
++crearVehiculoRandom()
+}
+ConstructorTablero *--up ConstructorJuego
+ConstructorJugador *--up ConstructorJuego
+ConstructorTablero *-down- ConstructorEsquinas
+ConstructorVehiculo *--up ConstructorJuego
+@enduml

@@ -13,23 +13,23 @@ public class ConstructorJuego implements IConstructor{
 
     private ConstructorVehiculo cVehiculo;
 
-    public ConstructorJuego(){
+    public ConstructorJuego() {
         //hacer en estas clases un error para cuando se pide el elemento antes de que se crees
         this.cJugador = new ConstructorJugador();
         this.cTablero = new ConstructorTablero();
         this.cVehiculo = new ConstructorVehiculo();
     }
 
-    public void crearJuego(int m, int n, String nick, String vehiculo) {
+    public void crearJuego(int n, String nick, String vehiculo) {
         /*
         * si quieren sacar el switch/hash de crearVehiculo, pasennos directamente el vehiculo
         * saquen cvehiculo.crear... y cambien c.vehiculo.get por vehiculo
         * */
-        this.cTablero.crearConTamanio(m,n);
+        this.cTablero.crearConTamanio(n);
         this.cJugador.crearConNick(nick, cTablero.getResultado(), new Auto());//cVehiculo.getResultado());
         this.cVehiculo.crearVehiculo(vehiculo);
     }
-    public Jugador getResultado(){
+    public Jugador getResultado() {
         return this.cJugador.getResultado();
     }
 

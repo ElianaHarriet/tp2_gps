@@ -21,10 +21,10 @@ public class Mapa { //patron factory
     private void iniciarMapa() {
         for (int i = 0; i < tam; i++) {
             for (int j = 0; j < tam; j++) {
-                mapa[i][j] = new Esquina(false);
+                mapa[i][j] = new EsquinaNormie();
             }
         }
-        mapa[random.nextInt(0, tam)][tam - 1] = new Esquina(true);
+        mapa[random.nextInt(tam)][tam - 1] = new EsquinaNormie();
         this.crearCalles();
     }
 
@@ -100,6 +100,6 @@ public class Mapa { //patron factory
 
     }
     public Esquina posicionInicio() {
-        return mapa[random.nextInt(0, tam)][0];
+        return mapa[random.nextInt(tam)][0];
     }
 }

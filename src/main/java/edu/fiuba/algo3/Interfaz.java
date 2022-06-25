@@ -24,9 +24,8 @@ public class Interfaz extends Application {
 
         Auto auto = new Auto();
 
-        Jugador jugador = new Jugador(new EsquinaNormie(), "ESSAYAGOD", auto);
-
-        var label = new Label("Hello, " + jugador.getNick() + ", running on Java " + auto.getNombre() + ".");
+        Jugador jugador = new Jugador(new EsquinaNormie(), "ESSAYAGOD???", auto);
+        var label = new Label("Hello, " + jugador.getNick() + ", running on Java " /* + auto.getNombre()  */ + ".");
 
         var scene = new Scene(new StackPane(label), 640, 480);
         stage.setScene(scene);

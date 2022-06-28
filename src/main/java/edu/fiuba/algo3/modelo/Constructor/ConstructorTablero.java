@@ -17,6 +17,11 @@ public class ConstructorTablero implements IConstructor {
         //innecesario podemos hacer que estoy reciba m y n y ya pueda devolver
         // el mapa
     }
+    //  BORRAR Y HACER BIEN ESTO
+    public Esquina[][] getMapa() {
+        return this.mapa;
+    }
+
 
     public void crearConTamanio(int n) {
         this.n = n;
@@ -28,10 +33,11 @@ public class ConstructorTablero implements IConstructor {
     private void iniciarTablero(){
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
-                mapa[i][j] = new EsquinaNormie();
+                mapa[i][j] = new EsquinaNormie(i, j);
             }
         }
-        mapa[random.nextInt(n)][n - 1] = new EsquinaNormie();
+        int randomInt = random.nextInt(n);
+        mapa[randomInt][n - 1] = new EsquinaDestino(randomInt, n - 1);
         this.crearCalles();
     }
 

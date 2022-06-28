@@ -12,7 +12,7 @@ public class JugadorTest {
 
     @Test
     public void prueba00ElJugadorSeCreaSinMovimientos() {
-        Esquina esqInicial = new EsquinaNormie();
+        Esquina esqInicial = new EsquinaNormie(0, 0);
         Jugador jugador = new Jugador(esqInicial, "Alister", null);
         assertEquals(0, jugador.movimientos);
     }
@@ -30,7 +30,7 @@ public class JugadorTest {
     @Test
     public void prueba01UnaMotoSeEncuentraConUnPozoYEsPenalizadaTresMovimientos() {
         int movimientosEsperados = 3;
-        Esquina esqInicial = new EsquinaNormie();
+        Esquina esqInicial = new EsquinaNormie(0, 0);
         Jugador jugador = new Jugador(esqInicial, "alister", new Moto());
         IObstaculo pozo = new Pozo();
 
@@ -41,7 +41,7 @@ public class JugadorTest {
     @Test
     public void prueba02UnAutoSeEncuentraConUnPozoYEsPenalizadoTresMovimientos() {
         int movimientosEsperados = 3;
-        Esquina esqInicial = new EsquinaNormie();
+        Esquina esqInicial = new EsquinaNormie(0, 0);
         Jugador jugador = new Jugador(esqInicial, "Alister", new Auto());
         IObstaculo pozo = new Pozo();
 
@@ -52,7 +52,7 @@ public class JugadorTest {
     @Test
     public void prueba03UnaCamionetaSeEncuentraConUnPozoYNoEsPenalizada() {
         int movimientosEsperados = 0;
-        Esquina esqInicial = new EsquinaNormie();
+        Esquina esqInicial = new EsquinaNormie(0, 0);
         Jugador jugador = new Jugador(esqInicial, "Alister", new Camioneta());
         IObstaculo pozo = new Pozo();
 
@@ -63,7 +63,7 @@ public class JugadorTest {
     @Test
     public void prueba04UnaCamionetaPasaPorTresPozosYEsPenalizadaDosMovimientos() {
         int movimientosEsperados = 2; // this!!!!
-        Esquina esqInicial = new EsquinaNormie();
+        Esquina esqInicial = new EsquinaNormie(0, 0);
         Jugador jugador = new Jugador(esqInicial, "qwe", new Camioneta());
         IObstaculo pozo = new Pozo();
 
@@ -76,7 +76,7 @@ public class JugadorTest {
     @Test
     public void prueba05UnaMotoPasaUnPiqueteYEsPenalizadaDosMovimientos() {
         int movimientosEsperados = 2;
-        Esquina esqInicial = new EsquinaNormie();
+        Esquina esqInicial = new EsquinaNormie(0, 0);
         Jugador jugador = new Jugador(esqInicial, "alister", new Moto());
         IObstaculo piquete = new Piquete();
 
@@ -93,10 +93,10 @@ public class JugadorTest {
 
     @Test
     public void pruebaAUnAutoQuierePasarPorUnPiqueteYVuelveAlLugarInicial() {
-        Esquina esquinaInicial = new EsquinaNormie();
+        Esquina esquinaInicial = new EsquinaNormie(0, 0);
         Jugador jugador = new Jugador(esquinaInicial, "alister", new Auto());
         IObstaculo piquete = new Piquete();
-        Esquina esquinaSiguiente = new EsquinaNormie();
+        Esquina esquinaSiguiente = new EsquinaNormie(0, 1);
 
         jugador.actualizarEstado(esquinaSiguiente, new SorpresaNeutra(), piquete);
         assertEquals(esquinaInicial, jugador.esquina);
@@ -104,10 +104,10 @@ public class JugadorTest {
 
     @Test
     public void pruebaBUna4x4QuierePasarPorUnPiqueteYVuelveAlLugarInicial() {
-        Esquina esquinaInicial = new EsquinaNormie();
+        Esquina esquinaInicial = new EsquinaNormie(0, 0);
         Jugador jugador = new Jugador(esquinaInicial, "Alister", new Camioneta());
         IObstaculo piquete = new Piquete();
-        Esquina esquinaSiguiente = new EsquinaNormie();
+        Esquina esquinaSiguiente = new EsquinaNormie(0, 1);
 
         jugador.actualizarEstado(esquinaSiguiente, new SorpresaNeutra(), piquete);
         assertEquals(esquinaInicial, jugador.esquina);
@@ -126,7 +126,7 @@ public class JugadorTest {
 
     @Test
     public void prueba01UnVehiculoAtraviesaLaCiudadYEncuentraUnaSorpresaFavorable() {
-        Esquina esqInicial = new EsquinaNormie();
+        Esquina esqInicial = new EsquinaNormie(0, 0);
         Jugador jugador = new Jugador(esqInicial, "Beto", new Moto());
         ISorpresa sorpresa = new SorpresaFavorable();
 
@@ -140,7 +140,7 @@ public class JugadorTest {
 
     @Test
     public void prueba02UnVehiculoAtraviesaLaCiudadYEncuentraUnaSorpresaDesfavorable() {
-        Esquina esqInicial = new EsquinaNormie();
+        Esquina esqInicial = new EsquinaNormie(0, 0);
         Jugador jugador = new Jugador(esqInicial, "Beto", new Moto());
         ISorpresa sorpresa = new SorpresaDesfavorable();
 
@@ -154,7 +154,7 @@ public class JugadorTest {
 
     @Test
     public void prueba03UnAutoAtraviesaLaCiudadYEncuentraUnaSorpresaCambioDeVehiculo() {
-        Esquina esqInicial = new EsquinaNormie();
+        Esquina esqInicial = new EsquinaNormie(0, 0);
         Jugador jugador = new Jugador(esqInicial, "Bonshot", new Auto());
         ISorpresa sorpresa = new SorpresaCambioVehiculo();
         IVehiculo vehiculoEsperado = new Camioneta();
@@ -166,7 +166,7 @@ public class JugadorTest {
 
     @Test
     public void prueba04UnaMotoAtraviesaLaCiudadYEncuentraUnaSorpresaCambioDeVehiculo() {
-        Esquina esqInicial = new EsquinaNormie();
+        Esquina esqInicial = new EsquinaNormie(0, 0);
         Jugador jugador = new Jugador(esqInicial, "Bonshot", new Moto());
         ISorpresa sorpresa = new SorpresaCambioVehiculo();
         IVehiculo vehiculoEsperado = new Auto();
@@ -177,7 +177,7 @@ public class JugadorTest {
 
     @Test
     public void prueba05UnaCamionetaAtraviesaLaCiudadYEncuentraUnaSorpresaCambioDeVehiculo() {
-        Esquina esqInicial = new EsquinaNormie();
+        Esquina esqInicial = new EsquinaNormie(0, 0);
         Jugador jugador = new Jugador(esqInicial, "Bonshot", new Camioneta());
         ISorpresa sorpresa = new SorpresaCambioVehiculo();
         IVehiculo vehiculoEsperado = new Moto();

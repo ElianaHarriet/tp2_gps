@@ -23,5 +23,4 @@ public class ModelDependenciesTest {
 //
 //        myRule.check(importedClasses);   CONSULTAR AL CORRECTOR :(
     }
-
 }

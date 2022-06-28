@@ -6,12 +6,20 @@ import edu.fiuba.algo3.modelo.Mapa.Calle;
 
 public abstract class Esquina { //dividir esquina normal de esquina destino
 
+    private int posX;
+    private int posY;
     private Calle adyacenteN;
     private Calle adyacenteS;
     private Calle adyacenteW;
     private Calle adyacenteE;
 
-    public Esquina() {
+    public Calle getNorte(){
+        return this.adyacenteN;
+    }
+
+    public Esquina(int posX, int posY) {
+        this.posX = posX;
+        this.posY = posY;
         this.adyacenteN = null;
         this.adyacenteS = null;
         this.adyacenteW = null;
@@ -70,6 +78,14 @@ public abstract class Esquina { //dividir esquina normal de esquina destino
         if (calle == null) {
             throw new TeFaltaCalleError();
         }
+    }
+
+    public int getX() {
+        return this.posX;
+    }
+
+    public int getY() {
+        return this.posY;
     }
 }
 

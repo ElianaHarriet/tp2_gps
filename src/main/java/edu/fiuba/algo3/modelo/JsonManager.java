@@ -9,7 +9,7 @@ import org.json.simple.parser.JSONParser;
 
 public class JsonManager {
 
-    public JSONObject obtenerJson(String path) {
+    public static JSONObject obtenerJson(String path) {
         JSONParser parser = new JSONParser();
         Object json = null;
 
@@ -27,7 +27,7 @@ public class JsonManager {
         return objetoJson;
     }
 
-    static public String obtenerRanking() {
+    public static String obtenerRanking() {
         String rankingString = "";
         JSONObject ranking = obtenerJson("./ranking.json");
         Iterator<String> claves = ranking.keySet().iterator();
@@ -39,7 +39,7 @@ public class JsonManager {
         return rankingString;
     }
 
-    static public void guardarMovimientos(JSONObject json, String nick, int movimientos) {
+    public static void guardarMovimientos(JSONObject json, String nick, int movimientos) {
         json.put(nick, movimientos);
     }
 

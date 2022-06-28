@@ -49,4 +49,6 @@ public class ControlPolicial implements IObstaculo {
         this.detencion = null;
         return penalizacion;
     }
+
+    public String tipo() {return "control";}
 }

@@ -25,4 +25,7 @@ public class SorpresaDesfavorable implements ISorpresa {
     public IVehiculo intercambiarVehiculo(Camioneta camioneta) {
         return camioneta;
     }
+
+    public String tipo() {return "desfavorable";}
+
 }

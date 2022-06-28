@@ -16,6 +16,15 @@ public abstract class Esquina { //dividir esquina normal de esquina destino
     public Calle getNorte(){
         return this.adyacenteN;
     }
+    public Calle getSur(){
+        return this.adyacenteS;
+    }
+    public Calle getEste(){
+        return this.adyacenteE;
+    }
+    public Calle getOeste(){
+        return this.adyacenteW;
+    }
 
     public Esquina(int posX, int posY) {
         this.posX = posX;

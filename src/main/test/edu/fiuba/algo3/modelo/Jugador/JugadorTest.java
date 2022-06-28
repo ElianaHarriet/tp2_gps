@@ -1,7 +1,6 @@
 package edu.fiuba.algo3.modelo.Jugador;
 
-import edu.fiuba.algo3.modelo.Esquina;
-
+import edu.fiuba.algo3.modelo.Mapa.*;
 import edu.fiuba.algo3.modelo.Obstaculos.*;
 import edu.fiuba.algo3.modelo.Sorpresas.*;
 import edu.fiuba.algo3.modelo.Vehiculos.*;
@@ -9,12 +8,12 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 
-public class PruebasJugador {
+public class JugadorTest {
 
     @Test
     public void prueba00ElJugadorSeCreaSinMovimientos() {
-        Esquina esqInicial = new Esquina(false);
-        Jugador jugador = new Jugador(esqInicial, "Alister");
+        Esquina esqInicial = new EsquinaNormie();
+        Jugador jugador = new Jugador(esqInicial, "Alister", null);
         assertEquals(0, jugador.movimientos);
     }
 
@@ -31,10 +30,8 @@ public class PruebasJugador {
     @Test
     public void prueba01UnaMotoSeEncuentraConUnPozoYEsPenalizadaTresMovimientos() {
         int movimientosEsperados = 3;
-        Esquina esqInicial = new Esquina(false);
-        Jugador jugador = new Jugador(esqInicial, "alister");
-        IVehiculo moto = new Moto();
-        jugador.setVehiculo(moto);
+        Esquina esqInicial = new EsquinaNormie();
+        Jugador jugador = new Jugador(esqInicial, "alister", new Moto());
         IObstaculo pozo = new Pozo();
 
         jugador.actualizarEstado(null, new SorpresaNeutra(), pozo);
@@ -44,10 +41,8 @@ public class PruebasJugador {
     @Test
     public void prueba02UnAutoSeEncuentraConUnPozoYEsPenalizadoTresMovimientos() {
         int movimientosEsperados = 3;
-        Esquina esqInicial = new Esquina(false);
-        Jugador jugador = new Jugador(esqInicial, "Alister");
-        IVehiculo auto = new Auto();
-        jugador.setVehiculo(auto);
+        Esquina esqInicial = new EsquinaNormie();
+        Jugador jugador = new Jugador(esqInicial, "Alister", new Auto());
         IObstaculo pozo = new Pozo();
 
         jugador.actualizarEstado(null, new SorpresaNeutra(), pozo);
@@ -57,10 +52,8 @@ public class PruebasJugador {
     @Test
     public void prueba03UnaCamionetaSeEncuentraConUnPozoYNoEsPenalizada() {
         int movimientosEsperados = 0;
-        Esquina esqInicial = new Esquina(false);
-        Jugador jugador = new Jugador(esqInicial, "Alister");
-        IVehiculo camioneta = new Camioneta();
-        jugador.setVehiculo(camioneta);
+        Esquina esqInicial = new EsquinaNormie();
+        Jugador jugador = new Jugador(esqInicial, "Alister", new Camioneta());
         IObstaculo pozo = new Pozo();
 
         jugador.actualizarEstado(null, new SorpresaNeutra(), pozo);
@@ -70,10 +63,8 @@ public class PruebasJugador {
     @Test
     public void prueba04UnaCamionetaPasaPorTresPozosYEsPenalizadaDosMovimientos() {
         int movimientosEsperados = 2; // this!!!!
-        Esquina esqInicial = new Esquina(false);
-        Jugador jugador = new Jugador(esqInicial, "qwe");
-        IVehiculo camioneta = new Camioneta();
-        jugador.setVehiculo(camioneta);
+        Esquina esqInicial = new EsquinaNormie();
+        Jugador jugador = new Jugador(esqInicial, "qwe", new Camioneta());
         IObstaculo pozo = new Pozo();
 
         jugador.actualizarEstado(null, new SorpresaNeutra(), pozo);
@@ -85,10 +76,8 @@ public class PruebasJugador {
     @Test
     public void prueba05UnaMotoPasaUnPiqueteYEsPenalizadaDosMovimientos() {
         int movimientosEsperados = 2;
-        Esquina esqInicial = new Esquina(false);
-        Jugador jugador = new Jugador(esqInicial, "alister");
-        IVehiculo moto = new Moto();
-        jugador.setVehiculo(moto);
+        Esquina esqInicial = new EsquinaNormie();
+        Jugador jugador = new Jugador(esqInicial, "alister", new Moto());
         IObstaculo piquete = new Piquete();
 
         jugador.actualizarEstado(null, new SorpresaNeutra(), piquete);
@@ -104,14 +93,10 @@ public class PruebasJugador {
 
     @Test
     public void pruebaAUnAutoQuierePasarPorUnPiqueteYVuelveAlLugarInicial() {
-        Esquina esqInicial = new Esquina(false);
-        Jugador jugador = new Jugador(esqInicial, "alister");
-        IVehiculo auto = new Auto();
-        jugador.setVehiculo(auto);
+        Esquina esquinaInicial = new EsquinaNormie();
+        Jugador jugador = new Jugador(esquinaInicial, "alister", new Auto());
         IObstaculo piquete = new Piquete();
-        Esquina esquinaInicial = new Esquina(false);
-        Esquina esquinaSiguiente = new Esquina(false);
-        jugador.setPosicion(esquinaInicial);
+        Esquina esquinaSiguiente = new EsquinaNormie();
 
         jugador.actualizarEstado(esquinaSiguiente, new SorpresaNeutra(), piquete);
         assertEquals(esquinaInicial, jugador.esquina);
@@ -119,14 +104,10 @@ public class PruebasJugador {
 
     @Test
     public void pruebaBUna4x4QuierePasarPorUnPiqueteYVuelveAlLugarInicial() {
-        Esquina esqInicial = new Esquina(false);
-        Jugador jugador = new Jugador(esqInicial, "Alister");
-        IVehiculo camioneta = new Camioneta();
-        jugador.setVehiculo(camioneta);
+        Esquina esquinaInicial = new EsquinaNormie();
+        Jugador jugador = new Jugador(esquinaInicial, "Alister", new Camioneta());
         IObstaculo piquete = new Piquete();
-        Esquina esquinaInicial = new Esquina(false);
-        Esquina esquinaSiguiente = new Esquina(false);
-        jugador.setPosicion(esquinaInicial);
+        Esquina esquinaSiguiente = new EsquinaNormie();
 
         jugador.actualizarEstado(esquinaSiguiente, new SorpresaNeutra(), piquete);
         assertEquals(esquinaInicial, jugador.esquina);
@@ -145,11 +126,9 @@ public class PruebasJugador {
 
     @Test
     public void prueba01UnVehiculoAtraviesaLaCiudadYEncuentraUnaSorpresaFavorable() {
-        Esquina esqInicial = new Esquina(false);
-        Jugador jugador = new Jugador(esqInicial, "Beto");
-        IVehiculo moto = new Moto();
-        jugador.setVehiculo(moto);
-        SorpresaNeutra sorpresa = new SorpresaFavorable();
+        Esquina esqInicial = new EsquinaNormie();
+        Jugador jugador = new Jugador(esqInicial, "Beto", new Moto());
+        ISorpresa sorpresa = new SorpresaFavorable();
 
         int movimientosInicio = 10;
         int movimientosEsperados = (int)(10 - 10 * 0.2);
@@ -161,11 +140,9 @@ public class PruebasJugador {
 
     @Test
     public void prueba02UnVehiculoAtraviesaLaCiudadYEncuentraUnaSorpresaDesfavorable() {
-        Esquina esqInicial = new Esquina(false);
-        Jugador jugador = new Jugador(esqInicial, "Beto");
-        IVehiculo moto = new Moto();
-        jugador.setVehiculo(moto);
-        SorpresaNeutra sorpresa = new SorpresaDesfavorable();
+        Esquina esqInicial = new EsquinaNormie();
+        Jugador jugador = new Jugador(esqInicial, "Beto", new Moto());
+        ISorpresa sorpresa = new SorpresaDesfavorable();
 
         int movimientosInicio = 10;
         int movimientosEsperados = (int)(10 + 10 * 0.25);
@@ -177,11 +154,9 @@ public class PruebasJugador {
 
     @Test
     public void prueba03UnAutoAtraviesaLaCiudadYEncuentraUnaSorpresaCambioDeVehiculo() {
-        Esquina esqInicial = new Esquina(false);
-        Jugador jugador = new Jugador(esqInicial, "Bonshot");
-        IVehiculo auto = new Auto();
-        jugador.setVehiculo(auto);
-        SorpresaNeutra sorpresa = new SorpresaCambioVehiculo();
+        Esquina esqInicial = new EsquinaNormie();
+        Jugador jugador = new Jugador(esqInicial, "Bonshot", new Auto());
+        ISorpresa sorpresa = new SorpresaCambioVehiculo();
         IVehiculo vehiculoEsperado = new Camioneta();
 
         jugador.actualizarEstado(null, sorpresa, new ObstaculoNulo());
@@ -191,11 +166,9 @@ public class PruebasJugador {
 
     @Test
     public void prueba04UnaMotoAtraviesaLaCiudadYEncuentraUnaSorpresaCambioDeVehiculo() {
-        Esquina esqInicial = new Esquina(false);
-        Jugador jugador = new Jugador(esqInicial, "Bonshot");
-        IVehiculo moto = new Moto();
-        jugador.setVehiculo(moto);
-        SorpresaNeutra sorpresa = new SorpresaCambioVehiculo();
+        Esquina esqInicial = new EsquinaNormie();
+        Jugador jugador = new Jugador(esqInicial, "Bonshot", new Moto());
+        ISorpresa sorpresa = new SorpresaCambioVehiculo();
         IVehiculo vehiculoEsperado = new Auto();
 
         jugador.actualizarEstado(null, sorpresa, new ObstaculoNulo());
@@ -204,11 +177,9 @@ public class PruebasJugador {
 
     @Test
     public void prueba05UnaCamionetaAtraviesaLaCiudadYEncuentraUnaSorpresaCambioDeVehiculo() {
-        Esquina esqInicial = new Esquina(false);
-        Jugador jugador = new Jugador(esqInicial, "Bonshot");
-        IVehiculo camioneta = new Camioneta();
-        jugador.setVehiculo(camioneta);
-        SorpresaNeutra sorpresa = new SorpresaCambioVehiculo();
+        Esquina esqInicial = new EsquinaNormie();
+        Jugador jugador = new Jugador(esqInicial, "Bonshot", new Camioneta());
+        ISorpresa sorpresa = new SorpresaCambioVehiculo();
         IVehiculo vehiculoEsperado = new Moto();
 
         jugador.actualizarEstado(null, sorpresa, new ObstaculoNulo());

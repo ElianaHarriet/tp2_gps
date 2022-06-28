@@ -4,7 +4,7 @@ import edu.fiuba.algo3.modelo.Vehiculos.*;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class PruebasPozo {
+public class PozoTest {
 
     @Test
     public void prueba01ElPozoPenalizaConTresMovimientosALaMoto() {

@@ -78,8 +78,7 @@ public class Interfaz extends Application {
                 grupo.add((Node)(manzana));
 
                 Calle calle = esq.getEste();
-
-             ArrayList<Calle> calless = new ArrayList<>();
+                ArrayList<Calle> calless = new ArrayList<>();
                 calless.add(esq.getNorte());
                 calless.add(esq.getSur());
                 calless.add(esq.getEste());
@@ -87,21 +86,22 @@ public class Interfaz extends Application {
 
             
                 for(Calle callea : calless) {
-
                     if (callea != null) {
                         ISorpresa sorpresa = callea.getSorpresa();
+
                         Circle sorpresaPrinteada = new Circle((esq.getX() * 65) + margenIzq + 35, (esq.getY() * 65) + margenInf + 35, 5);
 
-                        if (sorpresa.tipo().equals("favorable")) {
+                        Class claseDeSorpresa = sorpresa.getClass();
+                        if (claseDeSorpresa.getName().equals("sorpresaFavorable")) {
                             sorpresaPrinteada.setFill(Color.GREEN);
                         }
-                        if (sorpresa.tipo().equals("desfavorable")) {
+                        if (claseDeSorpresa.getName().equals("sorpresaDesfavorable")) {
                             sorpresaPrinteada.setFill(Color.RED);
                         }
-                        if (sorpresa.tipo().equals("cambio")) {
+                        if (claseDeSorpresa.getName().equals("SorpresaCambioVehiculo")) {
                             sorpresaPrinteada.setFill(Color.BLUE);
                         }
-                        if(sorpresa.tipo().equals("neutra")){
+                        if(claseDeSorpresa.getName().equals("SorpresaNula")){
                             Color colorNulo = new Color(1,1,1, 0);
                             sorpresaPrinteada.setFill(colorNulo);
                         }
@@ -109,17 +109,20 @@ public class Interfaz extends Application {
 
                         IObstaculo obstaculo = callea.getObstaculo();
                         Rectangle obstaculoPrinteado = new Rectangle((esq.getX() * 65) + margenIzq + 25, (esq.getY() * 65) + margenInf + 25, 5, 5);
+
+                        Class claseObstaculo = obstaculo.getClass();
+
                         //Color color = Color.rgb(71, 9, 124, 1); //el ultimo parametro es transparencia :D
-                        if (obstaculo.tipo().equals("control")) {
+                        if (claseObstaculo.getName().equals("control")) {
                             sorpresaPrinteada.setFill(Color.BLUE);
                         }
-                        if (obstaculo.tipo().equals("pozo")) {
+                        if (claseObstaculo.getName().equals("pozo")) {
                             sorpresaPrinteada.setFill(Color.RED);
                         }
-                        if (obstaculo.tipo().equals("piquete")) {
+                        if (claseObstaculo.getName().equals("piquete")) {
                             sorpresaPrinteada.setFill(Color.BROWN);
                         }
-                        if (obstaculo.tipo().equals("nulo")) {
+                        if (claseObstaculo.getName().equals("nulo")) {
                             Color colorNulo = new Color(1,1,1,0);
                             sorpresaPrinteada.setFill(colorNulo);
                         }
@@ -219,10 +222,6 @@ public class Interfaz extends Application {
         stage.setTitle("GPS - The Game");
 //        stage.close();
     }
-
-
-
-
 
     public static void main(String[] args) {
         launch();

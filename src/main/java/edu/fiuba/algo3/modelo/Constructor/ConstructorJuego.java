@@ -33,7 +33,7 @@ public class ConstructorJuego implements IConstructor{
         return this.cJugador.getResultado();
     }
 
-    public ConstructorTablero getcTablero() {
-        return this.cTablero;
+    public Esquina[][] getTablero() {
+        return this.cTablero.getMapa();
     }
 }

@@ -3,4 +3,5 @@ module edu.fiuba.algo3 {
     requires json;
     requires json.simple;
     exports edu.fiuba.algo3;
+    exports edu.fiuba.algo3.Vista;
 }

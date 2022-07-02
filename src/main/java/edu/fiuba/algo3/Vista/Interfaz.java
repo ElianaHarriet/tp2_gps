@@ -1,4 +1,4 @@
-package edu.fiuba.algo3;
+package edu.fiuba.algo3.Vista;
 
 import edu.fiuba.algo3.modelo.Constructor.ConstructorJuego;
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
@@ -14,6 +14,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
@@ -38,6 +39,7 @@ import javafx.stage.Stage;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.*;
+import java.util.EventListener;
 
 
 /*
@@ -54,18 +56,34 @@ public class Interfaz extends Application {
     private int margenIzq = 25;
     private int margenInf = 25;
 
+    private String rutaAuto = "file:C:\\Users\\Valeen\\Documents\\GitHub\\tp2_gps\\src\\main\\java\\edu\\fiuba\\algo3\\res\\auto.png";
+
     @Override
     public void start(Stage stage) {
-//me voy a hacer kung fu ahi vuelvo -no
         ConstructorJuego cons = new ConstructorJuego();
         cons.crearJuego(cantCuadras, "->BUCHGOD<-", "auto");
         Jugador jugador = cons.getResultado();
         Esquina[][] mapa = cons.getTablero();
-//      Jugador jugador = new Jugador(new EsquinaNormie(0, 5), "->ESSAYAGOD<-", auto);
-//        public Group(Collection<Node> var1);
-        //IMPRIMIR TABLERO
 
+        //IMPRIMIR TABLERO
         Group tablero = this.procesarTablero(mapa, cantCuadras);
+
+
+        Image imagen = new Image(rutaAuto);
+        ImageView imagenVehiculo = new ImageView();
+
+        imagenVehiculo.setImage(imagen);
+        imagenVehiculo.setX(jugador.getX());
+        imagenVehiculo.setY(jugador.getY());
+        imagenVehiculo.setFitHeight(15);
+
+        imagenVehiculo.setPreserveRatio(true);
+        //Setting the Scene object
+
+        //Group root = new Group(imageView);
+        //elementos.getChildren().add(imageView);
+
+
 
 
         int xJugador = jugador.getX();
@@ -74,7 +92,7 @@ public class Interfaz extends Application {
         autoXD.setFill(Color.RED);
 
 
-//        public Group(Collection<Node> var1);
+//      public Group(Collection<Node> var1);
         Group grupo = procesarTablero(mapa, cantCuadras);
         tablero.getChildren().add((Node)(autoXD));
 
@@ -95,42 +113,49 @@ public class Interfaz extends Application {
 
 
 
+        Pane pane = new Pane();
+
+        pane.getChildren().add(imagenVehiculo);
 
 
-        //creating the image object
-        //File foto = new File("src/main/java/edu/fiuba/algo3/ejercicio-triangulos.png");
-        //InputStream stream = new FileInputStream(foto);
-       // Image image = new Image(stream);
-        //Creating the image view
-       // ImageView imageView = new ImageView();
-        //Setting image to the image view
-       // imageView.setImage(image);
-        //Setting the image view parameters
-       /* imageView.setX(10);
-        imageView.setY(10);
-        imageView.setFitWidth(575);
-        imageView.setPreserveRatio(true);
-        //Setting the Scene object
-        Group root = new Group(imageView);
-        elementos.getChildren().add(root);*/
+        pane.setOnKeyPressed(e -> {
+            if (e.getCode() == KeyCode.UP) {
+                jugador.moverseHacia(new Arriba());
+                actualizarPosicion(jugador, imagenVehiculo);
 
-        Scene scene = new Scene(elementos, altoTablero*30 + margenIzq, altoTablero*30 + margenInf);
+                movimientosText.setText(Integer.toString(jugador.getMovimientos()));
 
-        stage.setResizable(false);
-        stage.setScene(scene);
-        stage.show();
-        stage.setTitle("GPS - escape from Torcuato");
+            }
+            if (e.getCode() == KeyCode.DOWN) {
+                jugador.moverseHacia(new Abajo());
+                actualizarPosicion(jugador, imagenVehiculo);
+
+                movimientosText.setText(Integer.toString(jugador.getMovimientos()));
+            }
+            if (e.getCode() == KeyCode.RIGHT) {
+                jugador.moverseHacia(new Derecha());
+                actualizarPosicion(jugador, imagenVehiculo);
+
+                movimientosText.setText(Integer.toString(jugador.getMovimientos()));
+            }
+            if (e.getCode() == KeyCode.LEFT) {
+                jugador.moverseHacia(new Izquierda());
+                actualizarPosicion(jugador, imagenVehiculo);
+
+                movimientosText.setText(Integer.toString(jugador.getMovimientos()));
+            }
+        });
 
 
 //logica de botones que no vamos a usar, rehacer con flechitas
         //event listener??
-        KeyEvent event = new KeyEvent();
+        /*KeyEvent event = new KeyEvent();
                 @Override
                 public void handle(KeyEvent event) {
                         controlador.teclaPresionada(jugador, event);
             }
 
-        controlador.moverseHacia(event.getCode());
+        controlador.moverseHacia(event.getCode());*/
 
 
         //vista
@@ -140,12 +165,26 @@ public class Interfaz extends Application {
         autoXD.setY((x*65) + margenInf + 50);
         movimientosText.setText(Integer.toString(jugador.getMovimientos()));
         //vista
+        elementos.getChildren().add(pane);
 
+        Scene scene = new Scene(elementos, altoTablero*30 + margenIzq, altoTablero*30 + margenInf);
+
+        stage.setResizable(false);
+        stage.setScene(scene);
+        stage.show();
+        stage.setTitle("GPS - escape from Torcuato");
+        pane.requestFocus();
 //      stage.close();
     }
 
+    public void actualizarPosicion(Jugador jugador, ImageView imagenVehiculo) {
+        int x = jugador.getX();
+        int y = jugador.getY();
+        imagenVehiculo.setX((y*65) + margenIzq + 50);
+        imagenVehiculo.setY((x*65) + margenInf + 50);
 
-    @Override
+    }
+   /* @Override
     public void handle(KeyEvent event, Jugador jugador, Rectangle autoXD) {
         if (event.getCode() == KeyCode.UP) {
             controlador.moverseHacia(jugador, new Arriba());
@@ -163,7 +202,7 @@ public class Interfaz extends Application {
             controlador.moverseHacia(jugador, new Izquierda());
 
         }
-    }
+    }*/
 
 
     private Group procesarTablero(Esquina[][] mapa, int cantCuadras){
@@ -190,7 +229,7 @@ public class Interfaz extends Application {
                 manzana.setFill(Color.PINK);
 
                // grupo.getChildren().add((Node)(calles));
-                grupo.getChildren().add((manzana)
+                grupo.getChildren().add(manzana);
                 ArrayList<Calle> calless = new ArrayList<>();
                 calless.add(esq.getNorte());
                 calless.add(esq.getSur());

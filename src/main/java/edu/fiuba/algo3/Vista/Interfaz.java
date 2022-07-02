@@ -56,7 +56,7 @@ public class Interfaz extends Application {
     private int margenIzq = 25;
     private int margenInf = 25;
 
-    private String rutaAuto = "file:C:\\Users\\Valeen\\Documents\\GitHub\\tp2_gps\\src\\main\\java\\edu\\fiuba\\algo3\\res\\auto.png";
+    private String rutaAuto = "file:C:\\home\\joaco\\1cuatri#actual\\algoritmos 3\\tp2_gps\\src\\main\\java\\edu\\fiuba\\algo3\\res\\auto.png";
 
     @Override
     public void start(Stage stage) {
@@ -99,6 +99,7 @@ public class Interfaz extends Application {
         Pane pane = new Pane();
 
         pane.getChildren().add(imagenVehiculo);
+
 
 
         pane.setOnKeyPressed(e -> {
@@ -204,25 +205,27 @@ public class Interfaz extends Application {
 
                 Esquina esq = mapa[i][j];
                 //las esquinass estan imprimiendo las cuadras, feo, pero por ahora sirve
-                Rectangle manzana = new Rectangle((esq.getX()*65) + margenIzq,(esq.getY()*65) + margenInf, tamCuadra ,tamCuadra);
+                Rectangle manzana = new Rectangle((esq.getX()*(tamCuadra+anchoCalle)) + margenIzq,(esq.getY()*(tamCuadra+anchoCalle)) + margenInf, tamCuadra ,tamCuadra);
                // calles.setFill(Color.GRAY);
                 manzana.setFill(Color.PINK);
 
                // grupo.getChildren().add((Node)(calles));
                 grupo.getChildren().add(manzana);
-                ArrayList<Calle> calless = new ArrayList<>();
-                calless.add(esq.getNorte());
-                calless.add(esq.getSur());
+                ArrayList<Calle> callesVerticales = new ArrayList<>();
+                ArrayList<Calle> callesHorizontales = new ArrayList<>();
 
-                calless.add(esq.getEste());
-                calless.add(esq.getOeste());
+                callesVerticales.add(esq.getNorte());
+                callesVerticales.add(esq.getSur());
+
+                callesHorizontales.add(esq.getEste());
+                callesHorizontales.add(esq.getOeste());
 
 
-                for(Calle callea : calless) {
-                    if (callea != null) {
-                        ISorpresa sorpresa = callea.getSorpresa();
+                for(Calle callei : callesVerticales) {
+                    if (callei != null) {
+                        ISorpresa sorpresa = callei.getSorpresa();
 
-                        Circle sorpresaPrinteada = new Circle((esq.getX() * 65) + margenIzq + 35, (esq.getY() * 65) + margenInf + 35, 5);
+                        Circle sorpresaPrinteada = new Circle((esq.getX() * (tamCuadra+anchoCalle)) + margenIzq + tamCuadra+(anchoCalle/2), (esq.getY() * (tamCuadra+anchoCalle)) + margenInf + tamCuadra/2, 5);
                         Class claseDeSorpresa = sorpresa.getClass();
 
                         if (claseDeSorpresa.equals(SorpresaFavorable.class)) {
@@ -240,8 +243,8 @@ public class Interfaz extends Application {
                         }
                         grupo.getChildren().add(sorpresaPrinteada);
 
-                        IObstaculo obstaculo = callea.getObstaculo();
-                        Rectangle obstaculoPrinteado = new Rectangle((esq.getX() * 65) + margenIzq + 25, (esq.getY() * 65) + margenInf + 25, 5, 5);
+                        IObstaculo obstaculo = callei.getObstaculo();
+                        Rectangle obstaculoPrinteado = new Rectangle((esq.getX() * (tamCuadra+anchoCalle)) + margenIzq + tamCuadra+(anchoCalle/2), (esq.getY() * (tamCuadra+anchoCalle)) + margenInf + tamCuadra/2+5, 5, 5);
 
                         Class claseObstaculo = obstaculo.getClass();
 
@@ -266,6 +269,58 @@ public class Interfaz extends Application {
 
                     }
                 }
+
+                for(Calle callej : callesHorizontales) {
+                    if (callej != null) {
+                        ISorpresa sorpresa = callej.getSorpresa();
+
+
+                        Circle sorpresaPrinteada = new Circle((esq.getY() * (tamCuadra+anchoCalle)) + margenInf + tamCuadra/2, (esq.getX() * (tamCuadra+anchoCalle)) + margenIzq + tamCuadra+(anchoCalle/2), 5);
+
+                        Class claseDeSorpresa = sorpresa.getClass();
+
+                        if (claseDeSorpresa.equals(SorpresaFavorable.class)) {
+                            sorpresaPrinteada.setFill(Color.GREEN);
+                        }
+                        if (claseDeSorpresa.equals(SorpresaDesfavorable.class)) {
+                            sorpresaPrinteada.setFill(Color.RED);
+                        }
+                        if (claseDeSorpresa.equals(SorpresaCambioVehiculo.class)) {
+                            sorpresaPrinteada.setFill(Color.BLUE);
+                        }
+                        if(claseDeSorpresa.equals(SorpresaNeutra.class)){
+                            Color colorNulo = new Color(1,1,1, 0);
+                            sorpresaPrinteada.setFill(colorNulo);
+                        }
+                        grupo.getChildren().add(sorpresaPrinteada);
+
+                        IObstaculo obstaculo = callej.getObstaculo();
+                        Rectangle obstaculoPrinteado = new Rectangle((esq.getY() * (tamCuadra+anchoCalle)) + margenInf + tamCuadra/2+5, (esq.getX() * (tamCuadra+anchoCalle)) + margenIzq + tamCuadra+(anchoCalle/2), 5, 5);
+
+                        Class claseObstaculo = obstaculo.getClass();
+
+                        //Color color = Color.rgb(71, 9, 124, 1); //el ultimo parametro es transparencia :D
+                        if (claseObstaculo.equals(ControlPolicial.class)) {
+
+                            obstaculoPrinteado.setFill(Color.BLUE);
+                        }
+                        if (claseObstaculo.equals(Pozo.class)) {
+                            obstaculoPrinteado.setFill(Color.RED);
+                        }
+                        if (claseObstaculo.equals(Piquete.class)) {
+                            obstaculoPrinteado.setFill(Color.BROWN);
+                        }
+                        if (claseObstaculo.equals(ObstaculoNulo.class)) {
+                            Color colorNulo = new Color(1,1,1,0);
+                            obstaculoPrinteado.setFill(colorNulo);
+                        }
+
+                        grupo.getChildren().add(obstaculoPrinteado);
+
+
+                    }
+                }
+
             }
         }
         return grupo;

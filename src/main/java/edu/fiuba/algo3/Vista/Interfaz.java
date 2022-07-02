@@ -66,9 +66,8 @@ public class Interfaz extends Application {
         Esquina[][] mapa = cons.getTablero();
 
         //IMPRIMIR TABLERO
-        Group tablero = this.procesarTablero(mapa, cantCuadras);
 
-
+        //MOSTRAR IMAGEN VEHICULO
         Image imagen = new Image(rutaAuto);
         ImageView imagenVehiculo = new ImageView();
 
@@ -76,28 +75,12 @@ public class Interfaz extends Application {
         imagenVehiculo.setX(jugador.getX());
         imagenVehiculo.setY(jugador.getY());
         imagenVehiculo.setFitHeight(15);
-
         imagenVehiculo.setPreserveRatio(true);
-        //Setting the Scene object
-
-        //Group root = new Group(imageView);
-        //elementos.getChildren().add(imageView);
 
 
-
-
-        int xJugador = jugador.getX();
-        int yJugador = jugador.getY();
-        Rectangle autoXD = new Rectangle((yJugador*65) + margenIzq + 50,(xJugador*65) + margenInf + 50,15 , 15);
-        autoXD.setFill(Color.RED);
-
-
-//      public Group(Collection<Node> var1);
         Group grupo = procesarTablero(mapa, cantCuadras);
-        tablero.getChildren().add((Node)(autoXD));
 
         Group elementos = new Group(grupo);
-        elementos.getChildren().add(autoXD);
 
         int movimientos = jugador.getMovimientos();
         Rectangle movimientosRect = new Rectangle(715, 600, 50, 50);
@@ -159,10 +142,7 @@ public class Interfaz extends Application {
 
 
         //vista
-        int x = jugador.getX();
-        int y = jugador.getY();
-        autoXD.setX((y*65) + margenIzq + 50);
-        autoXD.setY((x*65) + margenInf + 50);
+
         movimientosText.setText(Integer.toString(jugador.getMovimientos()));
         //vista
         elementos.getChildren().add(pane);

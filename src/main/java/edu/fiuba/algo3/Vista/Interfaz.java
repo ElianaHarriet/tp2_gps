@@ -56,7 +56,9 @@ public class Interfaz extends Application {
     private int margenIzq = 25;
     private int margenInf = 25;
 
-    private String rutaAuto = "file:C:\\home\\joaco\\1cuatri#actual\\algoritmos 3\\tp2_gps\\src\\main\\java\\edu\\fiuba\\algo3\\res\\auto.png";
+    //private String rutaAuto = "file:C:\\home\\joaco\\1cuatri#actual\\algoritmos 3\\tp2_gps\\src\\main\\java\\edu\\fiuba\\algo3\\res\\auto.png";
+
+    private String rutaAuto = "file:/Users/joaquin/IdeaProjects/tp2_gps/src/main/java/edu/fiuba/algo3/res/auto.png";
 
     @Override
     public void start(Stage stage) {
@@ -214,19 +216,21 @@ public class Interfaz extends Application {
                 ArrayList<Calle> callesVerticales = new ArrayList<>();
                 ArrayList<Calle> callesHorizontales = new ArrayList<>();
 
-                callesVerticales.add(esq.getNorte());
+                //callesVerticales.add(esq.getNorte());
                 callesVerticales.add(esq.getSur());
 
                 callesHorizontales.add(esq.getEste());
-                callesHorizontales.add(esq.getOeste());
+                //callesHorizontales.add(esq.getOeste());
 
 
                 for(Calle callei : callesVerticales) {
                     if (callei != null) {
                         ISorpresa sorpresa = callei.getSorpresa();
 
-                        Circle sorpresaPrinteada = new Circle((esq.getX() * (tamCuadra+anchoCalle)) + margenIzq + tamCuadra+(anchoCalle/2), (esq.getY() * (tamCuadra+anchoCalle)) + margenInf + tamCuadra/2, 5);
+                        //Circle sorpresaPrinteada = new Circle((esq.getX() * (tamCuadra+anchoCalle)) + margenIzq + (anchoCalle/2), (esq.getY() * (tamCuadra+anchoCalle)) + margenInf + tamCuadra/2, 5);
                         Class claseDeSorpresa = sorpresa.getClass();
+
+                        Circle sorpresaPrinteada = new Circle(((esq.getX()*(tamCuadra+anchoCalle)) + margenIzq + anchoCalle/2), esq.getY()*(tamCuadra+anchoCalle) + margenInf+(tamCuadra/2), 5);
 
                         if (claseDeSorpresa.equals(SorpresaFavorable.class)) {
                             sorpresaPrinteada.setFill(Color.GREEN);
@@ -243,14 +247,13 @@ public class Interfaz extends Application {
                         }
                         grupo.getChildren().add(sorpresaPrinteada);
 
+
                         IObstaculo obstaculo = callei.getObstaculo();
-                        Rectangle obstaculoPrinteado = new Rectangle((esq.getX() * (tamCuadra+anchoCalle)) + margenIzq + tamCuadra+(anchoCalle/2), (esq.getY() * (tamCuadra+anchoCalle)) + margenInf + tamCuadra/2+5, 5, 5);
+                        //Rectangle obstaculoPrinteado = new Rectangle((esq.getX() * (tamCuadra+anchoCalle)) + margenIzq + (anchoCalle/2), (esq.getY() * (tamCuadra+anchoCalle)) + margenInf + tamCuadra/2+5, 5, 5);
+                        Rectangle obstaculoPrinteado = new Rectangle( (esq.getX()+1)*(tamCuadra+anchoCalle)+margenIzq, (esq.getY()+1)*(tamCuadra+anchoCalle)+margenInf, 5, 5 );
 
                         Class claseObstaculo = obstaculo.getClass();
-
-                        //Color color = Color.rgb(71, 9, 124, 1); //el ultimo parametro es transparencia :D
                         if (claseObstaculo.equals(ControlPolicial.class)) {
-
                             obstaculoPrinteado.setFill(Color.BLUE);
                         }
                         if (claseObstaculo.equals(Pozo.class)) {
@@ -265,17 +268,15 @@ public class Interfaz extends Application {
                         }
 
                         grupo.getChildren().add(obstaculoPrinteado);
-
-
                     }
                 }
-
+                /*
                 for(Calle callej : callesHorizontales) {
                     if (callej != null) {
                         ISorpresa sorpresa = callej.getSorpresa();
 
 
-                        Circle sorpresaPrinteada = new Circle((esq.getY() * (tamCuadra+anchoCalle)) + margenInf + tamCuadra/2, (esq.getX() * (tamCuadra+anchoCalle)) + margenIzq + tamCuadra+(anchoCalle/2), 5);
+                        Circle sorpresaPrinteada = new Circle((esq.getX() * (tamCuadra+anchoCalle)) + margenInf + tamCuadra/2, (esq.getY() * (tamCuadra+anchoCalle)) + margenIzq + tamCuadra+(anchoCalle/2), 5);
 
                         Class claseDeSorpresa = sorpresa.getClass();
 
@@ -295,7 +296,7 @@ public class Interfaz extends Application {
                         grupo.getChildren().add(sorpresaPrinteada);
 
                         IObstaculo obstaculo = callej.getObstaculo();
-                        Rectangle obstaculoPrinteado = new Rectangle((esq.getY() * (tamCuadra+anchoCalle)) + margenInf + tamCuadra/2+5, (esq.getX() * (tamCuadra+anchoCalle)) + margenIzq + tamCuadra+(anchoCalle/2), 5, 5);
+                        Rectangle obstaculoPrinteado = new Rectangle((esq.getX() * (tamCuadra+anchoCalle)) + margenInf + tamCuadra/2+5, (esq.getY() * (tamCuadra+anchoCalle)) + margenIzq + tamCuadra+(anchoCalle/2), 5, 5);
 
                         Class claseObstaculo = obstaculo.getClass();
 
@@ -320,7 +321,7 @@ public class Interfaz extends Application {
 
                     }
                 }
-
+                */
             }
         }
         return grupo;

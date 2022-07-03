@@ -1,0 +1,244 @@
+package edu.fiuba.algo3.Vista;
+//modelo
+import edu.fiuba.algo3.modelo.Constructor.ConstructorJuego;
+import edu.fiuba.algo3.modelo.Jugador.Jugador;
+import edu.fiuba.algo3.modelo.Mapa.*;
+import edu.fiuba.algo3.modelo.Obstaculos.*;
+import edu.fiuba.algo3.modelo.Sorpresas.*;
+//javafx
+import javafx.application.Application;
+import javafx.scene.Group;
+import javafx.scene.Node;
+import javafx.scene.Scene;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
+
+
+// para imagenes
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import javafx.application.Application;
+import javafx.scene.Group;
+import javafx.scene.Scene;
+import javafx.scene.image.*;
+import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.*;
+import java.util.EventListener;
+
+//herramientas de java
+import java.util.ArrayList;
+
+public class Partida extends Application {
+    //pasar a mayusculas que son constantes
+    private int altoTablero = 25;
+    private int anchoTablero = 25;
+    private int cantCuadras = 10;
+    private int margenIzq = 25;
+    private int margenInf = 25;
+    private String rutaAuto = "file:/Users/joaquin/IdeaProjects/tp2_gps/src/main/java/edu/fiuba/algo3/res/auto.png"; 
+
+    public void start(Stage stage){
+        ConstructorJuego cons = new ConstructorJuego();
+        cons.crearJuego(cantCuadras, "->BUCHGOD<-", "auto"); //esto deberia recibirlo como parametro, despues hay que ver cuando se le pasaria esto
+        Jugador jugador = cons.getResultado();
+        Esquina[][] mapa = cons.getTablero();
+
+        Group elementos = procesarTablero(mapa, cantCuadras);
+
+        /*por alguna razon aca hacia lo siguente:
+        Group grupo = procesarTablero(mapa, cantCuadras);
+        Group elementos = new Group(grupo);
+        */
+
+
+
+        //capaz hay cierta persistencia y java no trabaja con copias como python, en ese caso se podria hacer que no devuelva nada y queda un poquito mas bonito
+        elementos = agregarTablaMovimientos(jugador, elementos);
+        
+        ImageView imagenVehiculo = setImagenInicialVehiculo(jugador, rutaAuto);
+
+
+        //logica de teclas para moverse
+        Pane pane = new Pane();
+        pane.getChildren().add(imagenVehiculo);
+        pane.setOnKeyPressed(e -> {
+            if (e.getCode() == KeyCode.UP) {
+                jugador.moverseHacia(new Arriba());
+                actualizarPosicion(jugador, imagenVehiculo);
+
+                movimientosText.setText(Integer.toString(jugador.getMovimientos()));
+
+            }
+            if (e.getCode() == KeyCode.DOWN) {
+                jugador.moverseHacia(new Abajo());
+                actualizarPosicion(jugador, imagenVehiculo);
+
+                movimientosText.setText(Integer.toString(jugador.getMovimientos()));
+            }
+            if (e.getCode() == KeyCode.RIGHT) {
+                jugador.moverseHacia(new Derecha());
+                actualizarPosicion(jugador, imagenVehiculo);
+
+                movimientosText.setText(Integer.toString(jugador.getMovimientos()));
+            }
+            if (e.getCode() == KeyCode.LEFT) {
+                jugador.moverseHacia(new Izquierda());
+                actualizarPosicion(jugador, imagenVehiculo);
+
+                movimientosText.setText(Integer.toString(jugador.getMovimientos()));
+            }
+        });
+
+        movimientosText.setText(Integer.toString(jugador.getMovimientos()));
+        elementos.getChildren().add(pane);
+        Scene scene = new Scene(elementos, altoTablero*30 + margenIzq, altoTablero*30 + margenInf);
+
+        stage.setResizable(false);
+        stage.setScene(scene);
+        stage.show();
+        stage.setTitle("GPS - escape from Torcuato");
+        pane.requestFocus();
+
+    }
+
+    
+
+    private Group procesarTablero(Esquina[][] mapa, int cantCuadras){
+        //crea el tablero y todo el fondo y lo devuelve en un grupo
+        int tamCuadra = 50;
+        int anchoCalle = 15;
+        
+        //no se porque llamamos "Esquina" a la esquina cuando enrealidad es una interseccion, la cual esta compuesta por 4 esquinas
+        
+        Group grupo = new Group()
+
+        Color colorTablero = Color.rgb(71, 9, 124, 1);
+        Rectangle fondo = new Rectangle(0,0, altoTablero*80, anchoTablero*80);
+        fondo.setFill(color);
+        grupo.getChildren().add(fondo)
+        
+        Rectangle calles = new Rectangle(margenIzq, margenInf, (tamCuadra+anchoCalle)*cantCuadras, (tamCuadra+anchoCalle)*cantCuadras);
+        calles.setFill(Color.GRAY);
+        grupo.getChildren().add(calles)
+
+        //este forfor imprime las cuadras, cada cuadra empieza en la posicion indicada por la esquina y va para abajo a la derecha
+        //tambien guarda las calles horizontales en un array con su posicion y tamaño y lo mismo con las verticales
+        for(int i = 0; i < cantCuadras; i++){
+            for(int j = 0; j < cantCuadras; j++){
+                Esquina esq = mapa[i][j];
+                //cada esquina imprime la cuadra de abajo a la derecha
+                Rectangle manzana = new Rectangle((esq.getX()*(tamCuadra+anchoCalle)) + margenIzq,(esq.getY()*(tamCuadra+anchoCalle)) + margenInf, tamCuadra ,tamCuadra);
+                manzana.setFill(Color.PINK);
+                grupo.getChildren().add(manzana);
+
+                grupo = agregarElementosEste(grupo, esq);
+                grupo = agregarElementosSur(grupo, esq);
+            }
+        }
+    }
+
+    private Group agregarElementosEste(Group grupo, Esquina esq){
+        Calle calle = esq.getEste();
+
+        Color colorNulo = new Color(1,1,1,0); //color que usamos para las sorpresas y obstaculos nulos
+
+        int posX = (esq.getX()*(tamCuadra+anchoCalle)) + margenIzq;
+        int posY = (esq.getY()*(tamCuadra+anchoCalle)) + margenInf;
+
+        if (calle == null) return grupo;
+        ISorpresa sorpresa = calle.getSorpresa();
+        
+        Circle sorpresaPrinteada = new Circle(posX, posY , 5);
+        Class claseDeSorpresa = sorpresa.getClass();
+
+        if (claseDeSorpresa.equals(SorpresaFavorable.class)) {
+            sorpresaPrinteada.setFill(Color.GREEN);
+        }
+        if (claseDeSorpresa.equals(SorpresaDesfavorable.class)) {
+            sorpresaPrinteada.setFill(Color.RED);
+        }
+        if (claseDeSorpresa.equals(SorpresaCambioVehiculo.class)) {
+            sorpresaPrinteada.setFill(Color.BLUE);
+        }
+        if(claseDeSorpresa.equals(SorpresaNeutra.class)){
+            sorpresaPrinteada.setFill(colorNulo);
+        }
+        grupo.getChildren().add(sorpresaPrinteada);
+
+
+
+        IObstaculo obstaculo = calle.getObstaculo();
+        Rectangle obstaculoPrinteado = new Rectangle(posX, posY, 5, 5);
+        
+        if (claseObstaculo.equals(ControlPolicial.class)) {
+            obstaculoPrinteado.setFill(Color.BLUE);
+        }
+        if (claseObstaculo.equals(Pozo.class)) {
+            obstaculoPrinteado.setFill(Color.RED);
+        }
+        if (claseObstaculo.equals(Piquete.class)) {
+            obstaculoPrinteado.setFill(Color.BROWN);
+        }
+        if (claseObstaculo.equals(ObstaculoNulo.class)) {
+            obstaculoPrinteado.setFill(colorNulo);
+        }
+        grupo.getChildren().add(obstaculoPrinteado);
+        
+    }
+
+    private ImageView setImagenInicialVehiculo(Jugador jugador, String rutaVehiculo){
+        Image imagen = new Image(rutaVehiculo);
+        ImageView imagenVehiculo = new ImageView();
+        imagenVehiculo.setImage(imagen);
+        imagenVehiculo.setX(jugador.getX());
+        imagenVehiculo.setY(jugador.getY());
+        imagenVehiculo.setFitHeight(15);
+
+        imagenVehiculo.setPreserveRatio(true);
+
+        return imagenVehiculo;
+
+    }
+
+    private Group agregarTablaMovimientos(Jugador jugador, Group elementos){
+        int movimientos = jugador.getMovimientos();
+        Rectangle movimientosRect = new Rectangle(715, 600, 50, 50);
+        movimientosRect.setFill(Color.rgb(71, 9, 124, 1));
+        movimientosRect.setStroke(Color.rgb(11, 32, 142, 1));
+        movimientosRect.setStrokeWidth(5);
+        Text movimientosText = new Text(730, 620, Integer.toString(movimientos));
+        movimientosText.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
+        movimientosText.setFill(Color.WHITE);
+
+        elementos.getChildren().add(movimientosRect);
+        elementos.getChildren().add(movimientosText);
+        return elementos;
+
+    }
+
+    public void actualizarPosicion(Jugador jugador, ImageView imagenVehiculo) {
+        int x = jugador.getX();
+        int y = jugador.getY();
+        imagenVehiculo.setX((y*65) + margenIzq + 50);
+        imagenVehiculo.setY((x*65) + margenInf + 50);
+
+    }
+
+    public static void main(String[] args) {
+        launch();
+    }
+
+
+}

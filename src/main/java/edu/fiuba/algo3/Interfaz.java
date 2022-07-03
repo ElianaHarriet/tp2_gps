@@ -1,15 +1,11 @@
 package edu.fiuba.algo3;
 
-import edu.fiuba.algo3.SystemInfo;
 import edu.fiuba.algo3.modelo.Constructor.ConstructorJuego;
 import edu.fiuba.algo3.modelo.Constructor.ConstructorTablero;
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import edu.fiuba.algo3.modelo.Mapa.*;
-import edu.fiuba.algo3.modelo.Mapa.EsquinaNormie;
 import edu.fiuba.algo3.modelo.Obstaculos.IObstaculo;
 import edu.fiuba.algo3.modelo.Sorpresas.*;
-import edu.fiuba.algo3.modelo.Vehiculos.Auto;
-
 import javafx.application.Application;
 
 import javafx.scene.Group;

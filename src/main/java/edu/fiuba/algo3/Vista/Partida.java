@@ -143,26 +143,20 @@ public class Partida extends Application {
             for(int j = 0; j < cantCuadras; j++){
                 Esquina esq = mapa[i][j];
                 //cada esquina imprime la cuadra de abajo a la derecha
-                Rectangle manzana = new Rectangle((esq.getX()*(tamCuadra+anchoCalle)) + margenIzq,(esq.getY()*(tamCuadra+anchoCalle)) + margenInf, tamCuadra ,tamCuadra);
+                Rectangle manzana = new Rectangle((esq.getX()*(tamCuadra+anchoCalle)) + anchoCalle + margenIzq,(esq.getY()*(tamCuadra+anchoCalle)) + margenInf + anchoCalle, tamCuadra ,tamCuadra);
                 manzana.setFill(Color.PINK);
                 grupo.getChildren().add(manzana);
 
-                grupo = agregarElementosEste(grupo, esq); //ahora mismo solo les cambia una linea, deberia sacar las 47 que se quedan igual y solo pasarles la posicion
-                grupo = agregarElementosSur(grupo, esq); //acorde a ambas
+                grupo = agregarElementosEste(grupo, esq); //ahora mismo solo les cambia una linea, deberia sacar las 47 que se quedan igual y solo pasarles la posicion acorde a ambas
+                grupo = agregarElementosSur(grupo, esq);
             }
         }
         return grupo;
     }
 
 
-
-    private Group agregarElementosEste(Group grupo, Esquina esq) {
-        Calle calle = esq.getEste();
-
+    private Group agregarElementos(Group grupo, Esquina esq, int posX, int posY, Calle calle){
         Color colorNulo = new Color(1,1,1,0); //color que usamos para las sorpresas y obstaculos nulos
-
-        int posX = (esq.getX()*(tamCuadra+anchoCalle)) + margenIzq + 5;
-        int posY = (esq.getY()*(tamCuadra+anchoCalle)) + margenInf + 5;
 
         if (calle == null) return grupo;
         ISorpresa sorpresa = calle.getSorpresa();
@@ -187,7 +181,7 @@ public class Partida extends Application {
 
 
         IObstaculo obstaculo = calle.getObstaculo();
-        Rectangle obstaculoPrinteado = new Rectangle(posX, posY, 5, 5);
+        Rectangle obstaculoPrinteado = new Rectangle(posX + 5, posY, 5, 5);
         Class claseObstaculo = obstaculo.getClass();
 
         if (claseObstaculo.equals(ControlPolicial.class)) {
@@ -207,55 +201,25 @@ public class Partida extends Application {
         return grupo;
     }
 
+
+    private Group agregarElementosEste(Group grupo, Esquina esq) {
+
+
+
+        Calle calle = esq.getEste();
+        int posX = (esq.getX()*(tamCuadra+anchoCalle)) + margenIzq + (tamCuadra/2);
+        int posY = (esq.getY()*(tamCuadra+anchoCalle)) + margenInf - (anchoCalle/4);
+
+        return agregarElementos(grupo, esq, posX, posY, calle);
+        
+    }
+
     private Group agregarElementosSur(Group grupo, Esquina esq) {
         Calle calle = esq.getSur();
+        int posX = (esq.getX()*(tamCuadra+anchoCalle)) + margenIzq - (anchoCalle/4);
+        int posY = (esq.getY()*(tamCuadra+anchoCalle)) + margenInf + (tamCuadra/2);
 
-        Color colorNulo = new Color(1,1,1,0); //color que usamos para las sorpresas y obstaculos nulos
-
-        int posX = (esq.getX()*(tamCuadra+anchoCalle)) + margenIzq;
-        int posY = (esq.getY()*(tamCuadra+anchoCalle)) + margenInf;
-
-        if (calle == null) return grupo;
-        ISorpresa sorpresa = calle.getSorpresa();
-
-        Circle sorpresaPrinteada = new Circle(posX, posY , 5);
-        Class claseDeSorpresa = sorpresa.getClass();
-
-        if (claseDeSorpresa.equals(SorpresaFavorable.class)) {
-            sorpresaPrinteada.setFill(Color.GREEN);
-        }
-        if (claseDeSorpresa.equals(SorpresaDesfavorable.class)) {
-            sorpresaPrinteada.setFill(Color.RED);
-        }
-        if (claseDeSorpresa.equals(SorpresaCambioVehiculo.class)) {
-            sorpresaPrinteada.setFill(Color.BLUE);
-        }
-        if(claseDeSorpresa.equals(SorpresaNeutra.class)){
-            sorpresaPrinteada.setFill(colorNulo);
-        }
-        grupo.getChildren().add(sorpresaPrinteada);
-
-
-
-        IObstaculo obstaculo = calle.getObstaculo();
-        Rectangle obstaculoPrinteado = new Rectangle(posX, posY, 5, 5);
-        Class claseObstaculo = obstaculo.getClass();
-
-        if (claseObstaculo.equals(ControlPolicial.class)) {
-            obstaculoPrinteado.setFill(Color.BLUE);
-        }
-        if (claseObstaculo.equals(Pozo.class)) {
-            obstaculoPrinteado.setFill(Color.RED);
-        }
-        if (claseObstaculo.equals(Piquete.class)) {
-            obstaculoPrinteado.setFill(Color.BROWN);
-        }
-        if (claseObstaculo.equals(ObstaculoNulo.class)) {
-            obstaculoPrinteado.setFill(colorNulo);
-        }
-        grupo.getChildren().add(obstaculoPrinteado);
-
-        return grupo;
+        return agregarElementos(grupo, esq, posX, posY, calle);
     }
 
     private ImageView setImagenInicialVehiculo(Jugador jugador, String rutaVehiculo){

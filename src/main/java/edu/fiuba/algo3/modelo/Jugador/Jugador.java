@@ -67,4 +67,12 @@ public class Jugador {
     public String getNick() {
         return this.nick;
     }
+
+    public int getX() {
+        return this.esquina.getX();
+    }
+
+    public int getY() {
+        return this.esquina.getY();
+    }
 }

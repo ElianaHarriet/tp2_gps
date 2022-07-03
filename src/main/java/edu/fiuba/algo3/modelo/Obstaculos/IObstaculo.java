@@ -19,5 +19,7 @@ public interface IObstaculo {
 
     Esquina siguienteEsquina(Esquina origen, Esquina destino, Moto moto);
 
+    String tipo();
+
 }
 

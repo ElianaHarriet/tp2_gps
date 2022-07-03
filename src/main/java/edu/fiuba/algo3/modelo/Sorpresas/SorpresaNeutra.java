@@ -19,4 +19,5 @@ public class SorpresaNeutra implements ISorpresa {
         return camioneta;
     }
 
+    public String tipo() {return "neutra";}
 }

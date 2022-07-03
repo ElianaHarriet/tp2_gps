@@ -31,4 +31,6 @@ public class ObstaculoNulo implements IObstaculo {
     public Esquina siguienteEsquina(Esquina origen, Esquina destino, Moto moto) {
         return destino;
     }
+
+    public String tipo() {return "nulo";}
 }

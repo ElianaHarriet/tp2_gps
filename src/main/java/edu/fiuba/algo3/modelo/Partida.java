@@ -8,7 +8,7 @@ public class Partida {
     Jugador jugador;
 
     public Partida () {
-        this.jugador = new Jugador(new EsquinaNormie(), null, null);
+        this.jugador = new Jugador(new EsquinaNormie(0, 0), null, null);
     }
 
     public boolean terminada() {

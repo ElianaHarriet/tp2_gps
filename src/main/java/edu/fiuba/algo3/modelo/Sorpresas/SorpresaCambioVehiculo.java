@@ -23,5 +23,8 @@ public class SorpresaCambioVehiculo implements ISorpresa {
         return new Moto();
     }
 
+    public String tipo() {return "cambio";}
+
+
 }
 

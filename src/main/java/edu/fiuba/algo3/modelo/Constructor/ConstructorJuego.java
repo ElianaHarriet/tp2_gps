@@ -2,6 +2,7 @@ package edu.fiuba.algo3.modelo.Constructor;
 
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import edu.fiuba.algo3.modelo.Vehiculos.Auto;
+import edu.fiuba.algo3.modelo.Mapa.Esquina;
 
 
 public class ConstructorJuego implements IConstructor{
@@ -30,5 +31,9 @@ public class ConstructorJuego implements IConstructor{
     }
     public Jugador getResultado() {
         return this.cJugador.getResultado();
+    }
+
+    public ConstructorTablero getcTablero() {
+        return this.cTablero;
     }
 }

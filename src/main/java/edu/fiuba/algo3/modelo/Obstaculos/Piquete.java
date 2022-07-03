@@ -30,4 +30,6 @@ public class Piquete implements IObstaculo {
     public int penalizar(Camioneta camioneta) {
         return 0;
     }
+
+    public String tipo() {return "piquete";}
 }

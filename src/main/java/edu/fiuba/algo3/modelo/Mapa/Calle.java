@@ -24,4 +24,12 @@ public class Calle {
         Esquina prox = esquina.equals(this.esquina1) ? this.esquina2 : this.esquina1;
         jugador.actualizarEstado(prox, this.sorpresa, this.obstaculo);
     }
+
+    public ISorpresa getSorpresa(){
+        return this.sorpresa;
+    }
+    public IObstaculo getObstaculo(){
+        return this.obstaculo;
+    }
+
 }

@@ -54,8 +54,8 @@ public class Partida extends Application {
     private final int margenInf = 25;
     // Acomodar para cada uno xd
     private final String rutaAuto = "file:/home/rueba/code/tp2_gps/src/main/java/edu/fiuba/algo3/Vista/res/auto.png";
-    private final String rutaPiquete = "file:\\res\\piquete.png";
-    private final String rutaControlPolicial = "file:/res/controlpolicial.png";
+    private final String rutaPiquete = "file:/home/rueba/code/tp2_gps/src/main/java/edu/fiuba/algo3/Vista/res/piquete.png";
+    private final String rutaControlPolicial = "file:/home/rueba/code/tp2_gps/src/main/java/edu/fiuba/algo3/Vista/res/controlpolicial.png";
     private final int tamCuadra = 50;
     private final int anchoCalle = 15;
     private String vehiculo;

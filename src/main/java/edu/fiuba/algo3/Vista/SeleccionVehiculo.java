@@ -32,7 +32,7 @@ public class SeleccionVehiculo extends Application {
     private final int altoVentana = 525;
     private final int anchoBoton = 110;
     private final int altoBoton = 50;
-    private final String pathTitulo = "file:/home/rueba/code/tp2_gps/src/main/java/edu/fiuba/algo3/Vista/res/84B9EF94-A4B5-41D3-A9B7-0A69AF51ED80.jpeg";
+    private final String pathTitulo = "file:/home/rueba/code/tp2_gps/src/main/java/edu/fiuba/algo3/Vista/res/seleccionVehiculos.jpeg";
 
     public static void main(String[] args) {
         launch();

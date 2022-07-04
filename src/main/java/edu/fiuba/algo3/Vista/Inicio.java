@@ -23,7 +23,7 @@ public class Inicio extends Application {
     private final int altoVentana = 525;
     private final int anchoBoton = 100;
     private final int altoBoton = 60;
-    private final String pathTitulo = "file:/home/rueba/code/tp2_gps/src/main/java/edu/fiuba/algo3/Vista/res/361DAEB8-EFF2-4BA1-BC46-58F6663DA56A.jpeg";
+    private final String pathTitulo = "file:/home/rueba/code/tp2_gps/src/main/java/edu/fiuba/algo3/Vista/res/inicio.jpeg";
 
     public static void main(String[] args) {
         launch();

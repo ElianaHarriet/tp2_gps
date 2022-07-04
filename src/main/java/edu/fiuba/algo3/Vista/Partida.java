@@ -10,6 +10,10 @@ import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.CheckMenuItem;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
@@ -42,14 +46,17 @@ import java.util.ArrayList;
 
 public class Partida extends Application {
     //pasar a mayusculas que son constantes
-    private int altoTablero = 25;
-    private int anchoTablero = 25;
-    private int cantCuadras = 10;
-    private int margenIzq = 25;
-    private int margenInf = 25;
-    private String rutaAuto = "file:/Users/joaquin/IdeaProjects/tp2_gps/src/main/java/edu/fiuba/algo3/res/auto.png";
-    private int tamCuadra = 50;
-    private int anchoCalle = 15;
+    private final int altoTablero = 25;
+    private final int anchoTablero = 25;
+    private final int cantCuadras = 10;
+    private final int margenIzq = 25;
+    private final int margenInf = 25;
+    // Acomodar para cada uno xd
+    private final String rutaAuto = "file:/home/rueba/code/tp2_gps/src/main/java/edu/fiuba/algo3/Vista/res/auto.png";
+    private final String rutaPiquete = "file:\\res\\piquete.png";
+    private final String rutaControlPolicial = "file:/res/controlpolicial.png";
+    private final int tamCuadra = 50;
+    private final int anchoCalle = 15;
 
     public void start(Stage stage){
         ConstructorJuego cons = new ConstructorJuego();
@@ -78,6 +85,7 @@ public class Partida extends Application {
         //logica de teclas para moverse
         Pane pane = new Pane();
         pane.getChildren().add(imagenVehiculo);
+        actualizarPosicion(jugador, imagenVehiculo);
         pane.setOnKeyPressed(e -> {
             if (e.getCode() == KeyCode.UP) {
                 jugador.moverseHacia(new Arriba());
@@ -108,6 +116,27 @@ public class Partida extends Application {
 
         movimientosText.setText(Integer.toString(jugador.getMovimientos()));
         elementos.getChildren().add(pane);
+
+        //hasta elementos.add(bar) ver si se puede mejorar, capaz haciendo un metodo.
+        //y hacer que cada opcion haga lo que dice
+        // -rive
+        Menu opciones = new Menu("opciones");
+        MenuItem opcion1 = new MenuItem("opcion1");
+        opciones.getItems().add(opcion1);
+
+        Menu uwu = new Menu("uwu");
+
+        Menu sonido = new Menu("sonido");
+        CheckMenuItem musica = new CheckMenuItem("Musica");
+        CheckMenuItem sfx = new CheckMenuItem("Efectos especiales");
+        sonido.getItems().addAll(musica,sfx);
+
+        Menu ayuda = new Menu("ayuda");
+
+        MenuBar bar = new MenuBar(opciones,uwu,sonido,ayuda);
+
+        elementos.getChildren().add(bar);
+
         Scene scene = new Scene(elementos, altoTablero*30 + margenIzq, altoTablero*30 + margenInf);
 
         stage.setResizable(false);
@@ -129,7 +158,7 @@ public class Partida extends Application {
         Group grupo = new Group();
 
         Color colorTablero = Color.rgb(71, 9, 124, 1);
-        Rectangle fondo = new Rectangle(0,0, altoTablero*80, anchoTablero*80);
+        Rectangle fondo = new Rectangle(0,0, altoTablero*90, anchoTablero*90);
         fondo.setFill(colorTablero);
         grupo.getChildren().add(fondo);
         
@@ -139,13 +168,27 @@ public class Partida extends Application {
 
         //este forfor imprime las cuadras, cada cuadra empieza en la posicion indicada por la esquina y va para abajo a la derecha
         //tambien guarda las calles horizontales en un array con su posicion y tamaño y lo mismo con las verticales
-        for(int i = 0; i < cantCuadras; i++){
-            for(int j = 0; j < cantCuadras; j++){
+        for(int i = 0; i < cantCuadras; i++) {
+            for(int j = 0; j < cantCuadras; j++) {
                 Esquina esq = mapa[i][j];
+
+                int posX = esq.getX()*(tamCuadra+anchoCalle) + anchoCalle + margenIzq;
+                int posY = (esq.getY()*(tamCuadra+anchoCalle)) + anchoCalle + margenInf;
+
                 //cada esquina imprime la cuadra de abajo a la derecha
-                Rectangle manzana = new Rectangle((esq.getX()*(tamCuadra+anchoCalle)) + anchoCalle + margenIzq,(esq.getY()*(tamCuadra+anchoCalle)) + margenInf + anchoCalle, tamCuadra ,tamCuadra);
+                Rectangle manzana = new Rectangle(posX,posY, tamCuadra ,tamCuadra);
                 manzana.setFill(Color.PINK);
                 grupo.getChildren().add(manzana);
+
+                if (esq.esDestino()) {
+                    Circle destino = new Circle();
+                    destino.setStroke(Color.GREEN);
+                    destino.setFill(Color.TRANSPARENT);
+                    destino.setRadius(10);
+                    destino.setCenterX(posX);
+                    destino.setCenterY(posY);
+                    grupo.getChildren().add(destino);
+                }
 
                 grupo = agregarElementosEste(grupo, esq); //ahora mismo solo les cambia una linea, deberia sacar las 47 que se quedan igual y solo pasarles la posicion acorde a ambas
                 grupo = agregarElementosSur(grupo, esq);
@@ -183,20 +226,35 @@ public class Partida extends Application {
         IObstaculo obstaculo = calle.getObstaculo();
         Rectangle obstaculoPrinteado = new Rectangle(posX + 5, posY, 5, 5);
         Class claseObstaculo = obstaculo.getClass();
+        ImageView obstaculoNuevo = new ImageView();
 
         if (claseObstaculo.equals(ControlPolicial.class)) {
+            Image control = new Image(rutaControlPolicial);
+            obstaculoNuevo.setImage(control);
+
             obstaculoPrinteado.setFill(Color.BLUE);
         }
         if (claseObstaculo.equals(Pozo.class)) {
             obstaculoPrinteado.setFill(Color.RED);
         }
         if (claseObstaculo.equals(Piquete.class)) {
+            Image piquete = new Image(rutaPiquete);
+            obstaculoNuevo.setImage(piquete);
+
             obstaculoPrinteado.setFill(Color.BROWN);
         }
         if (claseObstaculo.equals(ObstaculoNulo.class)) {
             obstaculoPrinteado.setFill(colorNulo);
         }
         grupo.getChildren().add(obstaculoPrinteado);
+
+        obstaculoNuevo.setX(posX);
+        obstaculoNuevo.setY(posY);
+
+        obstaculoNuevo.setFitHeight(25);
+        obstaculoNuevo.setPreserveRatio(true);
+
+        grupo.getChildren().add(obstaculoNuevo);
 
         return grupo;
     }
@@ -207,17 +265,17 @@ public class Partida extends Application {
 
 
         Calle calle = esq.getEste();
-        int posX = (esq.getX()*(tamCuadra+anchoCalle)) + margenIzq + (tamCuadra/2);
-        int posY = (esq.getY()*(tamCuadra+anchoCalle)) + margenInf - (anchoCalle/4);
+        int posX = (esq.getX()*(tamCuadra+anchoCalle)) + margenInf + (anchoCalle/2) + (tamCuadra/2);
+        int posY = (esq.getY()*(tamCuadra+anchoCalle)) + margenIzq + (anchoCalle/2);
 
         return agregarElementos(grupo, esq, posX, posY, calle);
-        
+
     }
 
     private Group agregarElementosSur(Group grupo, Esquina esq) {
         Calle calle = esq.getSur();
-        int posX = (esq.getX()*(tamCuadra+anchoCalle)) + margenIzq - (anchoCalle/4);
-        int posY = (esq.getY()*(tamCuadra+anchoCalle)) + margenInf + (tamCuadra/2);
+        int posX = (esq.getX()*(tamCuadra+anchoCalle)) + margenIzq+ (anchoCalle/2);
+        int posY = (esq.getY()*(tamCuadra+anchoCalle)) + margenInf+ (anchoCalle/2) + (tamCuadra/2);
 
         return agregarElementos(grupo, esq, posX, posY, calle);
     }
@@ -226,8 +284,8 @@ public class Partida extends Application {
         Image imagen = new Image(rutaVehiculo);
         ImageView imagenVehiculo = new ImageView();
         imagenVehiculo.setImage(imagen);
-        imagenVehiculo.setX(jugador.getX());
-        imagenVehiculo.setY(jugador.getY());
+        imagenVehiculo.setX((jugador.getX()*(tamCuadra+anchoCalle))+margenIzq );
+        imagenVehiculo.setY((jugador.getY()*(tamCuadra + anchoCalle)) + margenInf  );
         imagenVehiculo.setFitHeight(15);
 
         imagenVehiculo.setPreserveRatio(true);
@@ -249,10 +307,9 @@ public class Partida extends Application {
     }
 
     public void actualizarPosicion(Jugador jugador, ImageView imagenVehiculo) {
-        int x = jugador.getX();
-        int y = jugador.getY();
-        imagenVehiculo.setX((y*65) + margenIzq + 50);
-        imagenVehiculo.setY((x*65) + margenInf + 50);
+        //Si queres saber porque esta invertido volve a Algebra del CBC (nosotros tampoco sabemos porque).
+        imagenVehiculo.setX((jugador.getX()*(tamCuadra + anchoCalle))+margenIzq );
+        imagenVehiculo.setY((jugador.getY()*(tamCuadra + anchoCalle)) + margenInf );
 
     }
 

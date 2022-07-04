@@ -89,12 +89,12 @@ public class ConstructorTablero implements IConstructor {
             for (int j = 0; j < n; j++) {
                 Esquina actual = mapa[i][j];
                 if (j + 1 < n) {
-                    Esquina derecha = mapa[i][j + 1];
-                    this.unirEsquinasHorizontalmente(actual, derecha);
+                    Esquina abajo = mapa[i][j + 1];
+                    this.unirEsquinasVerticalmente(actual, abajo);
                 }
                 if (i + 1 < n) {
-                    Esquina abajo = mapa[i + 1][j];
-                    this.unirEsquinasVerticalmente(actual, abajo);
+                    Esquina derecha = mapa[i + 1][j];
+                    this.unirEsquinasHorizontalmente(actual, derecha);
                 }
             }
         }

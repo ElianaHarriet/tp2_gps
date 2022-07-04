@@ -1,6 +1,6 @@
 package edu.fiuba.algo3.modelo.Constructor;
 
-import edu.fiuba.algo3.modelo.Mapa.Esquina;
+import edu.fiuba.algo3.TeFaltaCarroError;
 import edu.fiuba.algo3.modelo.Vehiculos.*;
 
 
@@ -21,6 +21,8 @@ public class ConstructorVehiculo implements IConstructor {
             case "moto":
                 this.vehiculo = new Moto();
                 break;
+            default:
+                throw new TeFaltaCarroError();
         }
     }
 

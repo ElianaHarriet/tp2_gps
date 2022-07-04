@@ -1,26 +1,29 @@
 package edu.fiuba.algo3.Vista;
 //modelo
+import edu.fiuba.algo3.TeFaltaCarroError;
 import edu.fiuba.algo3.modelo.Constructor.ConstructorJuego;
+import edu.fiuba.algo3.modelo.Constructor.ConstructorVehiculo;
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import edu.fiuba.algo3.modelo.Mapa.*;
 import edu.fiuba.algo3.modelo.Obstaculos.*;
 import edu.fiuba.algo3.modelo.Sorpresas.*;
 //javafx
-import edu.fiuba.algo3.modelo.Vehiculos.IVehiculo;
+import edu.fiuba.algo3.modelo.Vehiculos.Auto;
+import edu.fiuba.algo3.modelo.Vehiculos.Camioneta;
+import edu.fiuba.algo3.modelo.Vehiculos.Moto;
 import javafx.application.Application;
 import javafx.scene.Group;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.CheckMenuItem;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.Shape;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
@@ -28,22 +31,11 @@ import javafx.stage.Stage;
 
 
 // para imagenes
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import javafx.application.Application;
-import javafx.scene.Group;
-import javafx.scene.Scene;
 import javafx.scene.image.*;
 import javafx.scene.image.ImageView;
-import javafx.stage.Stage;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.*;
-import java.util.EventListener;
 
 //herramientas de java
-import java.util.ArrayList;
+
 
 public class Partida extends Application {
     //pasar a mayusculas que son constantes
@@ -53,9 +45,11 @@ public class Partida extends Application {
     private final int margenIzq = 25;
     private final int margenInf = 25;
     // Acomodar para cada uno xd
-    private final String rutaAuto = "file:/home/rueba/code/tp2_gps/src/main/java/edu/fiuba/algo3/Vista/res/auto.png";
-    private final String rutaPiquete = "file:/home/rueba/code/tp2_gps/src/main/java/edu/fiuba/algo3/Vista/res/piquete.png";
-    private final String rutaControlPolicial = "file:/home/rueba/code/tp2_gps/src/main/java/edu/fiuba/algo3/Vista/res/controlpolicial.png";
+    private final String rutaAuto = "file:src/main/java/edu/fiuba/algo3/Vista/res/auto.png";
+    private final String rutaMoto = "file:src/main/java/edu/fiuba/algo3/Vista/res/moto.png";
+    private final String rutaCamioneta = "file:src/main/java/edu/fiuba/algo3/Vista/res/camioneta.png";
+    private final String rutaPiquete = "file:src/main/java/edu/fiuba/algo3/Vista/res/piquete.png";
+    private final String rutaControlPolicial = "file:src/main/java/edu/fiuba/algo3/Vista/res/controlpolicial.png";
     private final int tamCuadra = 50;
     private final int anchoCalle = 15;
     private String vehiculo;
@@ -68,7 +62,11 @@ public class Partida extends Application {
 
     public void start(Stage stage){
         ConstructorJuego cons = new ConstructorJuego();
-        cons.crearJuego(cantCuadras, nick, vehiculo); //esto deberia recibirlo como parametro, despues hay que ver cuando se le pasaria esto
+        ConstructorVehiculo cVehiculo = new ConstructorVehiculo();
+        cVehiculo.crearVehiculo(vehiculo);
+
+
+        cons.crearJuego(cantCuadras, nick, cVehiculo.getResultado());
         Jugador jugador = cons.getResultado();
         Esquina[][] mapa = cons.getTablero();
 
@@ -86,68 +84,64 @@ public class Partida extends Application {
         Text movimientosText = new Text(730, 620, Integer.toString(jugador.getMovimientos()));
         movimientosText.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
         movimientosText.setFill(Color.WHITE);
+        
+        
         elementos.getChildren().add(movimientosText);
-        ImageView imagenVehiculo = setImagenInicialVehiculo(jugador, rutaAuto);
+        ImageView imagenVehiculo = setImagenVehiculo(jugador);
 
 
-        //logica de teclas para moverse
+
         Pane pane = new Pane();
         pane.getChildren().add(imagenVehiculo);
-        actualizarPosicion(jugador, imagenVehiculo);
+        actualizarImagen(jugador, imagenVehiculo);
         pane.setOnKeyPressed(e -> {
             if (e.getCode() == KeyCode.UP) {
                 jugador.moverseHacia(new Arriba());
-                actualizarPosicion(jugador, imagenVehiculo);
-
-                movimientosText.setText(Integer.toString(jugador.getMovimientos()));
-
             }
             if (e.getCode() == KeyCode.DOWN) {
                 jugador.moverseHacia(new Abajo());
-                actualizarPosicion(jugador, imagenVehiculo);
-
-                movimientosText.setText(Integer.toString(jugador.getMovimientos()));
             }
             if (e.getCode() == KeyCode.RIGHT) {
                 jugador.moverseHacia(new Derecha());
-                actualizarPosicion(jugador, imagenVehiculo);
-
-                movimientosText.setText(Integer.toString(jugador.getMovimientos()));
             }
             if (e.getCode() == KeyCode.LEFT) {
                 jugador.moverseHacia(new Izquierda());
-                actualizarPosicion(jugador, imagenVehiculo);
-
-                movimientosText.setText(Integer.toString(jugador.getMovimientos()));
             }
+            actualizarImagen(jugador, imagenVehiculo);
+            movimientosText.setText(Integer.toString(jugador.getMovimientos()));
+            if (jugador.estaEnDestino()) {
+                stage.close();
+                Inicio inicio = new Inicio();
+                inicio.start(stage);
+            };
         });
 
         movimientosText.setText(Integer.toString(jugador.getMovimientos()));
         elementos.getChildren().add(pane);
 
-        //hasta elementos.add(bar) ver si se puede mejorar, capaz haciendo un metodo.
-        //y hacer que cada opcion haga lo que dice
-        // -rive
         Menu opciones = new Menu("opciones");
         MenuItem opcion1 = new MenuItem("opcion1");
         opciones.getItems().add(opcion1);
-
         Menu uwu = new Menu("uwu");
 
         Menu sonido = new Menu("sonido");
         CheckMenuItem musica = new CheckMenuItem("Musica");
-        CheckMenuItem sfx = new CheckMenuItem("Efectos especiales");
-        sonido.getItems().addAll(musica,sfx);
+        CheckMenuItem efectos = new CheckMenuItem("Efectos");
+        sonido.getItems().addAll(musica,efectos);
 
         Menu ayuda = new Menu("ayuda");
+        MenuItem porFavor = new MenuItem("por favor");
+        ayuda.getItems().add(porFavor);
 
         MenuBar bar = new MenuBar(opciones,uwu,sonido,ayuda);
+
 
         elementos.getChildren().add(bar);
 
         Scene scene = new Scene(elementos, altoTablero*30 + margenIzq, altoTablero*30 + margenInf);
 
         stage.setResizable(false);
+
         stage.setScene(scene);
         stage.show();
         stage.setTitle("GPS - escape from Torcuato");
@@ -288,7 +282,14 @@ public class Partida extends Application {
         return agregarElementos(grupo, esq, posX, posY, calle);
     }
 
-    private ImageView setImagenInicialVehiculo(Jugador jugador, String rutaVehiculo){
+    private ImageView setImagenVehiculo(Jugador jugador){
+        String rutaVehiculo;
+        Class claseVehiculo = jugador.getVehiculo().getClass();
+        if (claseVehiculo.equals(Auto.class)) rutaVehiculo = rutaAuto;
+        else if (claseVehiculo.equals(Moto.class)) rutaVehiculo = rutaMoto;
+        else if (claseVehiculo.equals(Camioneta.class)) rutaVehiculo = rutaCamioneta;
+        else throw new TeFaltaCarroError();
+
         Image imagen = new Image(rutaVehiculo);
         ImageView imagenVehiculo = new ImageView();
         imagenVehiculo.setImage(imagen);
@@ -314,16 +315,34 @@ public class Partida extends Application {
         return elementos;
     }
 
-    public void actualizarPosicion(Jugador jugador, ImageView imagenVehiculo) {
-        //Si queres saber porque esta invertido volve a Algebra del CBC (nosotros tampoco sabemos porque).
-        imagenVehiculo.setX((jugador.getX()*(tamCuadra + anchoCalle))+margenIzq );
+    public void actualizarImagen(Jugador jugador, ImageView imagenVehiculo) {
+        imagenVehiculo.setX((jugador.getX()*(tamCuadra + anchoCalle)) + margenIzq );
         imagenVehiculo.setY((jugador.getY()*(tamCuadra + anchoCalle)) + margenInf );
 
+
+        String rutaVehiculo;
+        Class claseVehiculo = jugador.getVehiculo().getClass();
+        if (claseVehiculo.equals(Auto.class)) rutaVehiculo = rutaAuto;
+        else if (claseVehiculo.equals(Moto.class)) rutaVehiculo = rutaMoto;
+        else if (claseVehiculo.equals(Camioneta.class)) rutaVehiculo = rutaCamioneta;
+        else throw new TeFaltaCarroError();
+
+        Image imagen = new Image(rutaVehiculo);
+        imagenVehiculo.setImage(imagen);
+
+    }
+
+
+
+    private Shape crearFog(Jugador jugador){
+        Rectangle rectangulo = new Rectangle(margenIzq,margenInf, altoTablero*25 + margenInf,altoTablero*25 + margenInf); // ELTAMAÑO DE LA PANTALLA ???? (altotablero*30 + margenizq)
+        Circle circulo = new Circle((jugador.getX()*(tamCuadra+anchoCalle))+margenIzq ,(jugador.getY()*(tamCuadra + anchoCalle)) + margenInf, 2*(tamCuadra + anchoCalle ));
+        Shape fog = Shape.subtract(rectangulo, circulo);
+
+        return fog;
     }
 
     public static void main(String[] args) {
         launch();
     }
-
-
 }

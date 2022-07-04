@@ -32,11 +32,13 @@ public class SeleccionVehiculo extends Application {
     private final int altoVentana = 525;
     private final int anchoBoton = 110;
     private final int altoBoton = 50;
-    private final String pathTitulo = "file:/home/rueba/code/tp2_gps/src/main/java/edu/fiuba/algo3/Vista/res/seleccionVehiculos.jpeg";
+    private final String pathTitulo = "file:src/main/java/edu/fiuba/algo3/Vista/res/seleccionVehiculos.jpeg";
 
     public static void main(String[] args) {
         launch();
     }
+
+
 
     @Override
     public void start(Stage stage) {
@@ -115,6 +117,7 @@ public class SeleccionVehiculo extends Application {
             }
         });
 
+
         Button botonVolver = new Button("\uD83E\uDC78");
         botonVolver.setPrefSize(anchoBoton / 3, altoBoton / 3);
         botonVolver.setStyle("-fx-background-color: #a67f5a;");
@@ -132,6 +135,7 @@ public class SeleccionVehiculo extends Application {
         stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
+
     }
 
 }

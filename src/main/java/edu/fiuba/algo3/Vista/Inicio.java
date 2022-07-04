@@ -2,18 +2,13 @@ package edu.fiuba.algo3.Vista;
 
 import javafx.application.Application;
 import javafx.scene.Group;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 
@@ -23,7 +18,7 @@ public class Inicio extends Application {
     private final int altoVentana = 525;
     private final int anchoBoton = 100;
     private final int altoBoton = 60;
-    private final String pathTitulo = "file:/home/rueba/code/tp2_gps/src/main/java/edu/fiuba/algo3/Vista/res/inicio.jpeg";
+    private final String pathTitulo = "file:src/main/java/edu/fiuba/algo3/Vista/res/inicio.jpeg";
 
     public static void main(String[] args) {
         launch();
@@ -35,6 +30,7 @@ public class Inicio extends Application {
         Pane panel = new Pane();
         elementos.getChildren().add(panel);
 
+        //setear ventana inicial
         Image img = new Image(pathTitulo);
         ImageView titulo = new ImageView();
         titulo.setImage(img);
@@ -44,6 +40,7 @@ public class Inicio extends Application {
         titulo.setPreserveRatio(true);
         panel.getChildren().add(titulo);
 
+        //boton jugar
         Button botonJugar = new Button("Jugar");
         botonJugar.setPrefSize(anchoBoton, altoBoton);
         botonJugar.setStyle("-fx-background-color: #6a815c;");
@@ -52,7 +49,6 @@ public class Inicio extends Application {
         botonJugar.setLayoutX((anchoVentana - anchoBoton) / 2);
         botonJugar.setLayoutY(300);
         botonJugar.setOnAction(e -> {
-            //abrir menu partida
             stage.close();
             SeleccionVehiculo pantallaSelecion = new SeleccionVehiculo();
             pantallaSelecion.start(stage);
@@ -81,6 +77,7 @@ public class Inicio extends Application {
             //abrir ayuda
 //            titulo.setText("Ayuda xd");
         });
+
 
         Scene scene = new Scene(elementos, anchoVentana, altoVentana);
         stage.setResizable(false);

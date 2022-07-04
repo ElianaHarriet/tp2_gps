@@ -3,6 +3,7 @@ package edu.fiuba.algo3.modelo.Constructor;
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import edu.fiuba.algo3.modelo.Vehiculos.Auto;
 import edu.fiuba.algo3.modelo.Mapa.Esquina;
+import edu.fiuba.algo3.modelo.Vehiculos.IVehiculo;
 
 
 public class ConstructorJuego implements IConstructor{
@@ -11,23 +12,17 @@ public class ConstructorJuego implements IConstructor{
 
     private ConstructorTablero cTablero;
 
-    private ConstructorVehiculo cVehiculo;
-
     public ConstructorJuego() {
         //hacer en estas clases un error para cuando se pide el elemento antes de que se crees
         this.cJugador = new ConstructorJugador();
         this.cTablero = new ConstructorTablero();
-        this.cVehiculo = new ConstructorVehiculo();
     }
 
-    public void crearJuego(int tam, String nick, String vehiculo) {
-        /*
-        * si quieren sacar el switch/hash de crearVehiculo, pasennos directamente el vehiculo
-        * saquen cvehiculo.crear... y cambien c.vehiculo.get por vehiculo
-        * */
+    public void crearJuego(int tam, String nick, IVehiculo vehiculo) {
+
+
         this.cTablero.crearConTamanio(tam);
-        this.cJugador.crearConNick(nick, cTablero.getResultado(), new Auto());//cVehiculo.getResultado());
-        this.cVehiculo.crearVehiculo(vehiculo);
+        this.cJugador.crearConNick(nick, cTablero.getResultado(), vehiculo);
     }
     public Jugador getResultado() {
         return this.cJugador.getResultado();

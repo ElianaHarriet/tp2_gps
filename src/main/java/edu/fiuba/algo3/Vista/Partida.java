@@ -6,6 +6,7 @@ import edu.fiuba.algo3.modelo.Mapa.*;
 import edu.fiuba.algo3.modelo.Obstaculos.*;
 import edu.fiuba.algo3.modelo.Sorpresas.*;
 //javafx
+import edu.fiuba.algo3.modelo.Vehiculos.IVehiculo;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Node;
@@ -57,10 +58,17 @@ public class Partida extends Application {
     private final String rutaControlPolicial = "file:/res/controlpolicial.png";
     private final int tamCuadra = 50;
     private final int anchoCalle = 15;
+    private String vehiculo;
+    private String nick;
+
+    public Partida(String nick, String vehiculo) {
+        this.nick = nick;
+        this.vehiculo = vehiculo;
+    }
 
     public void start(Stage stage){
         ConstructorJuego cons = new ConstructorJuego();
-        cons.crearJuego(cantCuadras, "->BUCHGOD<-", "auto"); //esto deberia recibirlo como parametro, despues hay que ver cuando se le pasaria esto
+        cons.crearJuego(cantCuadras, nick, vehiculo); //esto deberia recibirlo como parametro, despues hay que ver cuando se le pasaria esto
         Jugador jugador = cons.getResultado();
         Esquina[][] mapa = cons.getTablero();
 

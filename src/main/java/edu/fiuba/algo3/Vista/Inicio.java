@@ -54,8 +54,8 @@ public class Inicio extends Application {
         botonJugar.setOnAction(e -> {
             //abrir menu partida
             stage.close();
-            Partida partida = new Partida();
-            partida.start(new Stage());
+            SeleccionVehiculo pantallaSelecion = new SeleccionVehiculo();
+            pantallaSelecion.start(stage);
         });
 
         Button botonRanking = new Button("Ranking");

@@ -10,13 +10,13 @@ public class RankingManagerTest {
     public void prueba01SeAgregaUnaPuntuacionAlRankingYSeObtieneElRanking(){
         RankingManager ranking = new RankingManager(this.rankingPath);
         ranking.limpiarRanking();
-        String nick = "BuchwaldGod";
+        String nick = "BuchGod";
         int puntuacion = 38;
 
         ranking.guardarNuevaPuntuacion(nick, puntuacion);
         String rankingString = ranking.obtenerRanking();
-        String rankingEsperado = "✩-- BuchwaldGod\t--✩--\t38 --✩\n";
-        assertEquals(rankingString,rankingEsperado);
+        String rankingEsperado = "✩-- BuchGod   \t\t--✩--\t\t38 --✩\n";
+        assertEquals(rankingEsperado, rankingString);
 
     }
 
@@ -24,7 +24,7 @@ public class RankingManagerTest {
     public void prueba02SeAgregan3PuntuacionesYSeVerificaQueLaMejorSeaCorrecta(){
         RankingManager ranking = new RankingManager(this.rankingPath);
         ranking.limpiarRanking();
-        String nick1 = "BuchwaldGod";
+        String nick1 = "BuchGod";
         int puntuacion1 = 13;
         String nick2 = "BonShot";
         int puntuacion2 = 23;
@@ -35,8 +35,9 @@ public class RankingManagerTest {
         ranking.guardarNuevaPuntuacion(nick2, puntuacion2);
         ranking.guardarNuevaPuntuacion(nick3, puntuacion3);
         String rankingString = ranking.obtenerRanking();
-        String rankingEsperado = "✩-- Pandelfin\t--✩--\t11 --✩\n✩-- BuchwaldGod\t--✩--\t13 --✩\n✩-- BonShot\t--✩--\t23 --✩\n";
-
+        String rankingEsperado = "✩-- Pandelfin \t\t--✩--\t\t11 --✩\n" +
+                                 "✩-- BuchGod   \t\t--✩--\t\t13 --✩\n" +
+                                 "✩-- BonShot   \t\t--✩--\t\t23 --✩\n";
         assertEquals(rankingEsperado,rankingString);
     }
 

@@ -6,6 +6,7 @@ import edu.fiuba.algo3.modelo.Constructor.ConstructorVehiculo;
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import edu.fiuba.algo3.modelo.Mapa.*;
 import edu.fiuba.algo3.modelo.Obstaculos.*;
+import edu.fiuba.algo3.modelo.Ranking.RankingManager;
 import edu.fiuba.algo3.modelo.Sorpresas.*;
 //javafx
 import edu.fiuba.algo3.modelo.Vehiculos.Auto;
@@ -29,10 +30,17 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-
 // para imagenes
 import javafx.scene.image.*;
 import javafx.scene.image.ImageView;
+
+//import javax.print.attribute.standard.Media;
+
+// para sonidos
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+
+import java.io.File;
 
 //herramientas de java
 
@@ -45,21 +53,23 @@ public class Partida extends Application {
     private final int margenIzq = 25;
     private final int margenInf = 25;
     // Acomodar para cada uno xd
-    private final String rutaAuto = "file:src/main/java/edu/fiuba/algo3/Vista/res/auto.png";
-    private final String rutaMoto = "file:src/main/java/edu/fiuba/algo3/Vista/res/moto.png";
-    private final String rutaCamioneta = "file:src/main/java/edu/fiuba/algo3/Vista/res/camioneta.png";
-    private final String rutaPiquete = "file:src/main/java/edu/fiuba/algo3/Vista/res/piquete.png";
-    private final String rutaControlPolicial = "file:src/main/java/edu/fiuba/algo3/Vista/res/controlpolicial.png";
+    private final String rutaAuto = "file:src/main/java/edu/fiuba/algo3/Vista/media/img/auto.png";
+    private final String rutaMoto = "file:src/main/java/edu/fiuba/algo3/Vista/media/omg/moto.png";
+    private final String rutaCamioneta = "file:src/main/java/edu/fiuba/algo3/Vista/media/img/camioneta.png";
+    private final String rutaPiquete = "file:src/main/java/edu/fiuba/algo3/Vista/media/img/piquete.png";
+    private final String rutaControlPolicial = "file:src/main/java/edu/fiuba/algo3/Vista/media/img/controlpolicial.png";
     private final int tamCuadra = 50;
     private final int anchoCalle = 15;
     private String vehiculo;
     private String nick;
+    private RankingManager rankingManager;
     private Shape fog;
 
 
-    public Partida(String nick, String vehiculo) {
+    public Partida(String nick, String vehiculo, RankingManager rankingManager) {
         this.nick = nick;
         this.vehiculo = vehiculo;
+        this.rankingManager = rankingManager;
     }
 
     public void start(Stage stage){
@@ -96,16 +106,34 @@ public class Partida extends Application {
         pane.setOnKeyPressed(e -> {
             if (e.getCode() == KeyCode.UP) {
                 jugador.moverseHacia(new Arriba());
+                String musicFile = "src/main/java/edu/fiuba/algo3/Vista/media/audio/piqueteSound.mp3";
+                Media sound = new Media(new File(musicFile).toURI().toString());
+                MediaPlayer mediaPlayer = new MediaPlayer(sound);
+                mediaPlayer.play();
             }
             if (e.getCode() == KeyCode.DOWN) {
                 jugador.moverseHacia(new Abajo());
+                String musicFile = "src/main/java/edu/fiuba/algo3/Vista/media/audio/piqueteSound.mp3";
+                Media sound = new Media(new File(musicFile).toURI().toString());
+                MediaPlayer mediaPlayer = new MediaPlayer(sound);
+                mediaPlayer.play();
             }
             if (e.getCode() == KeyCode.RIGHT) {
                 jugador.moverseHacia(new Derecha());
+                String musicFile = "src/main/java/edu/fiuba/algo3/Vista/media/audio/piqueteSound.mp3";
+                Media sound = new Media(new File(musicFile).toURI().toString());
+                MediaPlayer mediaPlayer = new MediaPlayer(sound);
+                mediaPlayer.play();
             }
             if (e.getCode() == KeyCode.LEFT) {
                 jugador.moverseHacia(new Izquierda());
+                String musicFile = "src/main/java/edu/fiuba/algo3/Vista/media/audio/piqueteSound.mp3";
+                Media sound = new Media(new File(musicFile).toURI().toString());
+                MediaPlayer mediaPlayer = new MediaPlayer(sound);
+                mediaPlayer.play();
             }
+
+
 
             pane.getChildren().remove(fog);
             this.actualizarFog(jugador);
@@ -114,9 +142,10 @@ public class Partida extends Application {
             movimientosText.setText(Integer.toString(jugador.getMovimientos()));
 
             if (jugador.estaEnDestino()) {
+                rankingManager.guardarNuevaPuntuacion(nick, jugador.getMovimientos());
                 stage.close();
-                Inicio inicio = new Inicio(); //deberia ser final
-                inicio.start(stage);
+                FinDePartida fin = new FinDePartida(nick, jugador.getMovimientos(), rankingManager);
+                fin.start(stage);
             };
         });
 
@@ -149,7 +178,7 @@ public class Partida extends Application {
 
         stage.setScene(scene);
         stage.show();
-        stage.setTitle("GPS - escape from Torcuato");
+        stage.setTitle("GPS - Escape from Lanús");
         pane.requestFocus();
 
     }

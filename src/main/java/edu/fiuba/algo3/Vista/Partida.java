@@ -54,6 +54,8 @@ public class Partida extends Application {
     private final int anchoCalle = 15;
     private String vehiculo;
     private String nick;
+    private Shape fog;
+
 
     public Partida(String nick, String vehiculo) {
         this.nick = nick;
@@ -65,17 +67,11 @@ public class Partida extends Application {
         ConstructorVehiculo cVehiculo = new ConstructorVehiculo();
         cVehiculo.crearVehiculo(vehiculo);
 
-
         cons.crearJuego(cantCuadras, nick, cVehiculo.getResultado());
         Jugador jugador = cons.getResultado();
         Esquina[][] mapa = cons.getTablero();
 
         Group elementos = procesarTablero(mapa, cantCuadras);
-
-        /*por alguna razon aca hacia lo siguente:
-        Group grupo = procesarTablero(mapa, cantCuadras);
-        Group elementos = new Group(grupo);
-        */
 
         //capaz hay cierta persistencia y java no trabaja con copias como python, en ese caso se podria hacer que no devuelva nada y queda un poquito mas bonito
         elementos = agregarTablaMovimientos(jugador, elementos);
@@ -94,6 +90,9 @@ public class Partida extends Application {
         Pane pane = new Pane();
         pane.getChildren().add(imagenVehiculo);
         actualizarImagen(jugador, imagenVehiculo);
+        fog = crearFog(jugador);
+        pane.getChildren().add(fog);
+
         pane.setOnKeyPressed(e -> {
             if (e.getCode() == KeyCode.UP) {
                 jugador.moverseHacia(new Arriba());
@@ -107,14 +106,20 @@ public class Partida extends Application {
             if (e.getCode() == KeyCode.LEFT) {
                 jugador.moverseHacia(new Izquierda());
             }
+
+            pane.getChildren().remove(fog);
+            this.actualizarFog(jugador);
+            pane.getChildren().add(fog);
             actualizarImagen(jugador, imagenVehiculo);
             movimientosText.setText(Integer.toString(jugador.getMovimientos()));
+
             if (jugador.estaEnDestino()) {
                 stage.close();
-                Inicio inicio = new Inicio();
+                Inicio inicio = new Inicio(); //deberia ser final
                 inicio.start(stage);
             };
         });
+
 
         movimientosText.setText(Integer.toString(jugador.getMovimientos()));
         elementos.getChildren().add(pane);
@@ -149,7 +154,10 @@ public class Partida extends Application {
 
     }
 
-    
+
+    private void actualizarFog(Jugador jugador){
+        fog = crearFog(jugador);
+    }
 
     private Group procesarTablero(Esquina[][] mapa, int cantCuadras){
         //crea el tablero y todo el fondo y lo devuelve en un grupo
@@ -332,7 +340,11 @@ public class Partida extends Application {
 
     }
 
-
+    private void actualizarVista(Pane pane,Shape anterior, Jugador judador){
+        pane.getChildren().remove(anterior);
+        Shape nueva = crearFog(judador);
+        pane.getChildren().add(nueva);
+    }
 
     private Shape crearFog(Jugador jugador){
         Rectangle rectangulo = new Rectangle(margenIzq,margenInf, altoTablero*25 + margenInf,altoTablero*25 + margenInf); // ELTAMAÑO DE LA PANTALLA ???? (altotablero*30 + margenizq)

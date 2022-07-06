@@ -1,25 +1,19 @@
-package edu.fiuba.algo3.VistaControlador;
-//modelo
+package edu.fiuba.algo3.vista;
+
 import edu.fiuba.algo3.TeFaltaCarroError;
-import edu.fiuba.algo3.modelo.Constructor.ConstructorJuego;
-import edu.fiuba.algo3.modelo.Constructor.ConstructorVehiculo;
+import edu.fiuba.algo3.controlador.*;
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import edu.fiuba.algo3.modelo.Mapa.*;
-import edu.fiuba.algo3.modelo.Obstaculos.*;
 import edu.fiuba.algo3.modelo.Ranking.RankingManager;
 import edu.fiuba.algo3.modelo.Sorpresas.*;
-//javafx
-import edu.fiuba.algo3.modelo.Vehiculos.Auto;
-import edu.fiuba.algo3.modelo.Vehiculos.Camioneta;
-import edu.fiuba.algo3.modelo.Vehiculos.Moto;
-import edu.fiuba.algo3.vista.FinDePartida;
+import edu.fiuba.algo3.modelo.Obstaculos.*;
+import edu.fiuba.algo3.modelo.Vehiculos.*;
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.control.CheckMenuItem;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.MenuItem;
+import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -31,29 +25,14 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-// para imagenes
-import javafx.scene.image.*;
-import javafx.scene.image.ImageView;
-
-//import javax.print.attribute.standard.Media;
-
-// para sonidos
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-
-import java.io.File;
-
-//herramientas de java
-
-
-public class Partida extends Application {
-    //pasar a mayusculas que son constantes
+public class Partida extends Application implements IVista {
+        //pasar a mayusculas que son constantes
     private final int altoTablero = 25;
     private final int anchoTablero = 25;
     private final int cantCuadras = 10;
     private final int margenIzq = 25;
     private final int margenInf = 25;
-    // Acomodar para cada uno xd
+
     private final String rutaAuto = "file:src/main/java/edu/fiuba/algo3/Vista/media/img/auto.png";
     private final String rutaMoto = "file:src/main/java/edu/fiuba/algo3/Vista/media/omg/moto.png";
     private final String rutaCamioneta = "file:src/main/java/edu/fiuba/algo3/Vista/media/img/camioneta.png";
@@ -61,26 +40,21 @@ public class Partida extends Application {
     private final String rutaControlPolicial = "file:src/main/java/edu/fiuba/algo3/Vista/media/img/controlpolicial.png";
     private final int tamCuadra = 50;
     private final int anchoCalle = 15;
-    private String vehiculo;
-    private String nick;
+
     private RankingManager rankingManager;
     private Shape fog;
+    private Controlador controlador;
 
-
-    public Partida(String nick, String vehiculo, RankingManager rankingManager) {
-        this.nick = nick;
-        this.vehiculo = vehiculo;
-        this.rankingManager = rankingManager;
+    Stage stage;
+    public Partida(String nombre,String vehiculo, RankingManager rankingManager) {
+        this.controlador = new Controlador(rankingManager);
+        this.controlador = controlador;
     }
 
     public void start(Stage stage){
-        ConstructorJuego cons = new ConstructorJuego();
-        ConstructorVehiculo cVehiculo = new ConstructorVehiculo();
-        cVehiculo.crearVehiculo(vehiculo);
-
-        cons.crearJuego(cantCuadras, nick, cVehiculo.getResultado());
-        Jugador jugador = cons.getResultado();
-        Esquina[][] mapa = cons.getTablero();
+        this.stage = stage;
+        Esquina[][] mapa = controlador.getMapa();
+        Jugador jugador = controlador.getJugador();
 
         Group elementos = procesarTablero(mapa, cantCuadras);
 
@@ -91,11 +65,10 @@ public class Partida extends Application {
         Text movimientosText = new Text(730, 620, Integer.toString(jugador.getMovimientos()));
         movimientosText.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
         movimientosText.setFill(Color.WHITE);
-        
-        
+
+
         elementos.getChildren().add(movimientosText);
         ImageView imagenVehiculo = setImagenVehiculo(jugador);
-
 
         Pane pane = new Pane();
         pane.getChildren().add(imagenVehiculo);
@@ -103,26 +76,25 @@ public class Partida extends Application {
         fog = crearFog(jugador);
         pane.getChildren().add(fog);
 
-        String musicFile = "src/main/java/edu/fiuba/algo3/Vista/media/audio/piqueteSound.mp3";
-        Media sound = new Media(new File(musicFile).toURI().toString());
-        MediaPlayer mediaPlayer = new MediaPlayer(sound);
-        mediaPlayer.play();
+        //String musicFile = "src/main/java/edu/fiuba/algo3/Vista/media/audio/piqueteSound.mp3";
+        //Media sound = new Media(new File(musicFile).toURI().toString());
+        //MediaPlayer mediaPlayer = new MediaPlayer(sound);
+        //mediaPlayer.play();
+
 
         pane.setOnKeyPressed(e -> {
             if (e.getCode() == KeyCode.UP) {
-                jugador.moverseHacia(new Arriba());
+                controlador.moverJugadorHacia(new Arriba());
             }
             if (e.getCode() == KeyCode.DOWN) {
-                jugador.moverseHacia(new Abajo());
+                controlador.moverJugadorHacia(new Abajo());
             }
             if (e.getCode() == KeyCode.RIGHT) {
-                jugador.moverseHacia(new Derecha());
+                controlador.moverJugadorHacia(new Derecha());
             }
             if (e.getCode() == KeyCode.LEFT) {
-                jugador.moverseHacia(new Izquierda());
+                controlador.moverJugadorHacia(new Izquierda());
             }
-
-
 
             pane.getChildren().remove(fog);
             this.actualizarFog(jugador);
@@ -130,15 +102,8 @@ public class Partida extends Application {
             actualizarImagen(jugador, imagenVehiculo);
             movimientosText.setText(Integer.toString(jugador.getMovimientos()));
 
-            if (jugador.estaEnDestino()) {
-                rankingManager.guardarNuevaPuntuacion(nick, jugador.getMovimientos());
-                stage.close();
-                FinDePartida fin = new FinDePartida(nick, jugador.getMovimientos(), rankingManager);
-                fin.start(stage);
-            };
+
         });
-
-
         movimientosText.setText(Integer.toString(jugador.getMovimientos()));
         elementos.getChildren().add(pane);
 
@@ -154,12 +119,14 @@ public class Partida extends Application {
 
         Menu ayuda = new Menu("ayuda");
         MenuItem porFavor = new MenuItem("por favor");
+
         ayuda.getItems().add(porFavor);
 
         MenuBar bar = new MenuBar(opciones,uwu,sonido,ayuda);
 
 
         elementos.getChildren().add(bar);
+
 
         Scene scene = new Scene(elementos, altoTablero*30 + margenIzq, altoTablero*30 + margenInf);
 
@@ -171,7 +138,13 @@ public class Partida extends Application {
         pane.requestFocus();
 
     }
-
+    @Override
+    public void terminarJuego() {
+        rankingManager.guardarNuevaPuntuacion(controlador.getNick(), controlador.getMovimientosJugador());
+        stage.close();
+        FinDePartida fin = new FinDePartida(controlador.getNick(), controlador.getMovimientosJugador(), rankingManager);
+        fin.start(stage);
+    }
 
     private void actualizarFog(Jugador jugador){
         fog = crearFog(jugador);
@@ -180,16 +153,16 @@ public class Partida extends Application {
     private Group procesarTablero(Esquina[][] mapa, int cantCuadras){
         //crea el tablero y todo el fondo y lo devuelve en un grupo
 
-        
+
         //no se porque llamamos "Esquina" a la esquina cuando enrealidad es una interseccion, la cual esta compuesta por 4 esquinas
-        
+
         Group grupo = new Group();
 
         Color colorTablero = Color.rgb(71, 9, 124, 1);
         Rectangle fondo = new Rectangle(0,0, altoTablero*90, anchoTablero*90);
         fondo.setFill(colorTablero);
         grupo.getChildren().add(fondo);
-        
+
         Rectangle calles = new Rectangle(margenIzq, margenInf, (tamCuadra+anchoCalle)*cantCuadras, (tamCuadra+anchoCalle)*cantCuadras);
         calles.setFill(Color.GRAY);
         grupo.getChildren().add(calles);
@@ -231,7 +204,7 @@ public class Partida extends Application {
 
         if (calle == null) return grupo;
         ISorpresa sorpresa = calle.getSorpresa();
-        
+
         Circle sorpresaPrinteada = new Circle(posX, posY , 5);
         Class claseDeSorpresa = sorpresa.getClass();
 
@@ -363,7 +336,6 @@ public class Partida extends Application {
         Shape nueva = crearFog(judador);
         pane.getChildren().add(nueva);
     }
-
     private Shape crearFog(Jugador jugador){
         Rectangle rectangulo = new Rectangle(margenIzq,margenInf, altoTablero*25 + margenInf,altoTablero*25 + margenInf); // ELTAMAÑO DE LA PANTALLA ???? (altotablero*30 + margenizq)
         Circle circulo = new Circle((jugador.getX()*(tamCuadra+anchoCalle))+margenIzq ,(jugador.getY()*(tamCuadra + anchoCalle)) + margenInf, 2*(tamCuadra + anchoCalle ));
@@ -372,7 +344,9 @@ public class Partida extends Application {
         return fog;
     }
 
+
     public static void main(String[] args) {
         launch();
     }
+}
 }

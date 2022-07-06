@@ -1,11 +1,10 @@
-package edu.fiuba.algo3.Vista;
+package edu.fiuba.algo3.vista;
 
 import javafx.scene.control.Button;
 import javafx.scene.image.*;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
-import javafx.scene.text.TextAlignment;
+import javafx.scene.text.*;
+
 
 public class ElementManager {
 
@@ -19,15 +18,14 @@ public class ElementManager {
         return imgView;
     }
 
-    public static Button crearButton(String txt, int anchoBoton, int altoBoton, int x, int y, String color, Font font) {
-        Button boton = new Button(txt);
+    public static void disenarBoton(Button boton, String txt, int anchoBoton, int altoBoton, int x, int y, String color, Font font) {
+        boton.setText(txt);
         boton.setPrefSize(anchoBoton, altoBoton);
-        boton.setStyle("-fx-background-color: " + color + ";-fx-effect: dropshadow( one-pass-box , black , 8 , 0.0 , 2 , 0 );");
+        boton.setStyle("-fx-background-color: " + color + ";-fx-effect: dropshadow(one-pass-box, black, 8, 0.0, 2, 0);");
         boton.setFont(font);
         boton.setLayoutX(x);
         boton.setLayoutY(y);
-        return boton;
-    }
+    };
 
     public static Text crearText(String txt, int x, int y, Font font, String color, Color borde, TextAlignment alineacion) {
         Text text = new Text(txt);

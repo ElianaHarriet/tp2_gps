@@ -1,26 +1,18 @@
-package edu.fiuba.algo3.Vista;
+package edu.fiuba.algo3.vista;
 
+import edu.fiuba.algo3.controlador.BotonPantalla;
 import edu.fiuba.algo3.modelo.Ranking.RankingManager;
-import javafx.application.Application;
-import javafx.scene.Group;
-import javafx.scene.Scene;
+import javafx.scene.*;
 import javafx.scene.control.Button;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
-import javafx.scene.text.Text;
-import javafx.scene.text.TextAlignment;
+import javafx.scene.text.*;
 import javafx.stage.Stage;
-
-import java.lang.reflect.Array;
-
-import static edu.fiuba.algo3.Vista.ElementManager.*;
+import static edu.fiuba.algo3.vista.ElementManager.*;
 
 
-public class Ranking extends Application {
+public class Ranking extends Pantalla {
 
     private final int anchoVentana = 1050;
     private final int altoVentana = 525;
@@ -33,10 +25,6 @@ public class Ranking extends Application {
 
     public Ranking(RankingManager rankingManager) {
         this.rankingManager = rankingManager;
-    }
-
-    public static void main(String[] args) {
-        launch();
     }
 
     @Override
@@ -70,18 +58,13 @@ public class Ranking extends Application {
         panel.getChildren().add(texto);
 
         Font fuenteBoton = Font.font("Impact", FontWeight.BOLD, 17);
-        Button botonVolver = crearButton("\uD83E\uDC78", anchoBoton, altoBoton, 0, 0, colorBoton, fuenteBoton);
+        Button botonVolver = (new BotonPantalla(stage, new Inicio())).getBoton();
+        disenarBoton(botonVolver, "\uD83E\uDC78", anchoBoton, altoBoton, 0, 0, colorBoton, fuenteBoton);
         elementos.getChildren().add(botonVolver);
-        botonVolver.setOnAction(e -> {
-            stage.close();
-            Inicio inicio = new Inicio();
-            inicio.start(stage);
-        });
 
         Scene scene = new Scene(elementos, anchoVentana, altoVentana);
         stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
     }
-
 }

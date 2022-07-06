@@ -19,7 +19,7 @@ public class FinDePartida extends Application {
     private final int altoVentana = 525;
     private final int anchoBoton = 35;
     private final int altoBoton = 20;
-    private final String pathFondo = "file:/src/main/java/edu/fiuba/algo3/Vista/media/img/finDePartida.jpg";
+    private final String pathFondo = "file:/src/main/java/edu/fiuba/algo3/vista/media/img/finDePartida.jpg";
     private String nick;
     private int movimientos;
     private RankingManager rankingManager;

@@ -33,11 +33,11 @@ public class Partida extends Application implements IVista {
     private final int margenIzq = 25;
     private final int margenInf = 25;
 
-    private final String rutaAuto = "file:src/main/java/edu/fiuba/algo3/Vista/media/img/auto.png";
-    private final String rutaMoto = "file:src/main/java/edu/fiuba/algo3/Vista/media/omg/moto.png";
-    private final String rutaCamioneta = "file:src/main/java/edu/fiuba/algo3/Vista/media/img/camioneta.png";
-    private final String rutaPiquete = "file:src/main/java/edu/fiuba/algo3/Vista/media/img/piquete.png";
-    private final String rutaControlPolicial = "file:src/main/java/edu/fiuba/algo3/Vista/media/img/controlpolicial.png";
+    private final String rutaAuto = "file:src/main/java/edu/fiuba/algo3/vista/media/img/auto.png";
+    private final String rutaMoto = "file:src/main/java/edu/fiuba/algo3/vista/media/omg/moto.png";
+    private final String rutaCamioneta = "file:src/main/java/edu/fiuba/algo3/vista/media/img/camioneta.png";
+    private final String rutaPiquete = "file:src/main/java/edu/fiuba/algo3/vista/media/img/piquete.png";
+    private final String rutaControlPolicial = "file:src/main/java/edu/fiuba/algo3/vista/media/img/controlpolicial.png";
     private final int tamCuadra = 50;
     private final int anchoCalle = 15;
 

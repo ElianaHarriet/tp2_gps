@@ -2,6 +2,7 @@ package edu.fiuba.algo3.vista;
 
 import edu.fiuba.algo3.controlador.*;
 import edu.fiuba.algo3.modelo.Ranking.RankingManager;
+import javafx.application.Application;
 import javafx.scene.*;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
@@ -10,8 +11,7 @@ import javafx.scene.text.*;
 import javafx.stage.Stage;
 import static edu.fiuba.algo3.vista.ElementManager.*;
 
-
-public class Inicio extends Pantalla {
+public class Inicio extends Application {
     private final int anchoVentana = 1050;
     private final int altoVentana = 525;
     private final int anchoBoton = 100;
@@ -19,7 +19,8 @@ public class Inicio extends Pantalla {
     private final String colorBoton = "#57643f";
     private final int yBoton = 300;
     private final Font fuenteBoton = Font.font("Impact", FontWeight.BOLD, 17);
-    private final String pathTitulo = "file:src/main/java/edu/fiuba/algo3/Vista/media/img/inicio.jpeg";
+    private final String pathTitulo = "file:src/main/java/edu/fiuba/algo3/vista/media/img/inicio.jpeg";
+    private final RankingManager rankingManager = new RankingManager("src/main/java/edu/fiuba/algo3/modelo/Ranking/ranking.json");
 
 
     public static void main(String[] args) {

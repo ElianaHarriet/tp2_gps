@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.Vista;
+package edu.fiuba.algo3.VistaControlador;
 
 import edu.fiuba.algo3.modelo.Ranking.RankingManager;
 import javafx.application.Application;

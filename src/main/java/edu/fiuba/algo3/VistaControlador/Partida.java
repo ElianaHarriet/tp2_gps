@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.Vista;
+package edu.fiuba.algo3.VistaControlador;
 //modelo
 import edu.fiuba.algo3.TeFaltaCarroError;
 import edu.fiuba.algo3.modelo.Constructor.ConstructorJuego;

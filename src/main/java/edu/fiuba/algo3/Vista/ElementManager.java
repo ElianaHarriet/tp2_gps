@@ -22,7 +22,7 @@ public class ElementManager {
     public static Button crearButton(String txt, int anchoBoton, int altoBoton, int x, int y, String color, Font font) {
         Button boton = new Button(txt);
         boton.setPrefSize(anchoBoton, altoBoton);
-        boton.setStyle("-fx-background-color: " + color + ";");
+        boton.setStyle("-fx-background-color: " + color + ";-fx-effect: dropshadow( one-pass-box , black , 8 , 0.0 , 2 , 0 );");
         boton.setFont(font);
         boton.setLayoutX(x);
         boton.setLayoutY(y);

@@ -103,34 +103,23 @@ public class Partida extends Application {
         fog = crearFog(jugador);
         pane.getChildren().add(fog);
 
+        String musicFile = "src/main/java/edu/fiuba/algo3/Vista/media/audio/piqueteSound.mp3";
+        Media sound = new Media(new File(musicFile).toURI().toString());
+        MediaPlayer mediaPlayer = new MediaPlayer(sound);
+        mediaPlayer.play();
+
         pane.setOnKeyPressed(e -> {
             if (e.getCode() == KeyCode.UP) {
                 jugador.moverseHacia(new Arriba());
-                String musicFile = "src/main/java/edu/fiuba/algo3/Vista/media/audio/piqueteSound.mp3";
-                Media sound = new Media(new File(musicFile).toURI().toString());
-                MediaPlayer mediaPlayer = new MediaPlayer(sound);
-                mediaPlayer.play();
             }
             if (e.getCode() == KeyCode.DOWN) {
                 jugador.moverseHacia(new Abajo());
-                String musicFile = "src/main/java/edu/fiuba/algo3/Vista/media/audio/piqueteSound.mp3";
-                Media sound = new Media(new File(musicFile).toURI().toString());
-                MediaPlayer mediaPlayer = new MediaPlayer(sound);
-                mediaPlayer.play();
             }
             if (e.getCode() == KeyCode.RIGHT) {
                 jugador.moverseHacia(new Derecha());
-                String musicFile = "src/main/java/edu/fiuba/algo3/Vista/media/audio/piqueteSound.mp3";
-                Media sound = new Media(new File(musicFile).toURI().toString());
-                MediaPlayer mediaPlayer = new MediaPlayer(sound);
-                mediaPlayer.play();
             }
             if (e.getCode() == KeyCode.LEFT) {
                 jugador.moverseHacia(new Izquierda());
-                String musicFile = "src/main/java/edu/fiuba/algo3/Vista/media/audio/piqueteSound.mp3";
-                Media sound = new Media(new File(musicFile).toURI().toString());
-                MediaPlayer mediaPlayer = new MediaPlayer(sound);
-                mediaPlayer.play();
             }
 
 

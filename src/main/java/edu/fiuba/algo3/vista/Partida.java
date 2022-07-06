@@ -47,7 +47,7 @@ public class Partida extends Application implements IVista {
 
     Stage stage;
     public Partida(String nombre,String vehiculo, RankingManager rankingManager) {
-        this.controlador = new Controlador(rankingManager);
+        this.controlador = new Controlador();
         this.controlador = controlador;
     }
 

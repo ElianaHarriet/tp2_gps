@@ -11,14 +11,12 @@ import edu.fiuba.algo3.vista.Ranking;
 
 public class Controlador {
 
-	int cantCuadras;
-	Jugador jugador;
-	Esquina[][] mapa;
-	RankingManager rankingManager;
-	IVista observador;
-	public Controlador(RankingManager rankingManager){
-		cantCuadras = 10;
-		this.rankingManager = rankingManager;
+	int cantCuadras = 10;
+	private Jugador jugador;
+	private Esquina[][] mapa;
+	private IVista observador;
+	private RankingManager rankingManager = new RankingManager("src/main/java/edu/fiuba/algo3/modelo/Ranking/ranking.json");
+	public Controlador() {
 
 	}
 

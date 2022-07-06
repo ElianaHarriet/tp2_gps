@@ -21,7 +21,7 @@ public class Inicio extends Pantalla {
     private final int yBoton = 300;
     private final Font fuenteBoton = Font.font("Impact", FontWeight.BOLD, 17);
     private final String pathTitulo = "file:src/main/java/edu/fiuba/algo3/Vista/media/img/inicio.jpeg";
-    private RankingManager rankingManager = new RankingManager("src/main/java/edu/fiuba/algo3/modelo/Ranking/ranking.json");
+
 
     public static void main(String[] args) {
         launch();

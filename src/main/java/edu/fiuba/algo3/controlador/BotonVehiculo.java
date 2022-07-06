@@ -23,7 +23,7 @@ public class BotonVehiculo {
             String nombre = input.map(Objects::toString).orElse("");
             if ((nombre.length() >= 4 && nombre.length() <= 15)) {
                 stage.close();
-                Partida partida = new Partida(nombre, vehiculo, rankingManager);
+                Partida partida = new Partida(nombre, vehiculo);
                 partida.start(stage);
             }
         });

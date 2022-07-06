@@ -46,9 +46,10 @@ public class Partida extends Application implements IVista {
     private Controlador controlador;
 
     Stage stage;
-    public Partida(String nombre,String vehiculo, RankingManager rankingManager) {
+    public Partida(String nombre,String vehiculo) {
         this.controlador = new Controlador();
-        this.controlador = controlador;
+        controlador.iniciarPartidaCon(nombre, vehiculo);
+
     }
 
     public void start(Stage stage){
@@ -348,5 +349,4 @@ public class Partida extends Application implements IVista {
     public static void main(String[] args) {
         launch();
     }
-}
 }

@@ -12,7 +12,6 @@ import static edu.fiuba.algo3.vista.ElementManager.*;
 
 
 public class Inicio extends Pantalla {
-
     private final int anchoVentana = 1050;
     private final int altoVentana = 525;
     private final int anchoBoton = 100;

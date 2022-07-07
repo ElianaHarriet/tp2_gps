@@ -6,26 +6,12 @@ public class ControlPolicial implements IObstaculo {
 
     private Detencion detencion;
 
-    public ControlPolicial(Detencion detencion) { // usado para las pruebas
+    public ControlPolicial(Detencion detencion) { // usado para las pruebas (para que no se comporte de forma random)
         this.detencion = detencion;
     }
 
     public ControlPolicial() { // usado en el juego
         this.detencion = null;
-    }
-
-    public int penalizar(Auto auto) {
-        this.detencion = detencion != null ? detencion : Detencion.obtenerDetencion(auto);
-        int penalizacion = this.detencion.penalizar(auto);
-        this.detencion = null;
-        return penalizacion;
-    }
-
-    public int penalizar(Moto moto) {
-        this.detencion = detencion != null ? detencion : Detencion.obtenerDetencion(moto);
-        int penalizacion = this.detencion.penalizar(moto); //Ver de eliminar el codigo repetido
-        this.detencion = null;
-        return penalizacion;
     }
 
     @Override
@@ -43,12 +29,24 @@ public class ControlPolicial implements IObstaculo {
         return destino;
     }
 
-    public int penalizar(Camioneta camioneta) {
-        this.detencion = detencion != null ? detencion : Detencion.obtenerDetencion(camioneta);
-        int penalizacion = this.detencion.penalizar(camioneta); //Ver de eliminar el codigo repetido
+    public int penalizar(Auto auto) {
+        this.detencion = detencion != null ? detencion : Detencion.obtenerDetencion(auto);
+        int penalizacion = this.detencion.penalizar(auto);
         this.detencion = null;
         return penalizacion;
     }
 
-    public String tipo() {return "control";}
+    public int penalizar(Moto moto) {
+        this.detencion = detencion != null ? detencion : Detencion.obtenerDetencion(moto);
+        int penalizacion = this.detencion.penalizar(moto);
+        this.detencion = null;
+        return penalizacion;
+    }
+    public int penalizar(Camioneta camioneta) {
+        this.detencion = detencion != null ? detencion : Detencion.obtenerDetencion(camioneta);
+        int penalizacion = this.detencion.penalizar(camioneta);
+        this.detencion = null;
+        return penalizacion;
+    }
+
 }

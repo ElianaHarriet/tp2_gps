@@ -16,7 +16,7 @@ public class Camioneta implements IVehiculo {
 
     public int atravesarObstaculo(Pozo obstaculo) {
         this.pozos++;
-        return this.pozos % 3 == 0 ? 2 : 0; // Ver si se puede hacer un refactor para no usar if
+        return this.pozos % 3 == 0 ? 2 : 0;
     }
 
     public int atravesarObstaculo(IObstaculo obstaculo) {

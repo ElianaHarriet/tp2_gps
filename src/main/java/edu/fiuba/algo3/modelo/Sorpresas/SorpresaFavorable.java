@@ -23,6 +23,5 @@ public class SorpresaFavorable implements ISorpresa {
         return camioneta;
     }
 
-    public String tipo() {return "favorable";}
 
 }

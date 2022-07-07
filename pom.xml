@@ -21,6 +21,13 @@
             <artifactId>javafx-controls</artifactId>
             <version>${javafx-version}</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/org.openjfx/javafx.media -->
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-media</artifactId>
+            <version>15</version>
+            <type>pom</type>
+        </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
@@ -96,6 +103,8 @@
                 <version>3.8.0</version>
                 <configuration>
                     <release>11</release>
+                    <source>14</source>
+                    <target>14</target>
                 </configuration>
             </plugin>
             <plugin>

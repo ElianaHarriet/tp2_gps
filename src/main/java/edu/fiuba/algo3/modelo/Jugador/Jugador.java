@@ -33,32 +33,10 @@ public class Jugador {
         this.movimientos = movimientos;
     }
 
-
-
     public void moverseHacia(IDireccion direccion) {
         direccion.moverseHacia(this, this.esquina);
-        //this.moverseHacia(this, direccion);
         movimientos++;
     }
-    //public void moverseArriba() { // mover unico -> modelar direccion
-    //    this.esquina.moverseArriba(this);
-    //    movimientos++;
-    //}
-//
-    //public void moverseAbajo() {
-    //    this.esquina.moverseAbajo(this);
-    //    movimientos++;
-    //}
-//
-    //public void moverseIzquierda() {
-    //    this.esquina.moverseIzquierda(this);
-    //    movimientos++;
-    //}
-//
-    //public void moverseDerecha() {
-    //    this.esquina.moverseDerecha(this);
-    //    movimientos++;
-    //}
 
     public int getMovimientos() {
         return movimientos;
@@ -74,5 +52,9 @@ public class Jugador {
 
     public int getY() {
         return this.esquina.getY();
+    }
+
+    public IVehiculo getVehiculo(){
+        return this.vehiculo;
     }
 }

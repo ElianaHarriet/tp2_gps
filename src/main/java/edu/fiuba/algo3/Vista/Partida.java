@@ -25,6 +25,9 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 public class Partida extends Application {
         //pasar a mayusculas que son constantes
     private final int altoTablero = 25;
@@ -48,14 +51,18 @@ public class Partida extends Application {
     private Shape fog;
     private Controlador controlador;
 
-    public Partida(Controlador controlador, String nombre, String vehiculo) {
+    public Partida(Controlador controlador/*, String nombre, String vehiculo*/) {
         this.controlador = controlador;
-        controlador.iniciarPartidaCon(nombre, vehiculo);
+        /*ArrayList<String> jug = new ArrayList<>();
+        jug.add(nombre);
+        ArrayList<String> veh = new ArrayList<>();
+        veh.add(vehiculo);
+        controlador.iniciarPartidaCon(jug, veh);*/
     }
 
     public void start(Stage stage){
         Esquina[][] mapa = controlador.getMapa();
-        Jugador jugador = controlador.getJugador();
+        Jugador jugador = controlador.getJugadorActual();
 
         Group elementos = procesarTablero(mapa, cantCuadras);
 
@@ -66,9 +73,15 @@ public class Partida extends Application {
         Text movimientosText = new Text(730, 620, Integer.toString(jugador.getMovimientos()));
         movimientosText.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
         movimientosText.setFill(Color.WHITE);
-
-
         elementos.getChildren().add(movimientosText);
+
+        Text nickJugador = new Text(100, 60, jugador.getNick());
+        nickJugador.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
+        nickJugador.setFill(Color.WHITE);
+        elementos.getChildren().add(nickJugador);
+
+
+
         ImageView imagenVehiculo = setImagenVehiculo(jugador);
 
         Pane pane = new Pane();
@@ -96,11 +109,11 @@ public class Partida extends Application {
             if (e.getCode() == KeyCode.LEFT) {
                 controlador.moverJugadorHacia(new Izquierda());
             }
-             if (controlador.terminoElJuego()){
-                 stage.close();
-                 FinDePartida fin = new FinDePartida(controlador.getNick(), controlador);
-                 fin.start(stage);
-             }
+            if (controlador.terminoElJuego()){
+                stage.close();
+                FinDePartida fin = new FinDePartida(controlador.getNick(), controlador);
+                fin.start(stage);
+            }
             pane.getChildren().remove(fog);
             this.actualizarFog(jugador);
             pane.getChildren().add(fog);
@@ -115,7 +128,6 @@ public class Partida extends Application {
         Menu opciones = new Menu("opciones");
         MenuItem opcion1 = new MenuItem("opcion1");
         opciones.getItems().add(opcion1);
-        Menu uwu = new Menu("uwu");
 
         Menu sonido = new Menu("sonido");
         CheckMenuItem musica = new CheckMenuItem("Musica");
@@ -127,7 +139,7 @@ public class Partida extends Application {
 
         ayuda.getItems().add(porFavor);
 
-        MenuBar bar = new MenuBar(opciones,uwu,sonido,ayuda);
+        MenuBar bar = new MenuBar(opciones,sonido,ayuda);
 
 
         elementos.getChildren().add(bar);

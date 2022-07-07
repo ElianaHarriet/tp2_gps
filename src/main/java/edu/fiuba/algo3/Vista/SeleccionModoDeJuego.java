@@ -1,9 +1,9 @@
 package edu.fiuba.algo3.Vista;
 
-import edu.fiuba.algo3.controlador.BotonPantalla;
 import edu.fiuba.algo3.controlador.Controlador;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.Pane;
@@ -11,9 +11,9 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
-import javax.security.auth.callback.TextInputCallback;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import static edu.fiuba.algo3.Vista.ElementManager.disenarBoton;
 
@@ -24,8 +24,8 @@ public class SeleccionModoDeJuego extends Pantalla {
     private final int ANCHOBOTON = 350;
     private final int ALTOBOTON = 75;
     private final Font fuenteBoton = Font.font("Impact", FontWeight.BOLD, 17);
-    private final int yBOTONSINGLE = 250;
-    private final int yBOTONMULTI = 650;
+    private final int yBOTONSINGLE = 150;
+    private final int yBOTONMULTI = 250;
 
     private final Controlador CONTROLADOR;
     public SeleccionModoDeJuego(Controlador controlador) {
@@ -38,12 +38,18 @@ public class SeleccionModoDeJuego extends Pantalla {
         Pane panel = new Pane();
         elementos.getChildren().add(panel);
 
-        int cantJugadores = 1;
-
-        //boton singleplayer
-        Button botonSingleplayer = new Button();
-        disenarBoton(botonSingleplayer, "Jugar solo", ANCHOBOTON, ALTOBOTON, (anchoVentana - ANCHOBOTON) / 2, yBOTONSINGLE, "#550000", fuenteBoton);
-        elementos.getChildren().add(botonSingleplayer);
+//        //boton singleplayer
+//        Button botonSingleplayer = new Button();
+//        disenarBoton(botonSingleplayer, "Jugar solo", ANCHOBOTON, ALTOBOTON, (anchoVentana - ANCHOBOTON) / 2, yBOTONSINGLE, "#550000", fuenteBoton);
+//        elementos.getChildren().add(botonSingleplayer);
+//
+//        botonSingleplayer.setOnAction(e -> {
+//            Pantalla pantallaSelecion = new SeleccionVehiculo(CONTROLADOR, 1);
+//            stage.close();
+//            pantallaSelecion.start(stage);
+//        });
+//
+//
 
         //boton multiplayer
         Button botonMultiplayer = new Button();
@@ -52,29 +58,37 @@ public class SeleccionModoDeJuego extends Pantalla {
 
         botonMultiplayer.setOnAction(e -> {
             TextInputDialog dialog = new TextInputDialog("2");
-            dialog.setHeaderText("Ingrese la cantidad de desafortunados que deben escapar de Lanus");
+            dialog.setHeaderText("Ingrese la cantidad de desafortunados que deben escapar de Lanús");
             Optional<String> input = dialog.showAndWait();
             String cantJugadoresString = input.map(Objects::toString).orElse("");
             if (!validarCantJugadores(cantJugadoresString)) {
-                //printear dialogo que diga "dale flaco te pedi un numero no es tan dificil"
-                //continue
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setHeaderText(null);
+                alert.setTitle("Error");
+                alert.setContentText("Ingrese algo válido");
+                alert.showAndWait();
             }
-
-            cantJugadores = Integer.parseInt(cantJugadoresString);
-
-
-        });
-
-        for (int i = 0; i < cantJugadores; i++) {
-            Pantalla pantallaSelecion = SeleccionVehiculo(CONTROLADOR);
+            int cantJugadores = Integer.parseInt(cantJugadoresString);
+//            for (int i = 0; i <= cantJugadores; i++) {
+//                Pantalla pantallaSelecion = new SeleccionVehiculo(CONTROLADOR, cantJugadores);
+//                stage.close();
+//                pantallaSelecion.start(stage);
+//            }
+            Pantalla pantallaSelecion = new SeleccionVehiculo(CONTROLADOR, cantJugadores);
             stage.close();
             pantallaSelecion.start(stage);
-        }
+        });
+
+//        for (int i = 0; i < cantJugadores.get(); i++) {
+//            Pantalla pantallaSelecion = new SeleccionVehiculo(CONTROLADOR);
+//            stage.close();
+//            pantallaSelecion.start(stage);
+//        }
 
         //////////////////////////////////
-        Partida partida = new Partida(CONTROLADOR, nick, vehiculo);
+//        Partida partida = new Partida(CONTROLADOR, nick, vehiculo);
         /////////////////////////////////
-        partida.start(stage);
+//        partida.start(stage);
 
         Scene scene = new Scene(elementos, anchoVentana, altoVentana);
         stage.setResizable(false);

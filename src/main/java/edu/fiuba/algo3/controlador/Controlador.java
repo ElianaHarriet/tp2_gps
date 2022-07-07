@@ -1,5 +1,8 @@
 package edu.fiuba.algo3.controlador;
 
+import edu.fiuba.algo3.Vista.Pantalla;
+import edu.fiuba.algo3.Vista.Partida;
+import edu.fiuba.algo3.Vista.SeleccionVehiculo;
 import edu.fiuba.algo3.modelo.Constructor.*;
 import edu.fiuba.algo3.modelo.Jugador.*;
 import edu.fiuba.algo3.modelo.Ranking.RankingManager;
@@ -32,23 +35,22 @@ public class Controlador {
 	}
 
 	public void iniciarPartida(){
-		iniciarPartidaCon(this.nicks, this.vehiculos, this.cantJugadores);
+		iniciarPartidaCon(this.nicks, this.vehiculos);
 	}
 	//public void iniciarPartidaCon(ArrayList<String> nicks, String[] vehiculos, int cantidadDeJugadores ) {
-	public void iniciarPartidaCon(ArrayList<String> nicks, ArrayList<String> vehiculos, int cantJugadores ) {
+	public void iniciarPartidaCon(ArrayList<String> nicks, ArrayList<String> vehiculos ) {
 		this.turno = 0;
-		this.cantJugadores = cantJugadores;
 		ConstructorJuego cons = new ConstructorJuego();
 		ConstructorVehiculo cVehiculo = new ConstructorVehiculo();
 
 		ArrayList<IVehiculo> vehiculosJugadores = new ArrayList<>();
 
-		for (int i = 0; i < cantJugadores; i++) {
+		for (int i = 0; i < nicks.size(); i++) {
 			cVehiculo.crearVehiculo(vehiculos.get(i));
 			vehiculosJugadores.add(cVehiculo.getResultado());
 		}
 
-		cons.crearJuego(this.cantCuadras, nicks, vehiculosJugadores, cantJugadores);
+		cons.crearJuego(this.cantCuadras, nicks, vehiculosJugadores, nicks.size());
 		this.jugadores = cons.getResultado();
 		this.mapa = cons.getTablero();
 	}
@@ -59,7 +61,7 @@ public class Controlador {
 
 
 	private void pasarTurno(){
-		this.turno = (this.turno+1)%cantJugadores;
+		this.turno = (this.turno + 1) % this.jugadores.size();
 	}
 
 	public void moverJugadorHacia(IDireccion direccion) {

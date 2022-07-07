@@ -11,18 +11,6 @@ import javafx.stage.Stage;
 
 import static edu.fiuba.algo3.Vista.ElementManager.*;
 
-/*
- * Falta:
- * Revisar codigo por las dudas
- * Ejecutable <- <- <- <- <- <- <- <- <- <- <- <- <- <- <- <- toy leyendo eso oki gracias :D
- * Informe + muchos demasiados diagramas
- *  Diagramas de clases - LISTO
- *  Diagramas de secuencias - Hay 1 para movimiento, capaz se podria hacer uno para Vista
- *  Diagrama de paquetes - en progreso
- *  Diagrama de estados - alguien busque cuando pueda
- *
- * Resolver problemas de build para integrar con master
- */
 
 
 

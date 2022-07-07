@@ -11,9 +11,6 @@ import javafx.stage.Stage;
 
 import static edu.fiuba.algo3.Vista.ElementManager.*;
 
-
-
-
 public class Inicio extends Application {
     private final int anchoVentana = 1050;
     private final int altoVentana = 525;

@@ -38,8 +38,10 @@ public class SeleccionModoDeJuego extends Pantalla {
         Pane panel = new Pane();
         elementos.getChildren().add(panel);
 
+        int cantJugadores = 1;
+
         //boton singleplayer
-        Button botonSingleplayer = (new BotonPantalla(stage, new SeleccionVehiculo(CONTROLADOR))).getBoton();
+        Button botonSingleplayer = new Button();
         disenarBoton(botonSingleplayer, "Jugar solo", ANCHOBOTON, ALTOBOTON, (anchoVentana - ANCHOBOTON) / 2, yBOTONSINGLE, "#550000", fuenteBoton);
         elementos.getChildren().add(botonSingleplayer);
 
@@ -49,7 +51,7 @@ public class SeleccionModoDeJuego extends Pantalla {
         elementos.getChildren().add(botonMultiplayer);
 
         botonMultiplayer.setOnAction(e -> {
-            TextInputDialog dialog = new TextInputDialog("Chayanne");
+            TextInputDialog dialog = new TextInputDialog("2");
             dialog.setHeaderText("Ingrese la cantidad de desafortunados que deben escapar de Lanus");
             Optional<String> input = dialog.showAndWait();
             String cantJugadoresString = input.map(Objects::toString).orElse("");
@@ -58,20 +60,21 @@ public class SeleccionModoDeJuego extends Pantalla {
                 //continue
             }
 
-            int cantJugadores = Integer.parseInt(cantJugadoresString);
+            cantJugadores = Integer.parseInt(cantJugadoresString);
 
-
-            for (int i = 0; i < cantJugadores; i++) {
-                Pantalla pantallaSelecion = SeleccionVehiculo(CONTROLADOR)
-                stage.close();
-                pantallaSelecion.start(stage);
-            }
-            partida.start(stage);
 
         });
 
+        for (int i = 0; i < cantJugadores; i++) {
+            Pantalla pantallaSelecion = SeleccionVehiculo(CONTROLADOR);
+            stage.close();
+            pantallaSelecion.start(stage);
+        }
 
-
+        //////////////////////////////////
+        Partida partida = new Partida(CONTROLADOR, nick, vehiculo);
+        /////////////////////////////////
+        partida.start(stage);
 
         Scene scene = new Scene(elementos, anchoVentana, altoVentana);
         stage.setResizable(false);

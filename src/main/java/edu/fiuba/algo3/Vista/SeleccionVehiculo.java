@@ -21,7 +21,6 @@ public class SeleccionVehiculo extends Pantalla {
     private final int yBoton = 450;
     private Controlador controlador;
     public SeleccionVehiculo(Controlador controlador) {
-
         this.controlador = controlador;
     }
 

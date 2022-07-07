@@ -12,7 +12,7 @@ Trabajo Práctico número 2 de la materia Algoritmos y Programación III de FIUB
 * **Facundo Aguirre Argerich (107539)** - [bonshot](https://github.com/bonshot)
 * **Harriet Eliana (107205)** - [ElianaHarriet](https://github.com/ElianaHarriet)
 
-  Corrector: **{Corrector}**
+  Corrector: **Joaquin Gomez**
 
 ## Aplicación
 

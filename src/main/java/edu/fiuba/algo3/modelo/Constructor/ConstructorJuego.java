@@ -14,7 +14,6 @@ public class ConstructorJuego implements IConstructor{
     private ConstructorTablero cTablero;
 
     public ConstructorJuego() {
-        //hacer en estas clases un error para cuando se pide el elemento antes de que se crees
         this.cJugador = new ConstructorJugador();
         this.cTablero = new ConstructorTablero();
     }

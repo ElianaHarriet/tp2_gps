@@ -2,7 +2,6 @@ package edu.fiuba.algo3.Vista;
 
 import edu.fiuba.algo3.controlador.BotonPantalla;
 import edu.fiuba.algo3.controlador.Controlador;
-import edu.fiuba.algo3.modelo.Ranking.RankingManager;
 import javafx.application.Application;
 import javafx.scene.*;
 import javafx.scene.control.Button;

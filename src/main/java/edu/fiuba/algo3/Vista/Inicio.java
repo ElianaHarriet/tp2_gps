@@ -24,21 +24,7 @@ import static edu.fiuba.algo3.Vista.ElementManager.*;
  * Resolver problemas de build para integrar con master
  */
 
-/*
 
-oki :)
-Para el ejecutable: --> Eli cuando puedas probalo
-1. Compilar:
-     javac -d . Inicio.java
-
-2. Manifest
-    crear un archivo "manifest.mf" que adentro solo tenga una
-    linea que diga "Main-class: start.Inicio"
-
-3. Crear el jar
-    jar -cmf manifest.mf NOMBRE_EJECUTABLE.jar NOMBRE_CARPETA_DONDE_ESTA_TODO
-    no se si la carpeta deberia ser tp2_gps o src, supongo que src pero hay que probar
-* */
 
 public class Inicio extends Application {
     private final int anchoVentana = 1050;

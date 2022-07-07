@@ -16,7 +16,6 @@ import javafx.stage.Stage;
 
 import java.util.Objects;
 import java.util.Optional;
-import java.util.concurrent.atomic.AtomicInteger;
 
 import static edu.fiuba.algo3.Vista.ElementManager.crearImageView;
 import static edu.fiuba.algo3.Vista.ElementManager.disenarBoton;
@@ -100,16 +99,6 @@ public class SeleccionModoDeJuego extends Pantalla {
             }
         });
 
-//        for (int i = 0; i < cantJugadores.get(); i++) {
-//            Pantalla pantallaSelecion = new SeleccionVehiculo(CONTROLADOR);
-//            stage.close();
-//            pantallaSelecion.start(stage);
-//        }
-
-        //////////////////////////////////
-//        Partida partida = new Partida(CONTROLADOR, nick, vehiculo);
-        /////////////////////////////////
-//        partida.start(stage);
 
         Scene scene = new Scene(elementos, anchoVentana, altoVentana);
         stage.setResizable(false);

@@ -3,7 +3,6 @@ package edu.fiuba.algo3.modelo.Constructor;
 import edu.fiuba.algo3.modelo.Mapa.*;
 import edu.fiuba.algo3.modelo.Obstaculos.*;
 import edu.fiuba.algo3.modelo.Sorpresas.*;
-import edu.fiuba.algo3.modelo.Vehiculos.IVehiculo;
 
 import java.util.Random;
 
@@ -14,7 +13,6 @@ public class ConstructorTablero implements IConstructor {
     private Random random;
     public ConstructorTablero() {
     }
-    //  BORRAR Y HACER BIEN ESTO
     public Esquina[][] getMapa() {
         return this.mapa;
     }
@@ -41,7 +39,7 @@ public class ConstructorTablero implements IConstructor {
         float random = this.random.nextFloat();
         float tope0 = 0.125f;
         float tope1 = 2 * tope0 / 3;
-        float tope2 = tope0 / 3;  //porque pintó
+        float tope2 = tope0 / 3;
         // (proba de encontrar una sorpresa no neutra = 0.125)
         // SorpresaFavorable, SorpresaDesfavorable y SorpresaCambioVehiculo son equiprobables
 
@@ -56,7 +54,7 @@ public class ConstructorTablero implements IConstructor {
         float random = this.random.nextFloat();
         float tope0 = 0.125f;
         float tope1 = 2 * tope0 / 3;
-        float tope2 = tope0 / 3;  //porque pintó
+        float tope2 = tope0 / 3;
 
         return random > tope0 ? new ObstaculoNulo() :
                 random > tope1 ? new Piquete() :

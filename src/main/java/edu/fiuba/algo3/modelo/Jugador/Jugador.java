@@ -1,6 +1,5 @@
 package edu.fiuba.algo3.modelo.Jugador;
 
-import edu.fiuba.algo3.TeFaltaCalleError;
 import edu.fiuba.algo3.modelo.Mapa.*;
 import edu.fiuba.algo3.modelo.Sorpresas.*;
 import edu.fiuba.algo3.modelo.Obstaculos.IObstaculo;

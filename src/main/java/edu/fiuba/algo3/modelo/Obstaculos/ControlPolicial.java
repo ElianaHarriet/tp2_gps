@@ -38,17 +38,15 @@ public class ControlPolicial implements IObstaculo {
 
     public int penalizar(Moto moto) {
         this.detencion = detencion != null ? detencion : Detencion.obtenerDetencion(moto);
-        int penalizacion = this.detencion.penalizar(moto); //Ver de eliminar el codigo repetido
+        int penalizacion = this.detencion.penalizar(moto);
         this.detencion = null;
         return penalizacion;
     }
     public int penalizar(Camioneta camioneta) {
         this.detencion = detencion != null ? detencion : Detencion.obtenerDetencion(camioneta);
-        int penalizacion = this.detencion.penalizar(camioneta); //Ver de eliminar el codigo repetido
+        int penalizacion = this.detencion.penalizar(camioneta);
         this.detencion = null;
         return penalizacion;
     }
 
-
-    public String tipo() {return "control";}
 }

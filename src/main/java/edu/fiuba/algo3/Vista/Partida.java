@@ -16,8 +16,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
@@ -26,7 +24,6 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 
 import java.io.File;
 import java.util.concurrent.atomic.AtomicReference;
@@ -213,7 +210,7 @@ public class Partida extends Application {
         calles.setFill(Color.GRAY);
         grupo.getChildren().add(calles);
 
-        //este forfor imprime las cuadras, cada cuadra empieza en la posicion indicada por la esquina y va para abajo a la derecha
+        //este for imprime las cuadras, cada cuadra empieza en la posicion indicada por la esquina y va para abajo a la derecha
         //tambien guarda las calles horizontales en un array con su posicion y tamaño y lo mismo con las verticales
         for(int i = 0; i < cantCuadras; i++) {
             for(int j = 0; j < cantCuadras; j++) {
@@ -246,7 +243,6 @@ public class Partida extends Application {
 
 
     private Group agregarElementos(Group grupo, Esquina esq, int posX, int posY, Calle calle){
-        Color colorNulo = new Color(1,1,1,0); //color que usamos para las sorpresas y obstaculos nulos
 
         if (calle == null) return grupo;
         ISorpresa sorpresa = calle.getSorpresa();
@@ -362,11 +358,6 @@ public class Partida extends Application {
 
     }
 
-    private void actualizarVista(Pane pane,Shape anterior, Jugador judador){
-        pane.getChildren().remove(anterior);
-        Shape nueva = crearFog(judador);
-        pane.getChildren().add(nueva);
-    }
     private Shape crearFog(Jugador jugador){
         Rectangle rectangulo = new Rectangle(margenIzq,margenInf, altoTablero*25 + margenInf,altoTablero*25 + margenInf);
         Circle circulo = new Circle((jugador.getX()*(tamCuadra+anchoCalle))+margenIzq ,(jugador.getY()*(tamCuadra + anchoCalle)) + margenInf, 2*(tamCuadra + anchoCalle ));

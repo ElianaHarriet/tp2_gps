@@ -10,7 +10,4 @@ public class EsquinaDestino extends Esquina {
         return true;
     }
 
-    public void moverse() {
-
-    }
 }

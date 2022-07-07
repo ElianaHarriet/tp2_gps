@@ -19,8 +19,6 @@ import static edu.fiuba.algo3.Vista.ElementManager.*;
 
 public class Ayuda extends Pantalla {
 
-    private final int anchoVentana = 1050;
-    private final int altoVentana = 525;
     private final int anchoBoton = 35;
     private final int altoBoton = 20;
     private final String pathFondo = "file:src/main/java/edu/fiuba/algo3/Vista/media/img/Fondos/ayuda.jpg";

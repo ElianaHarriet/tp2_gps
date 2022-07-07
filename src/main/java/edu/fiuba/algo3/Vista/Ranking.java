@@ -2,7 +2,6 @@ package edu.fiuba.algo3.Vista;
 
 import edu.fiuba.algo3.controlador.BotonPantalla;
 import edu.fiuba.algo3.controlador.Controlador;
-import edu.fiuba.algo3.modelo.Ranking.RankingManager;
 import javafx.scene.*;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
@@ -22,9 +21,9 @@ public class Ranking extends Pantalla {
     private final String pathFondo = "file:src/main/java/edu/fiuba/algo3/Vista/media/img/Fondos/finDePartida.jpg";
     private final String colorTexto = "#f2d8a5";
     private final String colorBoton = "#57633c";
-    //private RankingManager rankingManager = new RankingManager("src/main/java/edu/fiuba/algo3/modelo/Ranking/ranking.json");
+
     private Controlador controlador;
-    //@Override
+
     public Ranking(Controlador controlador){
         this.controlador = controlador;
     }

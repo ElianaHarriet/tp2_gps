@@ -2,9 +2,8 @@ package edu.fiuba.algo3.modelo.Mapa;
 
 import edu.fiuba.algo3.TeFaltaCalleError;
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
-import edu.fiuba.algo3.modelo.Mapa.Calle;
 
-public abstract class Esquina { //dividir esquina normal de esquina destino
+public abstract class Esquina {
 
     private int posX;
     private int posY;

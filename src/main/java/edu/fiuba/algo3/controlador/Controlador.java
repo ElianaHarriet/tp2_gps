@@ -1,8 +1,5 @@
 package edu.fiuba.algo3.controlador;
 
-import edu.fiuba.algo3.Vista.Pantalla;
-import edu.fiuba.algo3.Vista.Partida;
-import edu.fiuba.algo3.Vista.SeleccionVehiculo;
 import edu.fiuba.algo3.modelo.Constructor.*;
 import edu.fiuba.algo3.modelo.Jugador.*;
 import edu.fiuba.algo3.modelo.Obstaculos.ControlPolicial;
@@ -50,7 +47,7 @@ public class Controlador {
 	public void iniciarPartida(){
 		iniciarPartidaCon(this.nicks, this.vehiculos);
 	}
-	//public void iniciarPartidaCon(ArrayList<String> nicks, String[] vehiculos, int cantidadDeJugadores ) {
+
 	public void iniciarPartidaCon(ArrayList<String> nicks, ArrayList<String> vehiculos ) {
 		this.turno = 0;
 		ConstructorJuego cons = new ConstructorJuego();
@@ -75,17 +72,6 @@ public class Controlador {
 		this.turno = (this.turno + 1) % this.jugadores.size();
 	}
 
-
-/*
-	//Esquina esquinaI = jugadores.get(turno);
-	public void moverJugadorHacia(IDireccion direccion) {
-		getJugadorActual().moverseHacia(direccion);
-		if (getJugadorActual().estaEnDestino()) {
-			rankingManager.guardarNuevaPuntuacion(getJugadorActual().getNick(), getJugadorActual().getMovimientos());
-		}
-		pasarTurno();
-	}
-	*/
  private Calle obtenerCalleAtravesada(int xI, int yI, int xF, int yF) {
         if (xI == xF){
 	          if (yI == yF){

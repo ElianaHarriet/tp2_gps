@@ -12,11 +12,11 @@ import static edu.fiuba.algo3.Vista.ElementManager.*;
 
 public class SeleccionVehiculo extends Pantalla {
 
-    private final int anchoVentana = 1005;
+    private final int anchoVentana = 1050;
     private final int altoVentana = 525;
     private final int anchoBoton = 110;
     private final int altoBoton = 50;
-    private final String pathTitulo = "file:src/main/java/edu/fiuba/algo3/Vista/media/img/seleccionVehiculos.jpeg";
+    private final String pathTitulo = "file:src/main/java/edu/fiuba/algo3/Vista/media/img/Fondos/seleccionVehiculos.jpeg";
     private final Font fuenteBoton = Font.font("Impact", FontWeight.BOLD, 17);
     private final int yBoton = 450;
     private final int cantJugadores;

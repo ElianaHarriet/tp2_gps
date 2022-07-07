@@ -11,12 +11,16 @@ public class CamionetaTest {
 
     //Obstaculos
     @Test
-    public void Test01Una4x4PasaPorUnPozoYSePenalizaCon2Movimientos(){
+    public void Test01Una4x4PasaPorTresPozosYSePenalizaCon2Movimientos(){
         int movimientosPenalizacionEsperados = 2;
         Camioneta camio = new Camioneta();
-        Pozo pozo = new Pozo();
+        Pozo pozo1 = new Pozo();
+        Pozo pozo2 = new Pozo();
+        Pozo pozo3 = new Pozo();
 
-        int movimientosPenalizacionEfectuados = camio.atravesarObstaculo(pozo);
+        camio.atravesarObstaculo(pozo1);
+        camio.atravesarObstaculo(pozo2);
+        int movimientosPenalizacionEfectuados = camio.atravesarObstaculo(pozo3);
         assertEquals(movimientosPenalizacionEsperados, movimientosPenalizacionEfectuados);
     }
 

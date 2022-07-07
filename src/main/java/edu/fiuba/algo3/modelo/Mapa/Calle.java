@@ -13,6 +13,8 @@ public class Calle {
 
     private final IObstaculo obstaculo;
 
+
+
     public Calle(Esquina esquina1, Esquina esquina2, ISorpresa sorpresa, IObstaculo obstaculo) {
         this.esquina1 = esquina1;
         this.esquina2 = esquina2;

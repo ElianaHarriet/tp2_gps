@@ -58,12 +58,13 @@ public class Controlador {
 	public Jugador getJugadorActual(){
 		return this.jugadores.get(this.turno);
 	}
-
-
 	private void pasarTurno(){
 		this.turno = (this.turno + 1) % this.jugadores.size();
 	}
 
+
+
+	//Esquina esquinaI = jugadores.get(turno);
 	public void moverJugadorHacia(IDireccion direccion) {
 		getJugadorActual().moverseHacia(direccion);
 		if (getJugadorActual().estaEnDestino()) {
@@ -71,6 +72,43 @@ public class Controlador {
 		}
 		pasarTurno();
 	}
+ //private Calle obtenerAtravesados(int xI, int yI, int xF, int yF) {
+ //       if (xI == xF){
+ //          if (yI == yF){
+//			return new Calle(this.mapa[xI][yI], this.mapa[xI][yI], new obstaculoNulo(), new sorpresaNeutra());
+ //          }else if(yI > yF){
+//				return this.mapa[xF][yF].getSur();
+//		   } else {
+ //				return this.mapa[xI][yI].getSur();
+//		   }
+//
+//       } else {
+//       	if (xI < xF) {
+//       		return this.mapa[xI][yI].getEste();
+//       	} else {
+//				return this.mapa[xF][yF].getEste();
+//       	}
+//       }
+//
+// }
+//
+//
+// public ArrayList<Object> moverJugadorHacia(IDireccion direccion) {
+//    int xI = jugadores.get(turno).getX();
+//    int yI = jugadores.get(turno).getY();
+//
+//    getJugadorActual().moverseHacia(direccion);
+//
+//    int xF = jugadores.get(turno).getX();
+//    int yF = jugadores.get(turno),getY();
+//    if (getJugadorActual().estaEnDestino()) {
+//       rankingManager.guardarNuevaPuntuacion(getJugadorActual().getNick(), getJugadorActual().getMovimientos());
+//    }
+//
+//    calle resultado =  obtenerCalleAtrave(xI, yI, xF, yF);
+//    pasarTurno();
+//    return resultado;
+// }
 
 
 	public Esquina[][] getMapa() {

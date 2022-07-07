@@ -4,7 +4,6 @@ import edu.fiuba.algo3.TeFaltaCarroError;
 import edu.fiuba.algo3.controlador.*;
 import edu.fiuba.algo3.modelo.Jugador.Jugador;
 import edu.fiuba.algo3.modelo.Mapa.*;
-import edu.fiuba.algo3.modelo.Ranking.RankingManager;
 import edu.fiuba.algo3.modelo.Sorpresas.*;
 import edu.fiuba.algo3.modelo.Obstaculos.*;
 import edu.fiuba.algo3.modelo.Vehiculos.*;
@@ -25,8 +24,9 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicReference;
+
+import static edu.fiuba.algo3.Vista.ElementManager.crearImageView;
 
 public class Partida extends Application {
         //pasar a mayusculas que son constantes
@@ -36,14 +36,15 @@ public class Partida extends Application {
     private final int margenIzq = 25;
     private final int margenInf = 25;
 
-    private final String rutaAuto = "file:src/main/java/edu/fiuba/algo3/Vista/media/img/auto.png";
-    private final String rutaMoto = "file:src/main/java/edu/fiuba/algo3/Vista/media/img/moto.png";
-    private final String rutaCamioneta = "file:src/main/java/edu/fiuba/algo3/Vista/media/img/camioneta.png";
-    private final String rutaPiquete = "file:src/main/java/edu/fiuba/algo3/Vista/media/img/piquete.png";
-    private final String rutaControlPolicial = "file:src/main/java/edu/fiuba/algo3/Vista/media/img/controlpolicial.png";
-    private final String rutaPozo = "file:src/main/java/edu/fiuba/algo3/Vista/media/img/pozo.png";
-    private final String rutaSorpresa = "file:src/main/java/edu/fiuba/algo3/Vista/media/img/sorpresa.png";
-    private final String rutaMeta = "file:src/main/java/edu/fiuba/algo3/Vista/media/img/meta.png";
+    private final String rutaAuto = "file:src/main/java/edu/fiuba/algo3/Vista/media/img/Vehiculos/auto.png";
+    private final String rutaMoto = "file:src/main/java/edu/fiuba/algo3/Vista/media/img/Vehiculos/moto.png";
+    private final String rutaCamioneta = "file:src/main/java/edu/fiuba/algo3/Vista/media/img/Vehiculos/camioneta.png";
+    private final String rutaPiquete = "file:src/main/java/edu/fiuba/algo3/Vista/media/img/Mapa/piquete.png";
+    private final String rutaControlPolicial = "file:src/main/java/edu/fiuba/algo3/Vista/media/img/Mapa/controlpolicial.png";
+    private final String rutaPozo = "file:src/main/java/edu/fiuba/algo3/Vista/media/img/Mapa/pozo.png";
+    private final String rutaSorpresa = "file:src/main/java/edu/fiuba/algo3/Vista/media/img/Mapa/sorpresa.png";
+    private final String rutaMeta = "file:src/main/java/edu/fiuba/algo3/Vista/media/img/Mapa/meta.png";
+    private final String rutaFondo = "file:src/main/java/edu/fiuba/algo3/Vista/media/img/Fondos/fondoPartida.jpg";
     private final int tamCuadra = 50;
     private final int anchoCalle = 15;
 
@@ -51,46 +52,41 @@ public class Partida extends Application {
     private Shape fog;
     private Controlador controlador;
 
-    public Partida(Controlador controlador/*, String nombre, String vehiculo*/) {
+    public Partida(Controlador controlador) {
         this.controlador = controlador;
-        /*ArrayList<String> jug = new ArrayList<>();
-        jug.add(nombre);
-        ArrayList<String> veh = new ArrayList<>();
-        veh.add(vehiculo);
-        controlador.iniciarPartidaCon(jug, veh);*/
     }
 
     public void start(Stage stage){
         Esquina[][] mapa = controlador.getMapa();
-        Jugador jugador = controlador.getJugadorActual();
+        AtomicReference<Jugador> jugador = new AtomicReference<>(controlador.getJugadorActual());
 
         Group elementos = procesarTablero(mapa, cantCuadras);
 
         //capaz hay cierta persistencia y java no trabaja con copias como python, en ese caso se podria hacer que no devuelva nada y queda un poquito mas bonito
-        elementos = agregarTablaMovimientos(jugador, elementos);
+        elementos = agregarTablaMovimientos(jugador.get(), elementos);
 
         //el texto lo agrego fuera de agregarTablaMovimientos porque hay que ir actualizando movimientosText
-        Text movimientosText = new Text(730, 620, Integer.toString(jugador.getMovimientos()));
+        String strMovimientos = Integer.toString(jugador.get().getMovimientos());
+        String cero = jugador.get().getMovimientos() < 10 ? "0" : "";
+        Text movimientosText = new Text(575, 773, cero + strMovimientos);
         movimientosText.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
         movimientosText.setFill(Color.WHITE);
         elementos.getChildren().add(movimientosText);
 
-        Text nickJugador = new Text(100, 60, jugador.getNick());
+        Text nickJugador = new Text(100, 745, jugador.get().getNick());
         nickJugador.setFont(Font.font("Verdana", FontWeight.BOLD, 20));
         nickJugador.setFill(Color.WHITE);
         elementos.getChildren().add(nickJugador);
 
-
-
-        ImageView imagenVehiculo = setImagenVehiculo(jugador);
+        ImageView imagenVehiculo = setImagenVehiculo(jugador.get());
 
         Pane pane = new Pane();
         pane.getChildren().add(imagenVehiculo);
-        actualizarImagen(jugador, imagenVehiculo);
-        fog = crearFog(jugador);
+        actualizarImagen(jugador.get(), imagenVehiculo);
+        fog = crearFog(jugador.get());
         pane.getChildren().add(fog);
 
-        //String musicFile = "src/main/java/edu/fiuba/algo3/Vista/media/audio/piqueteSound.mp3";
+        //String musicFile = "src/main/java/edu/fiuba/algo3/Vista/media/audio/";
         //Media sound = new Media(new File(musicFile).toURI().toString());
         //MediaPlayer mediaPlayer = new MediaPlayer(sound);
         //mediaPlayer.play();
@@ -99,51 +95,78 @@ public class Partida extends Application {
         pane.setOnKeyPressed(e -> {
             if (e.getCode() == KeyCode.UP) {
                 controlador.moverJugadorHacia(new Arriba());
+                chequearSiTermino(stage, jugador, nickJugador);
+                jugador.set(controlador.getJugadorActual());
+                nickJugador.setText(jugador.get().getNick());
             }
             if (e.getCode() == KeyCode.DOWN) {
                 controlador.moverJugadorHacia(new Abajo());
+                chequearSiTermino(stage, jugador, nickJugador);
+                jugador.set(controlador.getJugadorActual());
+                nickJugador.setText(jugador.get().getNick());
             }
             if (e.getCode() == KeyCode.RIGHT) {
                 controlador.moverJugadorHacia(new Derecha());
+                chequearSiTermino(stage, jugador, nickJugador);
+                jugador.set(controlador.getJugadorActual());
+                nickJugador.setText(jugador.get().getNick());
             }
             if (e.getCode() == KeyCode.LEFT) {
                 controlador.moverJugadorHacia(new Izquierda());
+                chequearSiTermino(stage, jugador, nickJugador);
+                jugador.set(controlador.getJugadorActual());
+                nickJugador.setText(jugador.get().getNick());
             }
-            if (controlador.terminoElJuego()){
-                stage.close();
-                FinDePartida fin = new FinDePartida(controlador.getNick(), controlador);
-                fin.start(stage);
-            }
+//            if (controlador.terminoElJuego()){
+//                stage.close();
+//                FinDePartida fin = new FinDePartida(controlador.getNick(), controlador);
+//                fin.start(stage);
+//                jugador.set(controlador.getJugadorActual());
+//                nickJugador.setText(jugador.get().getNick());
+//            }
             pane.getChildren().remove(fog);
-            this.actualizarFog(jugador);
+            this.actualizarFog(jugador.get());
             pane.getChildren().add(fog);
-            actualizarImagen(jugador, imagenVehiculo);
-            movimientosText.setText(Integer.toString(jugador.getMovimientos()));
-
-
+            actualizarImagen(jugador.get(), imagenVehiculo);
+            movimientosText.setText(Integer.toString(jugador.get().getMovimientos()));
         });
-        movimientosText.setText(Integer.toString(jugador.getMovimientos()));
+        movimientosText.setText(Integer.toString(jugador.get().getMovimientos()));
         elementos.getChildren().add(pane);
 
-        Menu opciones = new Menu("opciones");
-        MenuItem opcion1 = new MenuItem("opcion1");
-        opciones.getItems().add(opcion1);
-
+        //deberia ser un objeto?? hasta 164
         Menu sonido = new Menu("sonido");
         CheckMenuItem musica = new CheckMenuItem("Musica");
+        musica.setOnAction(e -> {
+            if (musica.isSelected()){
+                //
+            }else{
+
+            }
+        });
         CheckMenuItem efectos = new CheckMenuItem("Efectos");
+        musica.setSelected(true);
+        efectos.setSelected(true);
+
         sonido.getItems().addAll(musica,efectos);
 
         Menu ayuda = new Menu("ayuda");
-        MenuItem porFavor = new MenuItem("por favor");
+        ayuda.setOnAction(e -> {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setHeaderText(null);
+            alert.setTitle("Info");
+            alert.setContentText("    Movimientos\n œæ€®†¥  øπå∫∂ƒ™¶§ ~Ω∑©√ß µ \n" +
+                    "← : moverse hacia la izquierda \n" +
+                    "→: moverse hacia la derecha\n" +
+                    "↓: moverse hacia abajo\n" +
+                    "↑: moverse hacia arriba");
 
+            alert.showAndWait();
+        });
+        MenuItem porFavor = new MenuItem("por favor");
         ayuda.getItems().add(porFavor);
 
-        MenuBar bar = new MenuBar(opciones,sonido,ayuda);
-
-
-        elementos.getChildren().add(bar);
-
+        MenuBar barra = new MenuBar(sonido,ayuda);
+        elementos.getChildren().add(barra);
 
         Scene scene = new Scene(elementos, altoTablero*30 + margenIzq, altoTablero*30 + margenInf);
 
@@ -153,7 +176,16 @@ public class Partida extends Application {
         stage.show();
         stage.setTitle("GPS - Escape from Lanús");
         pane.requestFocus();
+    }
 
+    private void chequearSiTermino(Stage stage, AtomicReference<Jugador> jugador, Text nickJugador) {
+        if (controlador.terminoElJuego()){
+            stage.close();
+            FinDePartida fin = new FinDePartida(controlador.getNick(), controlador);
+            fin.start(stage);
+            jugador.set(controlador.getJugadorActual());
+            nickJugador.setText(jugador.get().getNick());
+        }
     }
 
 
@@ -169,10 +201,13 @@ public class Partida extends Application {
 
         Group grupo = new Group();
 
-        Color colorTablero = Color.rgb(71, 9, 124, 1);
-        Rectangle fondo = new Rectangle(0,0, altoTablero*90, anchoTablero*90);
-        fondo.setFill(colorTablero);
-        grupo.getChildren().add(fondo);
+//        Color colorTablero = Color.rgb(71, 9, 124, 1);
+//        Rectangle fondo = new Rectangle(0,0, altoTablero*90, anchoTablero*90);
+//        fondo.setFill(colorTablero);
+//        grupo.getChildren().add(fondo);
+
+        ImageView fondoPartida = crearImageView(rutaFondo, 0, 0, 777);
+        grupo.getChildren().add(fondoPartida);
 
         Rectangle calles = new Rectangle(margenIzq, margenInf, (tamCuadra+anchoCalle)*cantCuadras, (tamCuadra+anchoCalle)*cantCuadras);
         calles.setFill(Color.GRAY);

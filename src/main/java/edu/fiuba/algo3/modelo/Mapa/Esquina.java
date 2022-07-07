@@ -13,17 +13,11 @@ public abstract class Esquina { //dividir esquina normal de esquina destino
     private Calle adyacenteW;
     private Calle adyacenteE;
 
-    public Calle getNorte(){
-        return this.adyacenteN;
-    }
     public Calle getSur(){
         return this.adyacenteS;
     }
     public Calle getEste(){
         return this.adyacenteE;
-    }
-    public Calle getOeste(){
-        return this.adyacenteW;
     }
 
     public Esquina(int posX, int posY) {
@@ -54,11 +48,6 @@ public abstract class Esquina { //dividir esquina normal de esquina destino
     public abstract boolean esDestino();
 
 
-    public void mover(Jugador jugador, Arriba arriba){
-
-    }
-
-
     public void moverseHacia(Jugador jugador, Arriba direccion) {
         this.validarMovimiento(this.adyacenteN);
         this.adyacenteN.moverse(this, jugador);
@@ -78,9 +67,6 @@ public abstract class Esquina { //dividir esquina normal de esquina destino
         this.validarMovimiento(this.adyacenteE);
         this.adyacenteE.moverse(this, jugador);
     }
-
-
-    public abstract void moverse();
 
 
     private void validarMovimiento(Calle calle) {

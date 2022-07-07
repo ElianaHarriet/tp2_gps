@@ -6,9 +6,25 @@ import javafx.scene.*;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.*;
 import javafx.stage.Stage;
+import javafx.util.Duration;
+
+import java.io.File;
+
 import static edu.fiuba.algo3.Vista.ElementManager.*;
+
+/*
+ * Falta:
+ * Catch errores para que no salgan en la terminal
+ * Revisar codigo por las dudas
+ * Ejecutable
+ * Informe + muchos demasiados de diagramas
+ * Leer consigna del tp por las dudas
+ * Resolver problemas de build para integrar con master
+ */
 
 public class Inicio extends Application {
     private final int anchoVentana = 1050;
@@ -18,9 +34,9 @@ public class Inicio extends Application {
     private final String colorBoton = "#57643f";
     private final int yBoton = 300;
     private final Font fuenteBoton = Font.font("Impact", FontWeight.BOLD, 17);
-    private final String pathTitulo = "file:src/main/java/edu/fiuba/algo3/Vista/media/img/inicio.jpeg";
-//    private final RankingManager rankingManager = new RankingManager("src/main/java/edu/fiuba/algo3/modelo/Ranking/ranking.json");
+    private final String pathTitulo = "file:src/main/java/edu/fiuba/algo3/Vista/media/img/Fondos/inicio.jpeg";
     private final Controlador controlador = new Controlador();
+    static private MediaPlayer mediaPlayer;
 
     public static void main(String[] args) {
         launch();
@@ -32,12 +48,19 @@ public class Inicio extends Application {
         Pane panel = new Pane();
         elementos.getChildren().add(panel);
 
+        String musicFile = "src/main/java/edu/fiuba/algo3/Vista/media/audio/General/menuSong.mp3";
+        Media sound = new Media(new File(musicFile).toURI().toString());
+        this.mediaPlayer = new MediaPlayer(sound);
+        this.mediaPlayer.setAutoPlay(true);
+        this.mediaPlayer.setOnEndOfMedia(() -> mediaPlayer.seek(Duration.ZERO));
+        this.mediaPlayer.setVolume(0.6);
+        this.mediaPlayer.play();
+
         //setear ventana inicial
         ImageView titulo = crearImageView(pathTitulo, 0, 0, anchoVentana);
         panel.getChildren().add(titulo);
 
         //boton jugar
-        // POR SI NO LO ARREGLAMOS, QUE MANDE A SELECCIONAR VEHICULO EN VEZ DE MODO DE JUEGO
         Button botonJugar = (new BotonPantalla(stage, new SeleccionModoDeJuego(controlador))).getBoton();
         disenarBoton(botonJugar, "Jugar", anchoBoton, altoBoton, (anchoVentana - anchoBoton) / 2, yBoton, colorBoton, fuenteBoton);
         elementos.getChildren().add(botonJugar);
@@ -54,5 +77,8 @@ public class Inicio extends Application {
         stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
+
+
+
     }
 }

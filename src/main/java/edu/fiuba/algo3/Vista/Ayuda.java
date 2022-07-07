@@ -23,7 +23,7 @@ public class Ayuda extends Pantalla {
     private final int altoVentana = 525;
     private final int anchoBoton = 35;
     private final int altoBoton = 20;
-    private final String pathFondo = "file:src/main/java/edu/fiuba/algo3/Vista/media/img/ayuda.jpg";
+    private final String pathFondo = "file:src/main/java/edu/fiuba/algo3/Vista/media/img/Fondos/ayuda.jpg";
     private final String colorTexto = "#f2d8a5";
     private final String colorBoton = "#57633c";
 

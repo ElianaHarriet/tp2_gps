@@ -20,10 +20,10 @@ public class BotonVehiculo {
         boton = new Button();
         boton.setOnAction(e -> {
             TextInputDialog dialog = new TextInputDialog("Chayanne");
-            dialog.setHeaderText("Ingrese un nick (entre 5 y 15 caracteres)");
+            dialog.setHeaderText("Ingrese un nick (entre 5 y 10 caracteres)");
             Optional<String> input = dialog.showAndWait();
             String nick = input.map(Objects::toString).orElse("");
-            if ((nick.length() >= 4 && nick.length() <= 15)) {
+            if ((nick.length() >= 4 && nick.length() <= 10)) {
                 //NO SE TIENE QUE CREAR LA PARTIDA ACA Y PARA CAMBIAR ESO
                 //HAY QUE CAMBIAR MUCHAS COSAS AAAAAAAAAA
 

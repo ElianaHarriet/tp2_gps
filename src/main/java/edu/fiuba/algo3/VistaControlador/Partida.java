@@ -4,7 +4,6 @@
 //import edu.fiuba.algo3.modelo.Constructor.ConstructorJuego;
 //import edu.fiuba.algo3.modelo.Constructor.ConstructorVehiculo;
 //import edu.fiuba.algo3.modelo.Jugador.Jugador;
-//import edu.fiuba.algo3.modelo.Mapa.*;
 //import edu.fiuba.algo3.modelo.Obstaculos.*;
 //import edu.fiuba.algo3.modelo.Ranking.RankingManager;
 //import edu.fiuba.algo3.modelo.Sorpresas.*;

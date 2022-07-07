@@ -1,12 +1,11 @@
 package edu.fiuba.algo3.controlador;
 
-import edu.fiuba.algo3.modelo.*;
 import edu.fiuba.algo3.modelo.Constructor.*;
 import edu.fiuba.algo3.modelo.Jugador.*;
 import edu.fiuba.algo3.modelo.Ranking.RankingManager;
-import edu.fiuba.algo3.modelo.Vehiculos.*;
 import edu.fiuba.algo3.modelo.Mapa.*;
-import edu.fiuba.algo3.vista.Ranking;
+
+import java.util.ArrayList;
 
 
 public class Controlador {
@@ -14,10 +13,10 @@ public class Controlador {
 	int cantCuadras = 10;
 	private Jugador jugador;
 	private Esquina[][] mapa;
-	private IVista observador;
 	private RankingManager rankingManager = new RankingManager("src/main/java/edu/fiuba/algo3/modelo/Ranking/ranking.json");
+	private ArrayList<Jugador> jugadores;
+	private ConstructorJugador cJugadorActual;
 	public Controlador() {
-
 	}
 
 	public void iniciarPartidaCon(String unNick, String unVehiculo/*, int cantidadDeJugadores*/ ) {
@@ -35,12 +34,15 @@ public class Controlador {
 		jugador.moverseHacia(direccion);
 		if (jugador.estaEnDestino()) {
 			rankingManager.guardarNuevaPuntuacion(jugador.getNick(), jugador.getMovimientos());
-			observador.terminarJuego();
 		}
 	}
 
 	public Esquina[][] getMapa() {
 		return this.mapa;
+	}
+
+	public boolean terminoElJuego(){
+		return jugador.estaEnDestino();
 	}
 
 	public Jugador getJugador() {
@@ -51,7 +53,16 @@ public class Controlador {
 		return this.jugador.getMovimientos();
 	}
 
+	public String getRanking(){
+		return this.rankingManager.obtenerRanking();
+	}
+
 	public String getNick(){
 		return jugador.getNick();
+	}
+
+	public void crearJugador(String nick, String vehiculo) {
+		this.cJugadorActual = new ConstructorJugador();
+		//this.cJugadorActual.crearConNick();
 	}
 }

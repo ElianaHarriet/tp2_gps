@@ -28,8 +28,8 @@ public class Pozo implements IObstaculo {
     }
 
     public int penalizar(Camioneta camioneta) {
-        return camioneta.atravesarObstaculo(this);
-
+//        return camioneta.atravesarObstaculo(this);
+        return 2;
     }
 
     public String tipo() {return "pozo";}

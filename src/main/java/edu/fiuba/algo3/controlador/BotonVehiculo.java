@@ -1,8 +1,8 @@
 package edu.fiuba.algo3.controlador;
 
-import edu.fiuba.algo3.vista.Pantalla;
-import edu.fiuba.algo3.vista.Partida;
+import edu.fiuba.algo3.Vista.Partida;
 import edu.fiuba.algo3.modelo.Ranking.RankingManager;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextInputDialog;
 import javafx.stage.Stage;
@@ -14,17 +14,31 @@ public class BotonVehiculo {
 
     private Button boton;
 
-    public BotonVehiculo(Stage stage, String vehiculo, RankingManager rankingManager) {
+    public BotonVehiculo(Stage stage, String vehiculo, Controlador controlador) {
         boton = new Button();
         boton.setOnAction(e -> {
-            TextInputDialog dialog = new TextInputDialog("ElBrian");
+            TextInputDialog dialog = new TextInputDialog("Chayanne");
             dialog.setHeaderText("Ingrese un nick (entre 5 y 15 caracteres)");
             Optional<String> input = dialog.showAndWait();
-            String nombre = input.map(Objects::toString).orElse("");
-            if ((nombre.length() >= 4 && nombre.length() <= 15)) {
+            String nick = input.map(Objects::toString).orElse("");
+            if ((nick.length() >= 4 && nick.length() <= 15)) {
                 stage.close();
-                Partida partida = new Partida(nombre, vehiculo);
+                //NO SE TIENE QUE CREAR LA PARTIDA ACA Y PARA CAMBIAR ESO
+                //HAY QUE CAMBIAR MUCHAS COSAS AAAAAAAAAA
+
+
+                //Aca el controlador recibe un nick para el jugador actual
+                controlador.crearJugador(nick, vehiculo);
+
+                Partida partida = new Partida(controlador, nick, vehiculo);
+
                 partida.start(stage);
+            } else {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setHeaderText(null);
+                alert.setTitle("Error");
+                alert.setContentText("El nick debe tener entre 5 y 15 caracteres");
+                alert.showAndWait();
             }
         });
     }

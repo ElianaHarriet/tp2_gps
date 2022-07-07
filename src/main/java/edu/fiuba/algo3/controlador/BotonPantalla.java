@@ -1,7 +1,7 @@
 package edu.fiuba.algo3.controlador;
 
-import edu.fiuba.algo3.vista.Inicio;
-import edu.fiuba.algo3.vista.Pantalla;
+import edu.fiuba.algo3.Vista.Inicio;
+import edu.fiuba.algo3.Vista.Pantalla;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 

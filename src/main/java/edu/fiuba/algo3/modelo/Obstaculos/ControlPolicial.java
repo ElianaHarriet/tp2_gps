@@ -6,7 +6,7 @@ public class ControlPolicial implements IObstaculo {
 
     private Detencion detencion;
 
-    public ControlPolicial(Detencion detencion) { // usado para las pruebas
+    public ControlPolicial(Detencion detencion) { // usado para las pruebas (para que no se comporte de forma random)
         this.detencion = detencion;
     }
 

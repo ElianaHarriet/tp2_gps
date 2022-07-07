@@ -1,6 +1,7 @@
-package edu.fiuba.algo3.vista;
+package edu.fiuba.algo3.Vista;
 
 import edu.fiuba.algo3.controlador.BotonPantalla;
+import edu.fiuba.algo3.controlador.Controlador;
 import edu.fiuba.algo3.modelo.Ranking.RankingManager;
 import javafx.scene.*;
 import javafx.scene.control.Button;
@@ -9,7 +10,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.*;
 import javafx.stage.Stage;
-import static edu.fiuba.algo3.vista.ElementManager.*;
+import static edu.fiuba.algo3.Vista.ElementManager.*;
 
 
 public class Ranking extends Pantalla {
@@ -18,16 +19,16 @@ public class Ranking extends Pantalla {
     private final int altoVentana = 525;
     private final int anchoBoton = 35;
     private final int altoBoton = 20;
-    private final String pathFondo = "file:src/main/java/edu/fiuba/algo3/vista/media/img/finDePartida.jpg";
+    private final String pathFondo = "file:src/main/java/edu/fiuba/algo3/Vista/media/img/finDePartida.jpg";
     private final String colorTexto = "#f2d8a5";
     private final String colorBoton = "#57633c";
-    private RankingManager rankingManager;
-
-    public Ranking(RankingManager rankingManager) {
-        this.rankingManager = rankingManager;
+    //private RankingManager rankingManager = new RankingManager("src/main/java/edu/fiuba/algo3/modelo/Ranking/ranking.json");
+    private Controlador controlador;
+    //@Override
+    public Ranking(Controlador controlador){
+        this.controlador = controlador;
     }
 
-    @Override
     public void start(Stage stage) {
         Group elementos = new Group();
         Pane panel = new Pane();
@@ -41,7 +42,7 @@ public class Ranking extends Pantalla {
         panel.getChildren().add(ranking);
 
 
-        String txt = rankingManager.obtenerRanking();
+        String txt = controlador.getRanking();
         int contadorLineas = 0;
         for (int i = 0; i < txt.length(); i++) {
             char caracterActual = txt.charAt(i);

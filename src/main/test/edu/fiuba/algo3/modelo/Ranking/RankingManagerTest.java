@@ -21,7 +21,7 @@ public class RankingManagerTest {
     }
 
     @Test
-    public void prueba02SeAgregan3PuntuacionesYSeVerificaQueLaMejorSeaCorrecta(){
+    public void prueba02SeAgregan3PuntuacionesYSeVerificaLasPosicionesSeanCorrecta(){
         RankingManager ranking = new RankingManager(this.rankingPath);
         ranking.limpiarRanking();
         String nick1 = "BuchGod";

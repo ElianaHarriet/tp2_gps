@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.vista;
+package edu.fiuba.algo3.Vista;
 
 import edu.fiuba.algo3.TeFaltaCarroError;
 import edu.fiuba.algo3.controlador.*;
@@ -25,7 +25,7 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-public class Partida extends Application implements IVista {
+public class Partida extends Application {
         //pasar a mayusculas que son constantes
     private final int altoTablero = 25;
     private final int anchoTablero = 25;
@@ -33,27 +33,27 @@ public class Partida extends Application implements IVista {
     private final int margenIzq = 25;
     private final int margenInf = 25;
 
-    private final String rutaAuto = "file:src/main/java/edu/fiuba/algo3/vista/media/img/auto.png";
-    private final String rutaMoto = "file:src/main/java/edu/fiuba/algo3/vista/media/omg/moto.png";
-    private final String rutaCamioneta = "file:src/main/java/edu/fiuba/algo3/vista/media/img/camioneta.png";
-    private final String rutaPiquete = "file:src/main/java/edu/fiuba/algo3/vista/media/img/piquete.png";
-    private final String rutaControlPolicial = "file:src/main/java/edu/fiuba/algo3/vista/media/img/controlpolicial.png";
+    private final String rutaAuto = "file:src/main/java/edu/fiuba/algo3/Vista/media/img/auto.png";
+    private final String rutaMoto = "file:src/main/java/edu/fiuba/algo3/Vista/media/img/moto.png";
+    private final String rutaCamioneta = "file:src/main/java/edu/fiuba/algo3/Vista/media/img/camioneta.png";
+    private final String rutaPiquete = "file:src/main/java/edu/fiuba/algo3/Vista/media/img/piquete.png";
+    private final String rutaControlPolicial = "file:src/main/java/edu/fiuba/algo3/Vista/media/img/controlpolicial.png";
+    private final String rutaPozo = "file:src/main/java/edu/fiuba/algo3/Vista/media/img/pozo.png";
+    private final String rutaSorpresa = "file:src/main/java/edu/fiuba/algo3/Vista/media/img/sorpresa.png";
+    private final String rutaMeta = "file:src/main/java/edu/fiuba/algo3/Vista/media/img/meta.png";
     private final int tamCuadra = 50;
     private final int anchoCalle = 15;
 
-    private RankingManager rankingManager;
+    //private RankingManager rankingManager;
     private Shape fog;
     private Controlador controlador;
 
-    Stage stage;
-    public Partida(String nombre,String vehiculo) {
-        this.controlador = new Controlador();
+    public Partida(Controlador controlador, String nombre, String vehiculo) {
+        this.controlador = controlador;
         controlador.iniciarPartidaCon(nombre, vehiculo);
-
     }
 
     public void start(Stage stage){
-        this.stage = stage;
         Esquina[][] mapa = controlador.getMapa();
         Jugador jugador = controlador.getJugador();
 
@@ -96,7 +96,11 @@ public class Partida extends Application implements IVista {
             if (e.getCode() == KeyCode.LEFT) {
                 controlador.moverJugadorHacia(new Izquierda());
             }
-
+             if (controlador.terminoElJuego()){
+                 stage.close();
+                 FinDePartida fin = new FinDePartida(controlador.getNick(), controlador);
+                 fin.start(stage);
+             }
             pane.getChildren().remove(fog);
             this.actualizarFog(jugador);
             pane.getChildren().add(fog);
@@ -139,13 +143,7 @@ public class Partida extends Application implements IVista {
         pane.requestFocus();
 
     }
-    @Override
-    public void terminarJuego() {
-        rankingManager.guardarNuevaPuntuacion(controlador.getNick(), controlador.getMovimientosJugador());
-        stage.close();
-        FinDePartida fin = new FinDePartida(controlador.getNick(), controlador.getMovimientosJugador(), rankingManager);
-        fin.start(stage);
-    }
+
 
     private void actualizarFog(Jugador jugador){
         fog = crearFog(jugador);
@@ -183,13 +181,13 @@ public class Partida extends Application implements IVista {
                 grupo.getChildren().add(manzana);
 
                 if (esq.esDestino()) {
-                    Circle destino = new Circle();
-                    destino.setStroke(Color.GREEN);
-                    destino.setFill(Color.TRANSPARENT);
-                    destino.setRadius(10);
-                    destino.setCenterX(posX);
-                    destino.setCenterY(posY);
-                    grupo.getChildren().add(destino);
+                    Image imgFin = new Image(rutaMeta);
+                    ImageView imgFinView = new ImageView(imgFin);
+                    imgFinView.setFitWidth(80);
+                    imgFinView.setPreserveRatio(true);
+                    imgFinView.setX(posX - 40);
+                    imgFinView.setY(posY - 15);
+                    grupo.getChildren().add(imgFinView);
                 }
 
                 grupo = agregarElementosEste(grupo, esq); //ahora mismo solo les cambia una linea, deberia sacar las 47 que se quedan igual y solo pasarles la posicion acorde a ambas
@@ -206,27 +204,33 @@ public class Partida extends Application implements IVista {
         if (calle == null) return grupo;
         ISorpresa sorpresa = calle.getSorpresa();
 
-        Circle sorpresaPrinteada = new Circle(posX, posY , 5);
         Class claseDeSorpresa = sorpresa.getClass();
+        ImageView sorpresaNueva = new ImageView();
+        Image sorpresaImg = new Image(rutaSorpresa);
 
         if (claseDeSorpresa.equals(SorpresaFavorable.class)) {
-            sorpresaPrinteada.setFill(Color.GREEN);
+            sorpresaNueva.setImage(sorpresaImg);
         }
         if (claseDeSorpresa.equals(SorpresaDesfavorable.class)) {
-            sorpresaPrinteada.setFill(Color.RED);
+            sorpresaNueva.setImage(sorpresaImg);
         }
         if (claseDeSorpresa.equals(SorpresaCambioVehiculo.class)) {
-            sorpresaPrinteada.setFill(Color.BLUE);
+            sorpresaNueva.setImage(sorpresaImg);
         }
-        if(claseDeSorpresa.equals(SorpresaNeutra.class)){
-            sorpresaPrinteada.setFill(colorNulo);
-        }
-        grupo.getChildren().add(sorpresaPrinteada);
+//        if(claseDeSorpresa.equals(SorpresaNeutra.class)){
+//        }
+
+        sorpresaNueva.setX(posX - 2);
+        sorpresaNueva.setY(posY - 2);
+
+        sorpresaNueva.setFitHeight(25);
+        sorpresaNueva.setPreserveRatio(true);
+
+        grupo.getChildren().add(sorpresaNueva);
 
 
 
         IObstaculo obstaculo = calle.getObstaculo();
-        Rectangle obstaculoPrinteado = new Rectangle(posX + 5, posY, 5, 5);
         Class claseObstaculo = obstaculo.getClass();
         ImageView obstaculoNuevo = new ImageView();
 
@@ -234,21 +238,22 @@ public class Partida extends Application implements IVista {
             Image control = new Image(rutaControlPolicial);
             obstaculoNuevo.setImage(control);
 
-            obstaculoPrinteado.setFill(Color.BLUE);
+//            obstaculoPrinteado.setFill(Color.BLUE);
         }
         if (claseObstaculo.equals(Pozo.class)) {
-            obstaculoPrinteado.setFill(Color.RED);
+            Image pozo = new Image(rutaPozo);
+            obstaculoNuevo.setImage(pozo);
+//            obstaculoPrinteado.setFill(Color.RED);
         }
         if (claseObstaculo.equals(Piquete.class)) {
             Image piquete = new Image(rutaPiquete);
             obstaculoNuevo.setImage(piquete);
 
-            obstaculoPrinteado.setFill(Color.BROWN);
+//            obstaculoPrinteado.setFill(Color.BROWN);
         }
-        if (claseObstaculo.equals(ObstaculoNulo.class)) {
-            obstaculoPrinteado.setFill(colorNulo);
-        }
-        grupo.getChildren().add(obstaculoPrinteado);
+//        if (claseObstaculo.equals(ObstaculoNulo.class)) {
+//            obstaculoPrinteado.setFill(colorNulo);
+//        }
 
         obstaculoNuevo.setX(posX);
         obstaculoNuevo.setY(posY);

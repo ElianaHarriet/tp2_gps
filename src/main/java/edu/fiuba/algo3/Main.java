@@ -1,18 +1,6 @@
 package edu.fiuba.algo3;
 
 
-
-
-import edu.fiuba.algo3.modelo.Jugador.Jugador;
-import edu.fiuba.algo3.modelo.Mapa.Mapa;
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.layout.Pane;
-import javafx.scene.shape.Rectangle;
-import javafx.stage.Stage;
-
-
-
 //import edu.fiuba.algo3.modelo.Esquina;
 //import javafx.application.Application;
 //import javafx.scene.*;

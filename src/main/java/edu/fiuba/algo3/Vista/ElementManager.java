@@ -1,4 +1,4 @@
-package edu.fiuba.algo3.vista;
+package edu.fiuba.algo3.Vista;
 
 import javafx.scene.control.Button;
 import javafx.scene.image.*;

@@ -6,7 +6,7 @@ import edu.fiuba.algo3.modelo.Sorpresas.ISorpresa;
 
 public interface IVehiculo {
 
-    int atravesarObstaculo(/*Esquina esquina, int movimientos, */IObstaculo obstaculo);
+    int atravesarObstaculo(IObstaculo obstaculo);
 
     IVehiculo actualizarVehiculo(ISorpresa sorpresa);
 

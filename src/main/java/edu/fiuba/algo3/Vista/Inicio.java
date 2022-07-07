@@ -1,7 +1,6 @@
-package edu.fiuba.algo3.vista;
+package edu.fiuba.algo3.Vista;
 
 import edu.fiuba.algo3.controlador.*;
-import edu.fiuba.algo3.modelo.Ranking.RankingManager;
 import javafx.application.Application;
 import javafx.scene.*;
 import javafx.scene.control.Button;
@@ -9,7 +8,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.*;
 import javafx.stage.Stage;
-import static edu.fiuba.algo3.vista.ElementManager.*;
+import static edu.fiuba.algo3.Vista.ElementManager.*;
 
 public class Inicio extends Application {
     private final int anchoVentana = 1050;
@@ -19,9 +18,9 @@ public class Inicio extends Application {
     private final String colorBoton = "#57643f";
     private final int yBoton = 300;
     private final Font fuenteBoton = Font.font("Impact", FontWeight.BOLD, 17);
-    private final String pathTitulo = "file:src/main/java/edu/fiuba/algo3/vista/media/img/inicio.jpeg";
-    private final RankingManager rankingManager = new RankingManager("src/main/java/edu/fiuba/algo3/modelo/Ranking/ranking.json");
-
+    private final String pathTitulo = "file:src/main/java/edu/fiuba/algo3/Vista/media/img/inicio.jpeg";
+//    private final RankingManager rankingManager = new RankingManager("src/main/java/edu/fiuba/algo3/modelo/Ranking/ranking.json");
+    private final Controlador controlador = new Controlador();
 
     public static void main(String[] args) {
         launch();
@@ -38,11 +37,12 @@ public class Inicio extends Application {
         panel.getChildren().add(titulo);
 
         //boton jugar
-        Button botonJugar = (new BotonPantalla(stage, new SeleccionVehiculo(rankingManager))).getBoton();
+        // POR SI NO LO ARREGLAMOS, QUE MANDE A SELECCIONAR VEHICULO EN VEZ DE MODO DE JUEGO
+        Button botonJugar = (new BotonPantalla(stage, new SeleccionModoDeJuego(controlador))).getBoton();
         disenarBoton(botonJugar, "Jugar", anchoBoton, altoBoton, (anchoVentana - anchoBoton) / 2, yBoton, colorBoton, fuenteBoton);
         elementos.getChildren().add(botonJugar);
 
-        Button botonRanking = (new BotonPantalla(stage, new Ranking(rankingManager))).getBoton();
+        Button botonRanking = (new BotonPantalla(stage, new Ranking(this.controlador))).getBoton();
         disenarBoton(botonRanking, "Ranking", anchoBoton, altoBoton, (anchoVentana - anchoBoton) / 3, yBoton, colorBoton, fuenteBoton);
         elementos.getChildren().add(botonRanking);
 

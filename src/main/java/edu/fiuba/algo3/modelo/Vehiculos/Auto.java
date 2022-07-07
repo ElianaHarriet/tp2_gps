@@ -6,7 +6,7 @@ import edu.fiuba.algo3.modelo.Sorpresas.*;
 
 public class Auto implements IVehiculo {
 
-    public int atravesarObstaculo(/*Esquina esquina, int movimientos, */IObstaculo obstaculo) {
+    public int atravesarObstaculo(IObstaculo obstaculo) {
         return obstaculo.penalizar(this);
     }
 

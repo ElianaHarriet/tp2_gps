@@ -7,4 +7,5 @@ public interface ISorpresa {
     IVehiculo intercambiarVehiculo(Auto auto);
     IVehiculo intercambiarVehiculo(Moto moto);
     IVehiculo intercambiarVehiculo(Camioneta camioneta);
+    IVehiculo intercambiarVehiculo(ReliantRobin reliantRobin);
 }

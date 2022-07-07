@@ -27,6 +27,12 @@ public class Pozo implements IObstaculo {
         return destino;
     }
 
+    @Override
+    public Esquina siguienteEsquina(Esquina origen, Esquina destino, ReliantRobin reliantRobin) {
+        return destino;
+    }
+
+
     public int penalizar(Camioneta camioneta) {
         return camioneta.atravesarObstaculo(this);
     }

@@ -326,6 +326,7 @@ public class Partida extends Application {
         if (claseVehiculo.equals(Auto.class)) rutaVehiculo = rutaAuto;
         else if (claseVehiculo.equals(Moto.class)) rutaVehiculo = rutaMoto;
         else if (claseVehiculo.equals(Camioneta.class)) rutaVehiculo = rutaCamioneta;
+        else if (claseVehiculo.equals(ReliantRobin.class)) rutaVehiculo = rutaControlPolicial;
         else throw new TeFaltaCarroError();
 
         Image imagen = new Image(rutaVehiculo);

@@ -9,6 +9,7 @@ abstract class Detencion {
     private static final double FACTOR_MOTO = 0.8;
     private static final double FACTOR_CAMIONETA = 0.3;
 
+
     abstract int penalizar(IVehiculo vehiculo);
 
     static Detencion obtenerDetencion(Auto auto) {

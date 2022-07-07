@@ -20,6 +20,11 @@ public class ControlPolicial implements IObstaculo {
     }
 
     @Override
+    public Esquina siguienteEsquina(Esquina origen, Esquina destino, ReliantRobin reliantRobin) {
+        return destino;
+    }
+
+    @Override
     public Esquina siguienteEsquina(Esquina origen, Esquina destino, Camioneta camioneta) {
         return destino;
     }

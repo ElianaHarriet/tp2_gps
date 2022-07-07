@@ -23,5 +23,10 @@ public class SorpresaFavorable implements ISorpresa {
         return camioneta;
     }
 
+    @Override
+    public IVehiculo intercambiarVehiculo(ReliantRobin reliantRobin) {
+        return reliantRobin;
+    }
+
 
 }

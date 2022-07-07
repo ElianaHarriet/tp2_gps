@@ -32,4 +32,9 @@ public class Piquete implements IObstaculo {
         return destino;
     }
 
+    @Override
+    public Esquina siguienteEsquina(Esquina origen, Esquina destino, ReliantRobin reliantRobin) {
+        return destino;
+    }
+
 }

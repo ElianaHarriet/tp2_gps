@@ -21,6 +21,8 @@ public class ConstructorVehiculo implements IConstructor {
             case "moto":
                 this.vehiculo = new Moto();
                 break;
+            case "reliantRobin":
+                this.vehiculo = new ReliantRobin();
             default:
                 throw new TeFaltaCarroError();
         }

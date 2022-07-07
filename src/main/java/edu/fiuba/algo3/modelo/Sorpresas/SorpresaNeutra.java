@@ -19,4 +19,7 @@ public class SorpresaNeutra implements ISorpresa {
         return camioneta;
     }
 
+    public IVehiculo intercambiarVehiculo(ReliantRobin reliantRobin) {
+        return reliantRobin;
+    }
 }

@@ -23,7 +23,8 @@ public class SorpresaCambioVehiculo implements ISorpresa {
         return new Moto();
     }
 
-
+    @Override
+    public IVehiculo intercambiarVehiculo(ReliantRobin reliantRobin) {return new ReliantRobin();}
 
 }
 

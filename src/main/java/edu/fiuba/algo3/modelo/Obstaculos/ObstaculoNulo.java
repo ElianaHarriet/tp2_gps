@@ -32,5 +32,4 @@ public class ObstaculoNulo implements IObstaculo {
         return destino;
     }
 
-    public String tipo() {return "nulo";}
 }

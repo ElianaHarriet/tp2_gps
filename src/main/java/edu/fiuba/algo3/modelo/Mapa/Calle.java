@@ -10,10 +10,7 @@ public class Calle {
     private final Esquina esquina2;
 
     private final ISorpresa sorpresa;
-
     private final IObstaculo obstaculo;
-
-
 
     public Calle(Esquina esquina1, Esquina esquina2, ISorpresa sorpresa, IObstaculo obstaculo) {
         this.esquina1 = esquina1;
@@ -30,8 +27,8 @@ public class Calle {
     public ISorpresa getSorpresa(){
         return this.sorpresa;
     }
+
     public IObstaculo getObstaculo(){
         return this.obstaculo;
     }
-
 }

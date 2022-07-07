@@ -42,6 +42,9 @@ public class FinDePartida extends Application {
         ImageView titulo = crearImageView(pathFondo, 0, 0, anchoVentana);
         panel.getChildren().add(titulo);
 
+        this.controlador.setAudioMediaPlayer("src/main/java/edu/fiuba/algo3/Vista/media/audio/General/endingSound.mp3");
+        this.controlador.setVolumenMediaPlayer(1);
+
         int movimientos = controlador.getMovimientosJugador();
         String txt = movimientos < 15 ? "Felicidades " + nick + "!\n" + "Has escapado en tan solo\n" + movimientos + " movimientos" :
                      movimientos < 25 ? "Lo conseguiste " + nick + "!\n" + "Has escapado en\n" + movimientos + " movimientos" :

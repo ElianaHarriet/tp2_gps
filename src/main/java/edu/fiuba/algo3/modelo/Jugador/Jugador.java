@@ -1,5 +1,6 @@
 package edu.fiuba.algo3.modelo.Jugador;
 
+import edu.fiuba.algo3.TeFaltaCalleError;
 import edu.fiuba.algo3.modelo.Mapa.*;
 import edu.fiuba.algo3.modelo.Sorpresas.*;
 import edu.fiuba.algo3.modelo.Obstaculos.IObstaculo;
@@ -33,14 +34,10 @@ public class Jugador {
         this.movimientos = movimientos;
     }
 
-
-
     public void moverseHacia(IDireccion direccion) {
         direccion.moverseHacia(this, this.esquina);
-        //this.moverseHacia(this, direccion);
         movimientos++;
     }
-
 
     public int getMovimientos() {
         return movimientos;
@@ -62,5 +59,3 @@ public class Jugador {
         return this.vehiculo;
     }
 }
-
-

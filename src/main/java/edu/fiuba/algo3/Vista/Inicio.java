@@ -6,37 +6,50 @@ import javafx.scene.*;
 import javafx.scene.control.Button;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.*;
 import javafx.stage.Stage;
-import javafx.util.Duration;
-
-import java.io.File;
 
 import static edu.fiuba.algo3.Vista.ElementManager.*;
 
 /*
  * Falta:
- * Catch errores para que no salgan en la terminal
  * Revisar codigo por las dudas
- * Ejecutable
- * Informe + muchos demasiados de diagramas
- * Leer consigna del tp por las dudas
+ * Ejecutable <- <- <- <- <- <- <- <- <- <- <- <- <- <- <- <- toy leyendo eso oki gracias :D
+ * Informe + muchos demasiados diagramas
+ *  Diagramas de clases - LISTO
+ *  Diagramas de secuencias - Hay 1 para movimiento, capaz se podria hacer uno para Vista
+ *  Diagrama de paquetes - en progreso
+ *  Diagrama de estados - alguien busque cuando pueda
+ *
  * Resolver problemas de build para integrar con master
  */
+
+/*
+
+oki :)
+Para el ejecutable: --> Eli cuando puedas probalo
+1. Compilar:
+     javac -d . Inicio.java
+
+2. Manifest
+    crear un archivo "manifest.mf" que adentro solo tenga una
+    linea que diga "Main-class: start.Inicio"
+
+3. Crear el jar
+    jar -cmf manifest.mf NOMBRE_EJECUTABLE.jar NOMBRE_CARPETA_DONDE_ESTA_TODO
+    no se si la carpeta deberia ser tp2_gps o src, supongo que src pero hay que probar
+* */
 
 public class Inicio extends Application {
     private final int anchoVentana = 1050;
     private final int altoVentana = 525;
     private final int anchoBoton = 100;
     private final int altoBoton = 60;
-    private final String colorBoton = "#57643f";
+    private final String styleBoton = "#6c2e16; -fx-text-fill: #929292";
     private final int yBoton = 300;
     private final Font fuenteBoton = Font.font("Impact", FontWeight.BOLD, 17);
-    private final String pathTitulo = "file:src/main/java/edu/fiuba/algo3/Vista/media/img/Fondos/inicio.jpeg";
+    private final String pathTitulo = "file:src/main/java/edu/fiuba/algo3/Vista/media/img/Fondos/menuBackground.jpg";
     private final Controlador controlador = new Controlador();
-    static private MediaPlayer mediaPlayer;
 
     public static void main(String[] args) {
         launch();
@@ -48,13 +61,8 @@ public class Inicio extends Application {
         Pane panel = new Pane();
         elementos.getChildren().add(panel);
 
-        String musicFile = "src/main/java/edu/fiuba/algo3/Vista/media/audio/General/menuSong.mp3";
-        Media sound = new Media(new File(musicFile).toURI().toString());
-        this.mediaPlayer = new MediaPlayer(sound);
-        this.mediaPlayer.setAutoPlay(true);
-        this.mediaPlayer.setOnEndOfMedia(() -> mediaPlayer.seek(Duration.ZERO));
-        this.mediaPlayer.setVolume(0.6);
-        this.mediaPlayer.play();
+
+        this.controlador.setAudioMediaPlayer("src/main/java/edu/fiuba/algo3/Vista/media/audio/General/menuSong.mp3");
 
         //setear ventana inicial
         ImageView titulo = crearImageView(pathTitulo, 0, 0, anchoVentana);
@@ -62,15 +70,15 @@ public class Inicio extends Application {
 
         //boton jugar
         Button botonJugar = (new BotonPantalla(stage, new SeleccionModoDeJuego(controlador))).getBoton();
-        disenarBoton(botonJugar, "Jugar", anchoBoton, altoBoton, (anchoVentana - anchoBoton) / 2, yBoton, colorBoton, fuenteBoton);
+        disenarBoton(botonJugar, "Jugar", anchoBoton, altoBoton, (anchoVentana - anchoBoton) / 2, yBoton, styleBoton, fuenteBoton);
         elementos.getChildren().add(botonJugar);
 
         Button botonRanking = (new BotonPantalla(stage, new Ranking(this.controlador))).getBoton();
-        disenarBoton(botonRanking, "Ranking", anchoBoton, altoBoton, (anchoVentana - anchoBoton) / 3, yBoton, colorBoton, fuenteBoton);
+        disenarBoton(botonRanking, "Ranking", anchoBoton, altoBoton, (anchoVentana - anchoBoton) / 3, yBoton, styleBoton, fuenteBoton);
         elementos.getChildren().add(botonRanking);
 
         Button botonAyuda = (new BotonPantalla(stage, new Ayuda())).getBoton();
-        disenarBoton(botonAyuda, "Ayuda", anchoBoton, altoBoton, 2 * (anchoVentana - anchoBoton) / 3, yBoton, colorBoton, fuenteBoton);
+        disenarBoton(botonAyuda, "Ayuda", anchoBoton, altoBoton, 2 * (anchoVentana - anchoBoton) / 3, yBoton, styleBoton, fuenteBoton);
         elementos.getChildren().add(botonAyuda);
 
         Scene scene = new Scene(elementos, anchoVentana, altoVentana);

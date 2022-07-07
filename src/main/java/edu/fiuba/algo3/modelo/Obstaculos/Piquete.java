@@ -32,5 +32,4 @@ public class Piquete implements IObstaculo {
         return destino;
     }
 
-    public String tipo() {return "piquete";}
 }

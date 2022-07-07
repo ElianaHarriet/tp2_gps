@@ -31,5 +31,4 @@ public class Pozo implements IObstaculo {
         return camioneta.atravesarObstaculo(this);
     }
 
-    public String tipo() {return "pozo";}
 }

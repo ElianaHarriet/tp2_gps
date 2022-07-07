@@ -90,12 +90,13 @@ public class SeleccionModoDeJuego extends Pantalla {
                     alert.setTitle("Error");
                     alert.setContentText("Ingrese algo válido");
                     alert.showAndWait();
-                }
-                int cantJugadores = Integer.parseInt(cantJugadoresString);
+                } else {
+                    int cantJugadores = Integer.parseInt(cantJugadoresString);
 
-                Pantalla pantallaSelecion = new SeleccionVehiculo(CONTROLADOR, cantJugadores);
-                stage.close();
-                pantallaSelecion.start(stage);
+                    Pantalla pantallaSelecion = new SeleccionVehiculo(CONTROLADOR, cantJugadores);
+                    stage.close();
+                    pantallaSelecion.start(stage);
+                }
             }
         });
 

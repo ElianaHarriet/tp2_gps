@@ -33,7 +33,7 @@ public class Ayuda extends Pantalla {
         Pane panel = new Pane();
         elementos.getChildren().add(panel);
 
-        ImageView titulo = crearImageView(pathFondo, 0, 0, anchoVentana);
+        ImageView titulo = crearImageView(pathFondo, 0, 0, 1050);
         panel.getChildren().add(titulo);
 
         Rectangle fondo = new Rectangle(950, 455);
@@ -67,7 +67,7 @@ public class Ayuda extends Pantalla {
         disenarBoton(botonVolver, "\uD83E\uDC78", anchoBoton, altoBoton, 0, 0, colorBoton, fuenteBoton);
         elementos.getChildren().add(botonVolver);
 
-        Scene scene = new Scene(elementos, anchoVentana, altoVentana);
+        Scene scene = new Scene(elementos, 1050, 525);
         stage.setResizable(false);
         stage.setScene(scene);
         stage.show();

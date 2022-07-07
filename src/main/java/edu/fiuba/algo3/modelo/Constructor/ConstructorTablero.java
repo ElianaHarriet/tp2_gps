@@ -13,15 +13,11 @@ public class ConstructorTablero implements IConstructor {
     private int n;
     private Random random;
     public ConstructorTablero() {
-    //segun el patron build esto deberia quedar vacio, despues si resulta ser
-        //innecesario podemos hacer que estoy reciba m y n y ya pueda devolver
-        // el mapa
     }
     //  BORRAR Y HACER BIEN ESTO
     public Esquina[][] getMapa() {
         return this.mapa;
     }
-
 
     public void crearConTamanio(int n) {
         this.n = n;

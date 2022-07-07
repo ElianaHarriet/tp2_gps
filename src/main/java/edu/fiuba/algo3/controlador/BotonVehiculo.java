@@ -24,16 +24,6 @@ public class BotonVehiculo {
             Optional<String> input = dialog.showAndWait();
             String nick = input.map(Objects::toString).orElse("");
             if ((nick.length() >= 4 && nick.length() <= 10)) {
-                //NO SE TIENE QUE CREAR LA PARTIDA ACA Y PARA CAMBIAR ESO
-                //HAY QUE CAMBIAR MUCHAS COSAS AAAAAAAAAA
-
-
-                //Aca el controlador recibe un nick para el jugador actual
-                //controlador.crearJugador(nick, vehiculo);
-
-//                Partida partida = new Partida(controlador, nick, vehiculo);
-//
-//                partida.start(stage);
                 controlador.agregarJugador(nick, vehiculo);
                 stage.close();
                 if (cantJugadores == 1) {

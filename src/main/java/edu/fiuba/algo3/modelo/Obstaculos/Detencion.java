@@ -5,25 +5,27 @@ import java.util.Random;
 
 abstract class Detencion {
 
+    private static final double FACTOR_AUTO = 0.5;
+    private static final double FACTOR_MOTO = 0.8;
+    private static final double FACTOR_CAMIONETA = 0.3;
+
     abstract int penalizar(IVehiculo vehiculo);
 
     static Detencion obtenerDetencion(Auto auto) {
-        Random random = new Random(System.currentTimeMillis());
-        float randomNumber = random.nextFloat();
-        return randomNumber < 0.5 ? new DetencionEfectuada() : new DetencionPasada();
+        return detener(FACTOR_AUTO);
     }
 
     static Detencion obtenerDetencion(Moto moto) {
-        Random random = new Random(System.currentTimeMillis());
-        float randomNumber = random.nextFloat();
-        return randomNumber < 0.8 ? new DetencionEfectuada() : new DetencionPasada();
+        return detener(FACTOR_MOTO);
     }
 
     static Detencion obtenerDetencion(Camioneta camioneta) {
+        return detener(FACTOR_CAMIONETA);
+    }
+    static Detencion detener(double factorVehiculo) {
         Random random = new Random(System.currentTimeMillis());
         float randomNumber = random.nextFloat();
-        return randomNumber < 0.3 ? new DetencionEfectuada() : new DetencionPasada();
+        return randomNumber < factorVehiculo ? new DetencionEfectuada() : new DetencionPasada();
     }
-
 
 }

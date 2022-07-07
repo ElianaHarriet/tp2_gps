@@ -28,7 +28,7 @@ public class BotonVehiculo {
 
 
                 //Aca el controlador recibe un nick para el jugador actual
-                controlador.crearJugador(nick, vehiculo);
+                //controlador.crearJugador(nick, vehiculo);
 
                 Partida partida = new Partida(controlador, nick, vehiculo);
 

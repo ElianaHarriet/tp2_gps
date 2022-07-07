@@ -4,6 +4,7 @@ import edu.fiuba.algo3.modelo.Constructor.*;
 import edu.fiuba.algo3.modelo.Jugador.*;
 import edu.fiuba.algo3.modelo.Ranking.RankingManager;
 import edu.fiuba.algo3.modelo.Mapa.*;
+import edu.fiuba.algo3.modelo.Vehiculos.IVehiculo;
 
 import java.util.ArrayList;
 
@@ -11,46 +12,61 @@ import java.util.ArrayList;
 public class Controlador {
 
 	int cantCuadras = 10;
-	private Jugador jugador;
 	private Esquina[][] mapa;
 	private RankingManager rankingManager = new RankingManager("src/main/java/edu/fiuba/algo3/modelo/Ranking/ranking.json");
 	private ArrayList<Jugador> jugadores;
-	private ConstructorJugador cJugadorActual;
+	//private ConstructorJugador cJugadorActual;
+	private int turno;
+
 	public Controlador() {
 	}
 
-	public void iniciarPartidaCon(String unNick, String unVehiculo/*, int cantidadDeJugadores*/ ) {
+
+	public void iniciarPartidaCon(ArrayList<String> nicks, String[] vehiculos, int cantidadDeJugadores ) {
+		this.turno = 0;
 
 		ConstructorJuego cons = new ConstructorJuego();
 		ConstructorVehiculo cVehiculo = new ConstructorVehiculo();
-		cVehiculo.crearVehiculo(unVehiculo);
 
-		cons.crearJuego(this.cantCuadras, unNick, cVehiculo.getResultado());
-		this.jugador = cons.getResultado();
+		ArrayList<IVehiculo> vehiculosJugadores = new ArrayList<>();
+
+		for (int i = 0; i < cantidadDeJugadores; i++) {
+			cVehiculo.crearVehiculo(vehiculos[i]);
+			vehiculosJugadores.add(cVehiculo.getResultado());
+		}
+
+
+		cons.crearJuego(this.cantCuadras, nicks, vehiculosJugadores, cantidadDeJugadores);
+		this.jugadores = cons.getResultado();
 		this.mapa = cons.getTablero();
 	}
 
+	public Jugador getJugadorActual(){
+		return this.jugadores.get(this.turno);
+	}
+
 	public void moverJugadorHacia(IDireccion direccion) {
-		jugador.moverseHacia(direccion);
-		if (jugador.estaEnDestino()) {
-			rankingManager.guardarNuevaPuntuacion(jugador.getNick(), jugador.getMovimientos());
+		getJugadorActual().moverseHacia(direccion);
+		if (getJugadorActual().estaEnDestino()) {
+			rankingManager.guardarNuevaPuntuacion(getJugadorActual().getNick(), getJugadorActual().getMovimientos());
 		}
 	}
+
 
 	public Esquina[][] getMapa() {
 		return this.mapa;
 	}
 
 	public boolean terminoElJuego(){
-		return jugador.estaEnDestino();
+		return getJugadorActual().estaEnDestino();
 	}
 
 	public Jugador getJugador() {
-		return this.jugador;
+		return this.getJugadorActual();
 	}
 
 	public int getMovimientosJugador(){
-		return this.jugador.getMovimientos();
+		return this.getJugadorActual().getMovimientos();
 	}
 
 	public String getRanking(){
@@ -58,11 +74,7 @@ public class Controlador {
 	}
 
 	public String getNick(){
-		return jugador.getNick();
+		return getJugadorActual().getNick();
 	}
 
-	public void crearJugador(String nick, String vehiculo) {
-		this.cJugadorActual = new ConstructorJugador();
-		//this.cJugadorActual.crearConNick();
-	}
 }

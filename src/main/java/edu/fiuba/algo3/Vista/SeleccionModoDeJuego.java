@@ -48,7 +48,7 @@ public class SeleccionModoDeJuego extends Pantalla {
         disenarBoton(botonMultiplayer, "Multijugador", ANCHOBOTON, ALTOBOTON, (anchoVentana - ANCHOBOTON) / 2, yBOTONMULTI, "#550000", fuenteBoton);
         elementos.getChildren().add(botonMultiplayer);
 
-        /*botonMultiplayer.setOnAction(e -> {
+        botonMultiplayer.setOnAction(e -> {
             TextInputDialog dialog = new TextInputDialog("Chayanne");
             dialog.setHeaderText("Ingrese la cantidad de desafortunados que deben escapar de Lanus");
             Optional<String> input = dialog.showAndWait();
@@ -68,7 +68,7 @@ public class SeleccionModoDeJuego extends Pantalla {
             }
             partida.start(stage);
 
-        });*/
+        });
 
 
 

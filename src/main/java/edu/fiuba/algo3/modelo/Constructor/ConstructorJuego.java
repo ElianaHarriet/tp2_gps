@@ -9,10 +9,10 @@ import java.util.ArrayList;
 
 
 public class ConstructorJuego implements IConstructor{
-	//c = constructor no tenemos ganas de escribir
-    private ConstructorJugador cJugador;
-    private ArrayList<ConstructorJugador> cJugadores;
 
+    private ConstructorJugador cJugador;
+    //private ArrayList<ConstructorJugador> cJugadores;
+    private ArrayList<Jugador> jugadores;
 
     private ConstructorTablero cTablero;
 
@@ -29,18 +29,23 @@ public class ConstructorJuego implements IConstructor{
         this.cTablero = new ConstructorTablero();
     }
 
-    public void crearJuego(int tam, String nick, IVehiculo vehiculo) {
+    public void crearJuego(int tam, ArrayList<String> nicks, ArrayList<IVehiculo> vehiculos, int cantJugadores) {
         this.cTablero.crearConTamanio(tam);
 
-       /* for (ConstructorJugador jugador: cJugadores) {
-            jugador.crearConNick();
 
-        }*/
 
-        this.cJugador.crearConNick(nick, cTablero.getResultado(), vehiculo);
+        ArrayList<Jugador> jugadores = new ArrayList<>();
+        for (int i = 0; i < cantJugadores; i++){
+            Esquina esquina = cTablero.getResultado();
+            IVehiculo vehiculo =  vehiculos.get(i);
+            cJugador.crearConNick(nicks.get(i),esquina,vehiculo);
+            jugadores.add(cJugador.getResultado());
+        }
+        this.jugadores = jugadores;
     }
-    public Jugador getResultado() {
-        return this.cJugador.getResultado();
+
+    public ArrayList<Jugador> getResultado() {
+        return this.jugadores;
     }
 
     public Esquina[][] getTablero() {
